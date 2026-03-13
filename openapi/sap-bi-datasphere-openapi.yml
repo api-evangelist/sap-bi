@@ -1,0 +1,898 @@
+openapi: 3.1.0
+info:
+  title: SAP Datasphere API
+  description: >-
+    APIs for SAP Datasphere (formerly SAP Data Warehouse Cloud) enabling
+    data integration, space management, model deployment, and analytics.
+    Provides programmatic access to manage spaces, connections, data flows,
+    and consume analytical datasets from the Datasphere platform.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+externalDocs:
+  description: SAP Datasphere API Documentation
+  url: https://help.sap.com/docs/SAP_DATASPHERE
+servers:
+  - url: https://{tenant}.datasphere.cloud.sap/api/v1
+    description: SAP Datasphere Tenant
+    variables:
+      tenant:
+        default: mytenant
+        description: SAP Datasphere tenant identifier
+tags:
+  - name: Spaces
+    description: Manage Datasphere spaces
+  - name: Connections
+    description: Manage data source connections
+  - name: Data Flows
+    description: Manage data replication and transformation flows
+  - name: Views
+    description: Manage analytical and relational views
+  - name: Tasks
+    description: Manage and monitor task execution
+  - name: Catalog
+    description: Browse the Datasphere data catalog
+security:
+  - oauth2: []
+paths:
+  /spaces:
+    get:
+      operationId: listSpaces
+      summary: List spaces
+      description: >-
+        Retrieve a list of all spaces the authenticated user has access to.
+      tags:
+        - Spaces
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: List of spaces
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpaceCollection'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      operationId: createSpace
+      summary: Create a space
+      description: >-
+        Create a new Datasphere space with specified configuration.
+      tags:
+        - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSpaceRequest'
+      responses:
+        '201':
+          description: Space created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+  /spaces/{spaceId}:
+    get:
+      operationId: getSpace
+      summary: Get a space
+      description: >-
+        Retrieve details of a specific Datasphere space.
+      tags:
+        - Spaces
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+      responses:
+        '200':
+          description: Space details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+    put:
+      operationId: updateSpace
+      summary: Update a space
+      description: >-
+        Update properties of an existing Datasphere space.
+      tags:
+        - Spaces
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSpaceRequest'
+      responses:
+        '200':
+          description: Space updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+    delete:
+      operationId: deleteSpace
+      summary: Delete a space
+      description: >-
+        Delete an existing Datasphere space and its contents.
+      tags:
+        - Spaces
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+      responses:
+        '204':
+          description: Space deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+  /spaces/{spaceId}/connections:
+    get:
+      operationId: listConnections
+      summary: List connections in a space
+      description: >-
+        Retrieve all data source connections configured in a specific space.
+      tags:
+        - Connections
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+      responses:
+        '200':
+          description: List of connections
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionCollection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+    post:
+      operationId: createConnection
+      summary: Create a connection
+      description: >-
+        Create a new data source connection in a specific space.
+      tags:
+        - Connections
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConnectionRequest'
+      responses:
+        '201':
+          description: Connection created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+  /spaces/{spaceId}/connections/{connectionId}:
+    get:
+      operationId: getConnection
+      summary: Get a connection
+      description: >-
+        Retrieve details of a specific data source connection.
+      tags:
+        - Connections
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+        - $ref: '#/components/parameters/connectionId'
+      responses:
+        '200':
+          description: Connection details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Connection not found
+    delete:
+      operationId: deleteConnection
+      summary: Delete a connection
+      description: >-
+        Delete an existing data source connection.
+      tags:
+        - Connections
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+        - $ref: '#/components/parameters/connectionId'
+      responses:
+        '204':
+          description: Connection deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Connection not found
+  /spaces/{spaceId}/dataflows:
+    get:
+      operationId: listDataFlows
+      summary: List data flows
+      description: >-
+        Retrieve all data flows configured in a specific space.
+      tags:
+        - Data Flows
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+      responses:
+        '200':
+          description: List of data flows
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataFlowCollection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+  /spaces/{spaceId}/dataflows/{dataFlowId}:
+    get:
+      operationId: getDataFlow
+      summary: Get a data flow
+      description: >-
+        Retrieve details of a specific data flow.
+      tags:
+        - Data Flows
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+        - $ref: '#/components/parameters/dataFlowId'
+      responses:
+        '200':
+          description: Data flow details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataFlow'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Data flow not found
+  /spaces/{spaceId}/dataflows/{dataFlowId}/run:
+    post:
+      operationId: runDataFlow
+      summary: Run a data flow
+      description: >-
+        Trigger execution of a data flow to replicate or transform data.
+      tags:
+        - Data Flows
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+        - $ref: '#/components/parameters/dataFlowId'
+      responses:
+        '202':
+          description: Data flow execution started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskRun'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Data flow not found
+  /spaces/{spaceId}/views:
+    get:
+      operationId: listViews
+      summary: List views
+      description: >-
+        Retrieve all views (analytical and relational) defined in a space.
+      tags:
+        - Views
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+      responses:
+        '200':
+          description: List of views
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewCollection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+  /spaces/{spaceId}/views/{viewId}:
+    get:
+      operationId: getView
+      summary: Get a view
+      description: >-
+        Retrieve details and metadata of a specific view.
+      tags:
+        - Views
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+        - $ref: '#/components/parameters/viewId'
+      responses:
+        '200':
+          description: View details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/View'
+        '401':
+          description: Unauthorized
+        '404':
+          description: View not found
+  /spaces/{spaceId}/views/{viewId}/deploy:
+    post:
+      operationId: deployView
+      summary: Deploy a view
+      description: >-
+        Deploy a view to make it available for consumption.
+      tags:
+        - Views
+      parameters:
+        - $ref: '#/components/parameters/spaceId'
+        - $ref: '#/components/parameters/viewId'
+      responses:
+        '202':
+          description: View deployment started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskRun'
+        '401':
+          description: Unauthorized
+        '404':
+          description: View not found
+  /tasks:
+    get:
+      operationId: listTasks
+      summary: List tasks
+      description: >-
+        Retrieve a list of task executions across the tenant.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - name: status
+          in: query
+          description: Filter by task status
+          schema:
+            type: string
+            enum:
+              - Running
+              - Completed
+              - Failed
+      responses:
+        '200':
+          description: List of tasks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskRunCollection'
+        '401':
+          description: Unauthorized
+  /tasks/{taskId}:
+    get:
+      operationId: getTask
+      summary: Get a task
+      description: >-
+        Retrieve details and status of a specific task execution.
+      tags:
+        - Tasks
+      parameters:
+        - $ref: '#/components/parameters/taskId'
+      responses:
+        '200':
+          description: Task details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskRun'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Task not found
+  /catalog:
+    get:
+      operationId: listCatalogAssets
+      summary: List catalog assets
+      description: >-
+        Browse the data catalog to discover available datasets, views,
+        and other assets.
+      tags:
+        - Catalog
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - name: search
+          in: query
+          description: Search catalog assets by keyword
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of catalog assets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogAssetCollection'
+        '401':
+          description: Unauthorized
+  /catalog/{assetId}:
+    get:
+      operationId: getCatalogAsset
+      summary: Get a catalog asset
+      description: >-
+        Retrieve details and metadata of a specific catalog asset.
+      tags:
+        - Catalog
+      parameters:
+        - $ref: '#/components/parameters/assetId'
+      responses:
+        '200':
+          description: Catalog asset details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogAsset'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Catalog asset not found
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for SAP Datasphere
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.datasphere.cloud.sap/oauth/token
+          scopes: {}
+  parameters:
+    spaceId:
+      name: spaceId
+      in: path
+      required: true
+      description: Space unique identifier
+      schema:
+        type: string
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      description: Connection unique identifier
+      schema:
+        type: string
+    dataFlowId:
+      name: dataFlowId
+      in: path
+      required: true
+      description: Data flow unique identifier
+      schema:
+        type: string
+    viewId:
+      name: viewId
+      in: path
+      required: true
+      description: View unique identifier
+      schema:
+        type: string
+    taskId:
+      name: taskId
+      in: path
+      required: true
+      description: Task execution unique identifier
+      schema:
+        type: string
+    assetId:
+      name: assetId
+      in: path
+      required: true
+      description: Catalog asset unique identifier
+      schema:
+        type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        minimum: 1
+        maximum: 1000
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+  schemas:
+    SpaceCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Space'
+        totalCount:
+          type: integer
+          description: Total number of spaces
+    Space:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Space unique identifier
+        name:
+          type: string
+          description: Space name
+        description:
+          type: string
+          description: Space description
+        storageAssignment:
+          type: string
+          enum:
+            - InMemory
+            - Disk
+          description: Storage type assignment
+        diskStorageQuota:
+          type: integer
+          description: Disk storage quota in GB
+        memoryStorageQuota:
+          type: integer
+          description: In-memory storage quota in GB
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpaceMember'
+          description: Space members
+        createdBy:
+          type: string
+          description: User who created the space
+        createdTime:
+          type: string
+          format: date-time
+          description: When the space was created
+        modifiedTime:
+          type: string
+          format: date-time
+          description: When the space was last modified
+    SpaceMember:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: User identifier
+        role:
+          type: string
+          enum:
+            - Admin
+            - Modeler
+            - Viewer
+          description: Member role in the space
+    CreateSpaceRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name for the new space
+        description:
+          type: string
+          description: Description for the space
+        diskStorageQuota:
+          type: integer
+          description: Disk storage quota in GB
+        memoryStorageQuota:
+          type: integer
+          description: In-memory storage quota in GB
+    UpdateSpaceRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name
+        description:
+          type: string
+          description: Updated description
+        diskStorageQuota:
+          type: integer
+          description: Updated disk storage quota in GB
+        memoryStorageQuota:
+          type: integer
+          description: Updated in-memory storage quota in GB
+    ConnectionCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Connection'
+    Connection:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Connection unique identifier
+        name:
+          type: string
+          description: Connection name
+        description:
+          type: string
+          description: Connection description
+        type:
+          type: string
+          enum:
+            - HANA
+            - S4HANA
+            - SAP_BW
+            - SAP_BW4HANA
+            - ABAP_CDS
+            - OData
+            - Cloud_Data_Integration
+            - Google_BigQuery
+            - Microsoft_SQL_Server
+            - Amazon_S3
+          description: Connection type
+        status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+            - Error
+          description: Connection status
+        createdTime:
+          type: string
+          format: date-time
+          description: When the connection was created
+    CreateConnectionRequest:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+          description: Connection name
+        description:
+          type: string
+          description: Connection description
+        type:
+          type: string
+          description: Connection type
+        properties:
+          type: object
+          description: Connection-specific properties (host, port, credentials, etc.)
+    DataFlowCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFlow'
+    DataFlow:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Data flow unique identifier
+        name:
+          type: string
+          description: Data flow name
+        description:
+          type: string
+          description: Data flow description
+        type:
+          type: string
+          enum:
+            - Replication
+            - Transformation
+          description: Data flow type
+        status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+            - Error
+          description: Data flow status
+        sourceConnection:
+          type: string
+          description: Source connection ID
+        targetView:
+          type: string
+          description: Target view ID
+        lastRunTime:
+          type: string
+          format: date-time
+          description: When the data flow last ran
+        lastRunStatus:
+          type: string
+          enum:
+            - Completed
+            - Failed
+            - Running
+          description: Status of the last execution
+    ViewCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/View'
+    View:
+      type: object
+      properties:
+        id:
+          type: string
+          description: View unique identifier
+        name:
+          type: string
+          description: View name
+        description:
+          type: string
+          description: View description
+        type:
+          type: string
+          enum:
+            - Analytical
+            - Relational
+          description: View semantic type
+        deploymentStatus:
+          type: string
+          enum:
+            - Deployed
+            - NotDeployed
+            - Modified
+          description: Current deployment status
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ViewColumn'
+          description: View columns
+        createdBy:
+          type: string
+          description: User who created the view
+        createdTime:
+          type: string
+          format: date-time
+          description: When the view was created
+        modifiedTime:
+          type: string
+          format: date-time
+          description: When the view was last modified
+    ViewColumn:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name
+        description:
+          type: string
+          description: Column description
+        dataType:
+          type: string
+          description: Column data type
+        semanticType:
+          type: string
+          enum:
+            - Dimension
+            - Measure
+            - Attribute
+          description: Semantic role of the column
+    TaskRunCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskRun'
+        totalCount:
+          type: integer
+          description: Total number of task runs
+    TaskRun:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Task run unique identifier
+        type:
+          type: string
+          enum:
+            - DataFlowExecution
+            - ViewDeployment
+            - DataReplication
+          description: Task type
+        status:
+          type: string
+          enum:
+            - Pending
+            - Running
+            - Completed
+            - Failed
+          description: Task execution status
+        startTime:
+          type: string
+          format: date-time
+          description: When the task started
+        endTime:
+          type: string
+          format: date-time
+          description: When the task completed
+        rowsProcessed:
+          type: integer
+          description: Number of rows processed
+        errorMessage:
+          type: string
+          description: Error message if the task failed
+    CatalogAssetCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogAsset'
+        totalCount:
+          type: integer
+          description: Total number of catalog assets
+    CatalogAsset:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Asset unique identifier
+        name:
+          type: string
+          description: Asset name
+        description:
+          type: string
+          description: Asset description
+        type:
+          type: string
+          enum:
+            - Dataset
+            - View
+            - Table
+            - Connection
+          description: Asset type
+        spaceId:
+          type: string
+          description: Space containing the asset
+        owner:
+          type: string
+          description: Asset owner
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags assigned to the asset
+        createdTime:
+          type: string
+          format: date-time
+          description: When the asset was cataloged

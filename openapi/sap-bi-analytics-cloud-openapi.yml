@@ -1,0 +1,917 @@
+openapi: 3.1.0
+info:
+  title: SAP Analytics Cloud API
+  description: >-
+    REST API for SAP Analytics Cloud enabling data integration, story
+    management, model administration, and analytics operations. Provides
+    programmatic access to create and manage stories, models, data imports,
+    and user administration within SAP Analytics Cloud.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+externalDocs:
+  description: SAP Analytics Cloud API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+servers:
+  - url: https://{tenant}.sapanalytics.cloud/api/v1
+    description: SAP Analytics Cloud Tenant
+    variables:
+      tenant:
+        default: mytenant
+        description: SAP Analytics Cloud tenant identifier
+tags:
+  - name: Stories
+    description: Manage analytics stories and dashboards
+  - name: Models
+    description: Manage data models and dimensions
+  - name: Data Import
+    description: Import data into models
+  - name: Users
+    description: Manage users and teams
+  - name: Folders
+    description: Manage content folders
+security:
+  - oauth2: []
+paths:
+  /stories:
+    get:
+      operationId: listStories
+      summary: List stories
+      description: >-
+        Retrieve a list of all analytics stories accessible to the
+        authenticated user.
+      tags:
+        - Stories
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+        - name: search
+          in: query
+          description: Search stories by name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of stories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoryCollection'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      operationId: createStory
+      summary: Create a story
+      description: >-
+        Create a new analytics story with specified configuration and layout.
+      tags:
+        - Stories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStoryRequest'
+      responses:
+        '201':
+          description: Story created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Story'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+  /stories/{storyId}:
+    get:
+      operationId: getStory
+      summary: Get a story
+      description: >-
+        Retrieve details of a specific analytics story including its pages
+        and widgets.
+      tags:
+        - Stories
+      parameters:
+        - $ref: '#/components/parameters/storyId'
+      responses:
+        '200':
+          description: Story details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Story'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Story not found
+    put:
+      operationId: updateStory
+      summary: Update a story
+      description: >-
+        Update properties of an existing analytics story.
+      tags:
+        - Stories
+      parameters:
+        - $ref: '#/components/parameters/storyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStoryRequest'
+      responses:
+        '200':
+          description: Story updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Story'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Story not found
+    delete:
+      operationId: deleteStory
+      summary: Delete a story
+      description: >-
+        Delete an existing analytics story.
+      tags:
+        - Stories
+      parameters:
+        - $ref: '#/components/parameters/storyId'
+      responses:
+        '204':
+          description: Story deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Story not found
+  /stories/{storyId}/publish:
+    post:
+      operationId: publishStory
+      summary: Publish a story
+      description: >-
+        Publish an analytics story to make it available to other users.
+      tags:
+        - Stories
+      parameters:
+        - $ref: '#/components/parameters/storyId'
+      responses:
+        '200':
+          description: Story published
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Story'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Story not found
+  /models:
+    get:
+      operationId: listModels
+      summary: List models
+      description: >-
+        Retrieve a list of all data models available in the tenant.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: List of models
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelCollection'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createModel
+      summary: Create a model
+      description: >-
+        Create a new data model with specified dimensions and measures.
+      tags:
+        - Models
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateModelRequest'
+      responses:
+        '201':
+          description: Model created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+  /models/{modelId}:
+    get:
+      operationId: getModel
+      summary: Get a model
+      description: >-
+        Retrieve details of a specific data model including dimensions
+        and measures.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/modelId'
+      responses:
+        '200':
+          description: Model details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Model not found
+    put:
+      operationId: updateModel
+      summary: Update a model
+      description: >-
+        Update properties of an existing data model.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/modelId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateModelRequest'
+      responses:
+        '200':
+          description: Model updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Model not found
+    delete:
+      operationId: deleteModel
+      summary: Delete a model
+      description: >-
+        Delete an existing data model.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/modelId'
+      responses:
+        '204':
+          description: Model deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Model not found
+  /models/{modelId}/dimensions:
+    get:
+      operationId: listModelDimensions
+      summary: List model dimensions
+      description: >-
+        Retrieve all dimensions defined in a specific model.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/modelId'
+      responses:
+        '200':
+          description: List of dimensions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DimensionCollection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Model not found
+  /models/{modelId}/measures:
+    get:
+      operationId: listModelMeasures
+      summary: List model measures
+      description: >-
+        Retrieve all measures defined in a specific model.
+      tags:
+        - Models
+      parameters:
+        - $ref: '#/components/parameters/modelId'
+      responses:
+        '200':
+          description: List of measures
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeasureCollection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Model not found
+  /dataimport/models/{modelId}/jobs:
+    get:
+      operationId: listImportJobs
+      summary: List import jobs
+      description: >-
+        Retrieve all data import jobs for a specific model.
+      tags:
+        - Data Import
+      parameters:
+        - $ref: '#/components/parameters/modelId'
+      responses:
+        '200':
+          description: List of import jobs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJobCollection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Model not found
+    post:
+      operationId: createImportJob
+      summary: Create an import job
+      description: >-
+        Create a new data import job to load data into a model.
+      tags:
+        - Data Import
+      parameters:
+        - $ref: '#/components/parameters/modelId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImportJobRequest'
+      responses:
+        '201':
+          description: Import job created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJob'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Model not found
+  /dataimport/models/{modelId}/jobs/{jobId}:
+    get:
+      operationId: getImportJob
+      summary: Get an import job
+      description: >-
+        Retrieve status and details of a specific data import job.
+      tags:
+        - Data Import
+      parameters:
+        - $ref: '#/components/parameters/modelId'
+        - $ref: '#/components/parameters/jobId'
+      responses:
+        '200':
+          description: Import job details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJob'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Import job not found
+  /users:
+    get:
+      operationId: listUsers
+      summary: List users
+      description: >-
+        Retrieve a list of all users in the SAP Analytics Cloud tenant.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCollection'
+        '401':
+          description: Unauthorized
+  /users/{userId}:
+    get:
+      operationId: getUser
+      summary: Get a user
+      description: >-
+        Retrieve details of a specific user.
+      tags:
+        - Users
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+        '404':
+          description: User not found
+  /folders:
+    get:
+      operationId: listFolders
+      summary: List folders
+      description: >-
+        Retrieve a list of content folders in the SAP Analytics Cloud tenant.
+      tags:
+        - Folders
+      parameters:
+        - $ref: '#/components/parameters/limitParam'
+        - $ref: '#/components/parameters/offsetParam'
+      responses:
+        '200':
+          description: List of folders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FolderCollection'
+        '401':
+          description: Unauthorized
+  /folders/{folderId}:
+    get:
+      operationId: getFolder
+      summary: Get a folder
+      description: >-
+        Retrieve details and contents of a specific folder.
+      tags:
+        - Folders
+      parameters:
+        - $ref: '#/components/parameters/folderId'
+      responses:
+        '200':
+          description: Folder details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Folder not found
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for SAP Analytics Cloud
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.sapanalytics.cloud/oauth/token
+          scopes: {}
+  parameters:
+    storyId:
+      name: storyId
+      in: path
+      required: true
+      description: Story unique identifier
+      schema:
+        type: string
+    modelId:
+      name: modelId
+      in: path
+      required: true
+      description: Model unique identifier
+      schema:
+        type: string
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      description: Import job unique identifier
+      schema:
+        type: string
+    userId:
+      name: userId
+      in: path
+      required: true
+      description: User unique identifier
+      schema:
+        type: string
+    folderId:
+      name: folderId
+      in: path
+      required: true
+      description: Folder unique identifier
+      schema:
+        type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        minimum: 1
+        maximum: 1000
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+  schemas:
+    StoryCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Story'
+        totalCount:
+          type: integer
+          description: Total number of stories available
+    Story:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the story
+        name:
+          type: string
+          description: Name of the story
+        description:
+          type: string
+          description: Description of the story
+        createdBy:
+          type: string
+          description: User who created the story
+        createdTime:
+          type: string
+          format: date-time
+          description: When the story was created
+        modifiedBy:
+          type: string
+          description: User who last modified the story
+        modifiedTime:
+          type: string
+          format: date-time
+          description: When the story was last modified
+        status:
+          type: string
+          enum:
+            - Draft
+            - Published
+          description: Current publication status
+        folderId:
+          type: string
+          description: ID of the folder containing the story
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Page'
+          description: Pages within the story
+    CreateStoryRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name for the new story
+        description:
+          type: string
+          description: Description for the story
+        folderId:
+          type: string
+          description: Target folder ID
+    UpdateStoryRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name
+        description:
+          type: string
+          description: Updated description
+        folderId:
+          type: string
+          description: Updated folder ID
+    Page:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Page unique identifier
+        name:
+          type: string
+          description: Page name
+        widgets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Widget'
+          description: Widgets on the page
+    Widget:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Widget unique identifier
+        type:
+          type: string
+          enum:
+            - Chart
+            - Table
+            - Filter
+            - Text
+            - Image
+            - Shape
+          description: Type of widget
+        name:
+          type: string
+          description: Widget display name
+        modelId:
+          type: string
+          description: Associated model ID
+    ModelCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+        totalCount:
+          type: integer
+          description: Total number of models available
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the model
+        name:
+          type: string
+          description: Name of the model
+        description:
+          type: string
+          description: Description of the model
+        type:
+          type: string
+          enum:
+            - Planning
+            - Analytic
+            - Dataset
+          description: Model type
+        createdBy:
+          type: string
+          description: User who created the model
+        createdTime:
+          type: string
+          format: date-time
+          description: When the model was created
+        modifiedTime:
+          type: string
+          format: date-time
+          description: When the model was last modified
+        dimensions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dimension'
+          description: Dimensions in the model
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+          description: Measures in the model
+    CreateModelRequest:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+          description: Name for the new model
+        description:
+          type: string
+          description: Description for the model
+        type:
+          type: string
+          enum:
+            - Planning
+            - Analytic
+            - Dataset
+          description: Model type
+    UpdateModelRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name
+        description:
+          type: string
+          description: Updated description
+    DimensionCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dimension'
+    Dimension:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Dimension unique identifier
+        name:
+          type: string
+          description: Dimension name
+        description:
+          type: string
+          description: Dimension description
+        type:
+          type: string
+          enum:
+            - Generic
+            - Account
+            - Date
+            - Organization
+            - Version
+          description: Dimension type
+    MeasureCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+    Measure:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Measure unique identifier
+        name:
+          type: string
+          description: Measure name
+        description:
+          type: string
+          description: Measure description
+        aggregationType:
+          type: string
+          enum:
+            - SUM
+            - COUNT
+            - AVG
+            - MIN
+            - MAX
+          description: Aggregation type for the measure
+    ImportJobCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportJob'
+    ImportJob:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Import job unique identifier
+        status:
+          type: string
+          enum:
+            - Pending
+            - Running
+            - Completed
+            - Failed
+          description: Current job status
+        importType:
+          type: string
+          enum:
+            - Replace
+            - Append
+            - Update
+          description: How data is imported
+        createdTime:
+          type: string
+          format: date-time
+          description: When the job was created
+        completedTime:
+          type: string
+          format: date-time
+          description: When the job completed
+        rowsProcessed:
+          type: integer
+          description: Number of rows processed
+        errorMessage:
+          type: string
+          description: Error message if the job failed
+    CreateImportJobRequest:
+      type: object
+      required:
+        - importType
+      properties:
+        importType:
+          type: string
+          enum:
+            - Replace
+            - Append
+            - Update
+          description: How data should be imported
+        mapping:
+          type: object
+          description: Column-to-dimension/measure mapping
+    UserCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        totalCount:
+          type: integer
+          description: Total number of users
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User unique identifier
+        userName:
+          type: string
+          description: Login username
+        displayName:
+          type: string
+          description: Display name
+        email:
+          type: string
+          format: email
+          description: Email address
+        roles:
+          type: array
+          items:
+            type: string
+          description: Assigned roles
+        active:
+          type: boolean
+          description: Whether the user is active
+        createdTime:
+          type: string
+          format: date-time
+          description: When the user was created
+    FolderCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Folder'
+        totalCount:
+          type: integer
+          description: Total number of folders
+    Folder:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Folder unique identifier
+        name:
+          type: string
+          description: Folder name
+        description:
+          type: string
+          description: Folder description
+        parentFolderId:
+          type: string
+          description: Parent folder ID
+        createdBy:
+          type: string
+          description: User who created the folder
+        createdTime:
+          type: string
+          format: date-time
+          description: When the folder was created

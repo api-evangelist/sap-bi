@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.sap.com/schemas/sap-bi/data-source.json",
+  "title": "SAP BI Data Source",
+  "description": "A data source connection used across SAP BI products to connect to source systems, databases, cloud services, and other data repositories for analytics and reporting.",
+  "type": "object",
+  "required": ["name", "type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Data source unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Data source name",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "description": {
+      "type": "string",
+      "description": "Data source description"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "HANA",
+        "S4HANA",
+        "SAP_BW",
+        "SAP_BW4HANA",
+        "ABAP_CDS",
+        "OData",
+        "Cloud_Data_Integration",
+        "Google_BigQuery",
+        "Microsoft_SQL_Server",
+        "Amazon_S3",
+        "JDBC",
+        "File"
+      ],
+      "description": "Connection type indicating the source system"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Active", "Inactive", "Error"],
+      "description": "Current connection status"
+    },
+    "host": {
+      "type": "string",
+      "description": "Hostname or endpoint URL of the data source"
+    },
+    "port": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535,
+      "description": "Connection port number"
+    },
+    "database": {
+      "type": "string",
+      "description": "Database or schema name"
+    },
+    "authenticationMethod": {
+      "type": "string",
+      "enum": ["BasicAuth", "OAuth2", "SAML", "Kerberos", "Certificate", "APIKey"],
+      "description": "Authentication method used for the connection"
+    },
+    "sslEnabled": {
+      "type": "boolean",
+      "description": "Whether SSL/TLS encryption is enabled"
+    },
+    "spaceId": {
+      "type": "string",
+      "description": "Datasphere space containing this connection"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "User who created the data source"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the data source was created"
+    },
+    "modifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the data source was last modified"
+    },
+    "lastTestedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the connection was last tested"
+    },
+    "lastTestResult": {
+      "type": "string",
+      "enum": ["Success", "Failed"],
+      "description": "Result of the last connection test"
+    }
+  }
+}

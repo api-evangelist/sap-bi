@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.sap.com/schemas/sap-bi/report.json",
+  "title": "SAP BusinessObjects Report",
+  "description": "A report document in SAP BusinessObjects BI Platform, representing Crystal Reports, Web Intelligence documents, or publications managed through the content management system.",
+  "type": "object",
+  "required": ["name", "type"],
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Report unique system identifier (SI_ID)"
+    },
+    "cuid": {
+      "type": "string",
+      "description": "Cluster unique identifier (SI_CUID)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Report name",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "description": {
+      "type": "string",
+      "description": "Report description"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["CrystalReport", "Webi", "Publication"],
+      "description": "Report type indicating the reporting engine"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Report owner username"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the report was created"
+    },
+    "modifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the report was last modified"
+    },
+    "folderId": {
+      "type": "integer",
+      "description": "Parent folder system identifier"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Parameter"
+      },
+      "description": "Report prompt parameters"
+    },
+    "dataProviders": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DataProvider"
+      },
+      "description": "Data providers feeding the report"
+    },
+    "schedule": {
+      "$ref": "#/$defs/Schedule"
+    }
+  },
+  "$defs": {
+    "Parameter": {
+      "type": "object",
+      "description": "A prompt parameter that accepts user input when running a report",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Parameter identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Parameter display name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Parameter data type"
+        },
+        "optional": {
+          "type": "boolean",
+          "description": "Whether the parameter is optional"
+        },
+        "allowMultipleValues": {
+          "type": "boolean",
+          "description": "Whether multiple values can be provided"
+        },
+        "defaultValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Default parameter values"
+        }
+      }
+    },
+    "DataProvider": {
+      "type": "object",
+      "description": "A data source connection providing data to the report",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Data provider identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Data provider name"
+        },
+        "dataSourceType": {
+          "type": "string",
+          "description": "Type of data source"
+        },
+        "query": {
+          "type": "string",
+          "description": "Query text"
+        }
+      }
+    },
+    "Schedule": {
+      "type": "object",
+      "description": "Scheduling configuration for automated report execution",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Schedule unique identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Schedule name"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Active", "Paused", "Completed"],
+          "description": "Schedule status"
+        },
+        "recurrenceType": {
+          "type": "string",
+          "enum": ["Once", "Daily", "Weekly", "Monthly"],
+          "description": "Recurrence pattern"
+        },
+        "nextRunTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Next scheduled run time"
+        },
+        "format": {
+          "type": "string",
+          "enum": ["PDF", "Excel", "CSV", "HTML"],
+          "description": "Output format"
+        }
+      }
+    }
+  }
+}

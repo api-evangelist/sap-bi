@@ -1,0 +1,180 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "sapbi": "https://api.sap.com/schemas/sap-bi/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Story": {
+      "@id": "sapbi:Story",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "createdBy": "schema:author",
+        "createdTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedBy": "sapbi:modifiedBy",
+        "modifiedTime": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "status": "sapbi:publicationStatus",
+        "folderId": "sapbi:folderId"
+      }
+    },
+
+    "Model": {
+      "@id": "sapbi:Model",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "type": "sapbi:modelType",
+        "createdBy": "schema:author",
+        "createdTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedTime": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Report": {
+      "@id": "sapbi:Report",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "type": "sapbi:reportType",
+        "owner": "schema:author",
+        "createdTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedTime": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "folderId": {
+          "@id": "sapbi:folderId",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "InfoObject": {
+      "@id": "sapbi:InfoObject",
+      "@context": {
+        "SI_NAME": "schema:name",
+        "SI_DESCRIPTION": "schema:description",
+        "SI_KIND": "sapbi:objectKind",
+        "SI_OWNER": "schema:author",
+        "SI_CREATION_TIME": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "SI_UPDATE_TS": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "DataSource": {
+      "@id": "sapbi:DataSource",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "type": "sapbi:connectionType",
+        "status": "sapbi:connectionStatus",
+        "host": "sapbi:host",
+        "port": {
+          "@id": "sapbi:port",
+          "@type": "xsd:integer"
+        },
+        "sslEnabled": {
+          "@id": "sapbi:sslEnabled",
+          "@type": "xsd:boolean"
+        },
+        "createdTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Space": {
+      "@id": "sapbi:Space",
+      "@context": {
+        "name": "schema:name",
+        "description": "schema:description",
+        "storageAssignment": "sapbi:storageAssignment",
+        "diskStorageQuota": {
+          "@id": "sapbi:diskStorageQuota",
+          "@type": "xsd:integer"
+        },
+        "memoryStorageQuota": {
+          "@id": "sapbi:memoryStorageQuota",
+          "@type": "xsd:integer"
+        },
+        "createdTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "InfoProvider": {
+      "@id": "sapbi:InfoProvider",
+      "@context": {
+        "InfoProviderName": "schema:name",
+        "InfoProviderDescription": "schema:description",
+        "InfoProviderType": "sapbi:infoProviderType",
+        "InfoArea": "sapbi:infoArea",
+        "CreatedBy": "schema:author",
+        "CreatedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "ImportJob": {
+      "@id": "sapbi:ImportJob",
+      "@context": {
+        "status": "sapbi:jobStatus",
+        "importType": "sapbi:importType",
+        "createdTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "completedTime": {
+          "@id": "sapbi:completedTime",
+          "@type": "xsd:dateTime"
+        },
+        "rowsProcessed": {
+          "@id": "sapbi:rowsProcessed",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "Schedule": {
+      "@id": "sapbi:Schedule",
+      "@context": {
+        "name": "schema:name",
+        "status": "sapbi:scheduleStatus",
+        "recurrenceType": "sapbi:recurrenceType",
+        "nextRunTime": {
+          "@id": "sapbi:nextRunTime",
+          "@type": "xsd:dateTime"
+        },
+        "format": "sapbi:outputFormat"
+      }
+    }
+  }
+}

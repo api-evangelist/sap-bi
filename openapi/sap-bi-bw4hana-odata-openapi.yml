@@ -1,0 +1,692 @@
+openapi: 3.1.0
+info:
+  title: SAP BW/4HANA OData API
+  description: >-
+    OData services for accessing SAP BW/4HANA data warehouse content and
+    metadata. Provides programmatic access to query InfoProviders, manage
+    data store objects, browse metadata, and execute analytical queries
+    against the BW/4HANA data warehouse.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+externalDocs:
+  description: SAP BW/4HANA OData API Documentation
+  url: https://help.sap.com/docs/SAP_BW4HANA
+servers:
+  - url: https://{server}:{port}/sap/opu/odata/sap
+    description: SAP BW/4HANA OData Endpoint
+    variables:
+      server:
+        default: localhost
+        description: BW/4HANA server hostname
+      port:
+        default: '443'
+        description: BW/4HANA server port
+tags:
+  - name: InfoProviders
+    description: Access InfoProvider metadata and data
+  - name: Queries
+    description: Execute and manage BW queries
+  - name: Data Store Objects
+    description: Manage advanced data store objects (aDSO)
+  - name: Process Chains
+    description: Monitor and manage process chains
+  - name: Metadata
+    description: Browse BW/4HANA metadata catalog
+security:
+  - basicAuth: []
+paths:
+  /RSOD_INFOPROV_SRV/InfoProviders:
+    get:
+      operationId: listInfoProviders
+      summary: List InfoProviders
+      description: >-
+        Retrieve a list of all InfoProviders (InfoCubes, DataStore Objects,
+        CompositeProviders) available in the BW/4HANA system.
+      tags:
+        - InfoProviders
+      parameters:
+        - $ref: '#/components/parameters/topParam'
+        - $ref: '#/components/parameters/skipParam'
+        - $ref: '#/components/parameters/filterParam'
+        - $ref: '#/components/parameters/selectParam'
+        - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: List of InfoProviders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoProviderCollection'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /RSOD_INFOPROV_SRV/InfoProviders('{infoProviderName}'):
+    get:
+      operationId: getInfoProvider
+      summary: Get an InfoProvider
+      description: >-
+        Retrieve details and metadata of a specific InfoProvider.
+      tags:
+        - InfoProviders
+      parameters:
+        - $ref: '#/components/parameters/infoProviderName'
+        - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: InfoProvider details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InfoProvider'
+        '401':
+          description: Unauthorized
+        '404':
+          description: InfoProvider not found
+  /RSOD_INFOPROV_SRV/InfoProviders('{infoProviderName}')/Dimensions:
+    get:
+      operationId: listInfoProviderDimensions
+      summary: List InfoProvider dimensions
+      description: >-
+        Retrieve all dimensions associated with a specific InfoProvider.
+      tags:
+        - InfoProviders
+      parameters:
+        - $ref: '#/components/parameters/infoProviderName'
+        - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: List of dimensions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BwDimensionCollection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: InfoProvider not found
+  /RSOD_INFOPROV_SRV/InfoProviders('{infoProviderName}')/KeyFigures:
+    get:
+      operationId: listInfoProviderKeyFigures
+      summary: List InfoProvider key figures
+      description: >-
+        Retrieve all key figures (measures) associated with a specific
+        InfoProvider.
+      tags:
+        - InfoProviders
+      parameters:
+        - $ref: '#/components/parameters/infoProviderName'
+        - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: List of key figures
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyFigureCollection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: InfoProvider not found
+  /RSOD_BW_QUERY_SRV/Queries:
+    get:
+      operationId: listQueries
+      summary: List BW queries
+      description: >-
+        Retrieve a list of all BW queries available in the system.
+      tags:
+        - Queries
+      parameters:
+        - $ref: '#/components/parameters/topParam'
+        - $ref: '#/components/parameters/skipParam'
+        - $ref: '#/components/parameters/filterParam'
+        - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: List of queries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryCollection'
+        '401':
+          description: Unauthorized
+  /RSOD_BW_QUERY_SRV/Queries('{queryName}'):
+    get:
+      operationId: getQuery
+      summary: Get a BW query
+      description: >-
+        Retrieve metadata of a specific BW query.
+      tags:
+        - Queries
+      parameters:
+        - $ref: '#/components/parameters/queryName'
+        - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: Query details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BwQuery'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Query not found
+  /RSOD_BW_QUERY_SRV/Queries('{queryName}')/Execute:
+    post:
+      operationId: executeQuery
+      summary: Execute a BW query
+      description: >-
+        Execute a BW query with optional variable values and retrieve
+        the result set.
+      tags:
+        - Queries
+      parameters:
+        - $ref: '#/components/parameters/queryName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryExecutionRequest'
+      responses:
+        '200':
+          description: Query result set
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResult'
+        '400':
+          description: Invalid query parameters
+        '401':
+          description: Unauthorized
+        '404':
+          description: Query not found
+  /RSOD_ADSO_SRV/DataStoreObjects:
+    get:
+      operationId: listDataStoreObjects
+      summary: List data store objects
+      description: >-
+        Retrieve a list of all advanced data store objects (aDSO) in the system.
+      tags:
+        - Data Store Objects
+      parameters:
+        - $ref: '#/components/parameters/topParam'
+        - $ref: '#/components/parameters/skipParam'
+        - $ref: '#/components/parameters/filterParam'
+        - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: List of data store objects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStoreObjectCollection'
+        '401':
+          description: Unauthorized
+  /RSOD_ADSO_SRV/DataStoreObjects('{adsoName}'):
+    get:
+      operationId: getDataStoreObject
+      summary: Get a data store object
+      description: >-
+        Retrieve details and metadata of a specific advanced data store object.
+      tags:
+        - Data Store Objects
+      parameters:
+        - $ref: '#/components/parameters/adsoName'
+        - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: Data store object details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStoreObject'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Data store object not found
+  /RSPC_API_SRV/ProcessChains:
+    get:
+      operationId: listProcessChains
+      summary: List process chains
+      description: >-
+        Retrieve a list of all process chains in the BW/4HANA system.
+      tags:
+        - Process Chains
+      parameters:
+        - $ref: '#/components/parameters/topParam'
+        - $ref: '#/components/parameters/skipParam'
+        - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: List of process chains
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessChainCollection'
+        '401':
+          description: Unauthorized
+  /RSPC_API_SRV/ProcessChains('{chainId}'):
+    get:
+      operationId: getProcessChain
+      summary: Get a process chain
+      description: >-
+        Retrieve details and execution history of a specific process chain.
+      tags:
+        - Process Chains
+      parameters:
+        - $ref: '#/components/parameters/chainId'
+        - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: Process chain details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessChain'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Process chain not found
+  /RSPC_API_SRV/ProcessChains('{chainId}')/Start:
+    post:
+      operationId: startProcessChain
+      summary: Start a process chain
+      description: >-
+        Trigger execution of a process chain.
+      tags:
+        - Process Chains
+      parameters:
+        - $ref: '#/components/parameters/chainId'
+      responses:
+        '202':
+          description: Process chain execution started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessChainRun'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Process chain not found
+  /RSOD_CATALOG_SRV/CatalogEntries:
+    get:
+      operationId: listCatalogEntries
+      summary: List metadata catalog entries
+      description: >-
+        Browse the BW/4HANA metadata catalog to discover available
+        objects across the system.
+      tags:
+        - Metadata
+      parameters:
+        - $ref: '#/components/parameters/topParam'
+        - $ref: '#/components/parameters/skipParam'
+        - $ref: '#/components/parameters/filterParam'
+        - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: List of catalog entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogEntryCollection'
+        '401':
+          description: Unauthorized
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: SAP user credentials for BW/4HANA system
+  parameters:
+    infoProviderName:
+      name: infoProviderName
+      in: path
+      required: true
+      description: InfoProvider technical name
+      schema:
+        type: string
+    queryName:
+      name: queryName
+      in: path
+      required: true
+      description: BW query technical name
+      schema:
+        type: string
+    adsoName:
+      name: adsoName
+      in: path
+      required: true
+      description: Advanced data store object technical name
+      schema:
+        type: string
+    chainId:
+      name: chainId
+      in: path
+      required: true
+      description: Process chain identifier
+      schema:
+        type: string
+    topParam:
+      name: $top
+      in: query
+      description: Maximum number of results to return (OData)
+      schema:
+        type: integer
+        default: 100
+        minimum: 1
+    skipParam:
+      name: $skip
+      in: query
+      description: Number of results to skip for pagination (OData)
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    filterParam:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    selectParam:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to return
+      schema:
+        type: string
+    formatParam:
+      name: $format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+          - json
+          - xml
+        default: json
+  schemas:
+    InfoProviderCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/InfoProvider'
+    InfoProvider:
+      type: object
+      properties:
+        InfoProviderName:
+          type: string
+          description: Technical name of the InfoProvider
+        InfoProviderDescription:
+          type: string
+          description: Description of the InfoProvider
+        InfoProviderType:
+          type: string
+          enum:
+            - ADSO
+            - CompositeProvider
+            - InfoCube
+            - InfoObject
+          description: Type of InfoProvider
+        InfoArea:
+          type: string
+          description: InfoArea containing the InfoProvider
+        CreatedBy:
+          type: string
+          description: User who created the InfoProvider
+        CreatedAt:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        ChangedBy:
+          type: string
+          description: User who last changed the InfoProvider
+        ChangedAt:
+          type: string
+          format: date-time
+          description: Last change timestamp
+    BwDimensionCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/BwDimension'
+    BwDimension:
+      type: object
+      properties:
+        DimensionName:
+          type: string
+          description: Technical name of the dimension
+        DimensionDescription:
+          type: string
+          description: Description of the dimension
+        DimensionType:
+          type: string
+          description: Dimension type
+        InfoObjectName:
+          type: string
+          description: Associated InfoObject technical name
+    KeyFigureCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/KeyFigure'
+    KeyFigure:
+      type: object
+      properties:
+        KeyFigureName:
+          type: string
+          description: Technical name of the key figure
+        KeyFigureDescription:
+          type: string
+          description: Description of the key figure
+        AggregationType:
+          type: string
+          enum:
+            - SUM
+            - MIN
+            - MAX
+            - AVG
+            - COUNT
+            - NOP
+          description: Aggregation behavior
+        DataType:
+          type: string
+          description: Data type of the key figure
+        UnitOfMeasure:
+          type: string
+          description: Unit of measure or currency
+    QueryCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/BwQuery'
+    BwQuery:
+      type: object
+      properties:
+        QueryName:
+          type: string
+          description: Technical name of the query
+        QueryDescription:
+          type: string
+          description: Description of the query
+        InfoProviderName:
+          type: string
+          description: Underlying InfoProvider
+        CreatedBy:
+          type: string
+          description: User who created the query
+        ChangedAt:
+          type: string
+          format: date-time
+          description: Last modification timestamp
+    QueryExecutionRequest:
+      type: object
+      properties:
+        Variables:
+          type: array
+          items:
+            type: object
+            properties:
+              VariableName:
+                type: string
+                description: Variable technical name
+              Value:
+                type: string
+                description: Variable value
+          description: Query variable values
+    QueryResult:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                type: object
+              description: Result rows
+            __count:
+              type: string
+              description: Total result count
+    DataStoreObjectCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/DataStoreObject'
+    DataStoreObject:
+      type: object
+      properties:
+        DataStoreObjectName:
+          type: string
+          description: Technical name of the aDSO
+        DataStoreObjectDescription:
+          type: string
+          description: Description of the aDSO
+        DataStoreObjectType:
+          type: string
+          enum:
+            - Standard
+            - WriteOptimized
+            - DirectUpdate
+          description: Data store object type
+        InfoArea:
+          type: string
+          description: InfoArea containing the aDSO
+        ActivationStatus:
+          type: string
+          enum:
+            - Active
+            - Inactive
+            - Modified
+          description: Current activation status
+        RecordCount:
+          type: integer
+          description: Number of records in the active table
+    ProcessChainCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProcessChain'
+    ProcessChain:
+      type: object
+      properties:
+        ChainId:
+          type: string
+          description: Process chain identifier
+        Description:
+          type: string
+          description: Process chain description
+        Status:
+          type: string
+          enum:
+            - Active
+            - Inactive
+          description: Chain status
+        LastRunStatus:
+          type: string
+          enum:
+            - Green
+            - Yellow
+            - Red
+          description: Status of the last execution
+        LastRunTime:
+          type: string
+          format: date-time
+          description: When the chain last ran
+    ProcessChainRun:
+      type: object
+      properties:
+        RunId:
+          type: string
+          description: Execution run identifier
+        Status:
+          type: string
+          enum:
+            - Started
+            - Running
+          description: Initial run status
+        StartTime:
+          type: string
+          format: date-time
+          description: When the execution started
+    CatalogEntryCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/CatalogEntry'
+    CatalogEntry:
+      type: object
+      properties:
+        ObjectName:
+          type: string
+          description: Technical name of the object
+        ObjectDescription:
+          type: string
+          description: Object description
+        ObjectType:
+          type: string
+          description: Object type (e.g., ADSO, CPROV, IOBJ)
+        InfoArea:
+          type: string
+          description: InfoArea of the object
+        Version:
+          type: string
+          description: Object version

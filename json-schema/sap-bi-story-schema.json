@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.sap.com/schemas/sap-bi/story.json",
+  "title": "SAP Analytics Cloud Story",
+  "description": "An analytics story in SAP Analytics Cloud that combines data visualizations, charts, tables, and other widgets into interactive dashboards and reports for data-driven decision making.",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the story"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the story",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the story"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "User who created the story"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the story was created"
+    },
+    "modifiedBy": {
+      "type": "string",
+      "description": "User who last modified the story"
+    },
+    "modifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the story was last modified"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["Draft", "Published"],
+      "description": "Current publication status of the story"
+    },
+    "folderId": {
+      "type": "string",
+      "description": "ID of the folder containing the story"
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Page"
+      },
+      "description": "Pages within the story"
+    }
+  },
+  "$defs": {
+    "Page": {
+      "type": "object",
+      "description": "A page within an analytics story containing one or more widgets",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Page unique identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Page name"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Widget"
+          },
+          "description": "Widgets on the page"
+        }
+      }
+    },
+    "Widget": {
+      "type": "object",
+      "description": "A visualization or interactive component on a story page",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Widget unique identifier"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["Chart", "Table", "Filter", "Text", "Image", "Shape"],
+          "description": "Type of widget"
+        },
+        "name": {
+          "type": "string",
+          "description": "Widget display name"
+        },
+        "modelId": {
+          "type": "string",
+          "description": "Associated data model ID"
+        }
+      }
+    }
+  }
+}

@@ -9,7 +9,8 @@ tags:
 - Data Visualization
 - SAP
 created: '2024'
-modified: '2024'
+modified: '2026-03-04'
+specificationVersion: '0.18'
 apis:
 - name: SAP Analytics Cloud API
   description: REST API for SAP Analytics Cloud enabling data integration, story management, and analytics operations
@@ -29,6 +30,8 @@ apis:
     url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
   - type: Swagger
     url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: OpenAPI
+    url: openapi/sap-bi-analytics-cloud-openapi.yml
 - name: SAP BusinessObjects BI Platform REST API
   description: RESTful web services for SAP BusinessObjects BI Platform administration, content management, and reporting
   image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
@@ -47,6 +50,8 @@ apis:
     url: https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
   - type: Authentication
     url: https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: OpenAPI
+    url: openapi/sap-bi-businessobjects-platform-openapi.yml
 - name: SAP HANA XS Advanced API
   description: APIs for building analytics applications on SAP HANA XS Advanced platform
   image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
@@ -81,6 +86,8 @@ apis:
     url: https://api.sap.com/package/SAPBW4HANA/odata
   - type: Integration Guide
     url: https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: OpenAPI
+    url: openapi/sap-bi-bw4hana-odata-openapi.yml
 - name: SAP Datasphere API
   description: APIs for SAP Datasphere (formerly SAP Data Warehouse Cloud) for data integration and analytics
   image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
@@ -100,6 +107,8 @@ apis:
     url: https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
   - type: Authentication
     url: https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+  - type: OpenAPI
+    url: openapi/sap-bi-datasphere-openapi.yml
 - name: SAP Crystal Reports API
   description: APIs for embedding and automating SAP Crystal Reports in applications
   image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
@@ -117,9 +126,8 @@ apis:
   - type: Integration Samples
     url: https://wiki.scn.sap.com/wiki/display/BOBJ/Crystal+Reports+Developer+Center
 maintainers:
-- name: SAP
-  email: api.support@sap.com
-  url: https://support.sap.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
 common:
 - type: Portal
   url: https://api.sap.com/
@@ -133,3 +141,11 @@ common:
   url: https://www.sap.com/about/legal/terms-of-use.html
 - type: Privacy Policy
   url: https://www.sap.com/about/legal/privacy.html
+- type: JSON-LD
+  url: json-ld/sap-bi-context.jsonld
+- type: JSONSchema
+  url: json-schema/sap-bi-story-schema.json
+- type: JSONSchema
+  url: json-schema/sap-bi-report-schema.json
+- type: JSONSchema
+  url: json-schema/sap-bi-data-source-schema.json
