@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: SAP BW/4HANA OData API
+  title: SAP Business Intelligence SAP BW/4HANA OData API
   description: >-
     OData services for accessing SAP BW/4HANA data warehouse content and
     metadata. Provides programmatic access to query InfoProviders, manage
@@ -41,7 +41,7 @@ paths:
   /RSOD_INFOPROV_SRV/InfoProviders:
     get:
       operationId: listInfoProviders
-      summary: List InfoProviders
+      summary: SAP Business Intelligence List InfoProviders
       description: >-
         Retrieve a list of all InfoProviders (InfoCubes, DataStore Objects,
         CompositeProviders) available in the BW/4HANA system.
@@ -67,7 +67,7 @@ paths:
   /RSOD_INFOPROV_SRV/InfoProviders('{infoProviderName}'):
     get:
       operationId: getInfoProvider
-      summary: Get an InfoProvider
+      summary: SAP Business Intelligence Get an InfoProvider
       description: >-
         Retrieve details and metadata of a specific InfoProvider.
       tags:
@@ -89,7 +89,7 @@ paths:
   /RSOD_INFOPROV_SRV/InfoProviders('{infoProviderName}')/Dimensions:
     get:
       operationId: listInfoProviderDimensions
-      summary: List InfoProvider dimensions
+      summary: SAP Business Intelligence List InfoProvider dimensions
       description: >-
         Retrieve all dimensions associated with a specific InfoProvider.
       tags:
@@ -111,7 +111,7 @@ paths:
   /RSOD_INFOPROV_SRV/InfoProviders('{infoProviderName}')/KeyFigures:
     get:
       operationId: listInfoProviderKeyFigures
-      summary: List InfoProvider key figures
+      summary: SAP Business Intelligence List InfoProvider key figures
       description: >-
         Retrieve all key figures (measures) associated with a specific
         InfoProvider.
@@ -134,7 +134,7 @@ paths:
   /RSOD_BW_QUERY_SRV/Queries:
     get:
       operationId: listQueries
-      summary: List BW queries
+      summary: SAP Business Intelligence List BW queries
       description: >-
         Retrieve a list of all BW queries available in the system.
       tags:
@@ -156,7 +156,7 @@ paths:
   /RSOD_BW_QUERY_SRV/Queries('{queryName}'):
     get:
       operationId: getQuery
-      summary: Get a BW query
+      summary: SAP Business Intelligence Get a BW query
       description: >-
         Retrieve metadata of a specific BW query.
       tags:
@@ -178,7 +178,7 @@ paths:
   /RSOD_BW_QUERY_SRV/Queries('{queryName}')/Execute:
     post:
       operationId: executeQuery
-      summary: Execute a BW query
+      summary: SAP Business Intelligence Execute a BW query
       description: >-
         Execute a BW query with optional variable values and retrieve
         the result set.
@@ -207,7 +207,7 @@ paths:
   /RSOD_ADSO_SRV/DataStoreObjects:
     get:
       operationId: listDataStoreObjects
-      summary: List data store objects
+      summary: SAP Business Intelligence List data store objects
       description: >-
         Retrieve a list of all advanced data store objects (aDSO) in the system.
       tags:
@@ -229,7 +229,7 @@ paths:
   /RSOD_ADSO_SRV/DataStoreObjects('{adsoName}'):
     get:
       operationId: getDataStoreObject
-      summary: Get a data store object
+      summary: SAP Business Intelligence Get a data store object
       description: >-
         Retrieve details and metadata of a specific advanced data store object.
       tags:
@@ -251,7 +251,7 @@ paths:
   /RSPC_API_SRV/ProcessChains:
     get:
       operationId: listProcessChains
-      summary: List process chains
+      summary: SAP Business Intelligence List process chains
       description: >-
         Retrieve a list of all process chains in the BW/4HANA system.
       tags:
@@ -272,7 +272,7 @@ paths:
   /RSPC_API_SRV/ProcessChains('{chainId}'):
     get:
       operationId: getProcessChain
-      summary: Get a process chain
+      summary: SAP Business Intelligence Get a process chain
       description: >-
         Retrieve details and execution history of a specific process chain.
       tags:
@@ -294,7 +294,7 @@ paths:
   /RSPC_API_SRV/ProcessChains('{chainId}')/Start:
     post:
       operationId: startProcessChain
-      summary: Start a process chain
+      summary: SAP Business Intelligence Start a process chain
       description: >-
         Trigger execution of a process chain.
       tags:
@@ -315,7 +315,7 @@ paths:
   /RSOD_CATALOG_SRV/CatalogEntries:
     get:
       operationId: listCatalogEntries
-      summary: List metadata catalog entries
+      summary: SAP Business Intelligence List metadata catalog entries
       description: >-
         Browse the BW/4HANA metadata catalog to discover available
         objects across the system.

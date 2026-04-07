@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: SAP BusinessObjects BI Platform REST API
+  title: SAP Business Intelligence SAP BusinessObjects BI Platform REST API
   description: >-
     RESTful web services for SAP BusinessObjects BI Platform administration,
     content management, scheduling, and reporting. Provides access to manage
@@ -45,7 +45,7 @@ paths:
   /logon/long:
     post:
       operationId: logon
-      summary: Log on to BI Platform
+      summary: SAP Business Intelligence Log on to BI Platform
       description: >-
         Authenticate to the BI Platform and obtain a logon token for
         subsequent API calls.
@@ -70,7 +70,7 @@ paths:
   /logoff:
     post:
       operationId: logoff
-      summary: Log off from BI Platform
+      summary: SAP Business Intelligence Log off from BI Platform
       description: >-
         Invalidate the current logon token and end the session.
       tags:
@@ -83,7 +83,7 @@ paths:
   /infostore:
     get:
       operationId: listInfoObjects
-      summary: List InfoObjects
+      summary: SAP Business Intelligence List InfoObjects
       description: >-
         Query and retrieve InfoObjects from the BI Platform content
         management system using CMS queries.
@@ -109,7 +109,7 @@ paths:
   /infostore/{objectId}:
     get:
       operationId: getInfoObject
-      summary: Get an InfoObject
+      summary: SAP Business Intelligence Get an InfoObject
       description: >-
         Retrieve details of a specific InfoObject by its ID.
       tags:
@@ -129,7 +129,7 @@ paths:
           description: InfoObject not found
     put:
       operationId: updateInfoObject
-      summary: Update an InfoObject
+      summary: SAP Business Intelligence Update an InfoObject
       description: >-
         Update properties of an existing InfoObject.
       tags:
@@ -157,7 +157,7 @@ paths:
           description: InfoObject not found
     delete:
       operationId: deleteInfoObject
-      summary: Delete an InfoObject
+      summary: SAP Business Intelligence Delete an InfoObject
       description: >-
         Delete an InfoObject from the BI Platform.
       tags:
@@ -174,7 +174,7 @@ paths:
   /infostore/{objectId}/children:
     get:
       operationId: listInfoObjectChildren
-      summary: List children of an InfoObject
+      summary: SAP Business Intelligence List children of an InfoObject
       description: >-
         Retrieve child objects of a folder or container InfoObject.
       tags:
@@ -197,7 +197,7 @@ paths:
   /documents/{documentId}:
     get:
       operationId: getDocument
-      summary: Get a report document
+      summary: SAP Business Intelligence Get a report document
       description: >-
         Retrieve a specific report document with its metadata.
       tags:
@@ -218,7 +218,7 @@ paths:
   /documents/{documentId}/parameters:
     get:
       operationId: listDocumentParameters
-      summary: List report parameters
+      summary: SAP Business Intelligence List report parameters
       description: >-
         Retrieve the prompt parameters for a report document.
       tags:
@@ -239,7 +239,7 @@ paths:
   /documents/{documentId}/dataproviders:
     get:
       operationId: listDataProviders
-      summary: List data providers
+      summary: SAP Business Intelligence List data providers
       description: >-
         Retrieve data providers associated with a report document.
       tags:
@@ -260,7 +260,7 @@ paths:
   /infostore/{objectId}/schedules:
     get:
       operationId: listSchedules
-      summary: List schedules for an object
+      summary: SAP Business Intelligence List schedules for an object
       description: >-
         Retrieve all schedules configured for a specific InfoObject.
       tags:
@@ -280,7 +280,7 @@ paths:
           description: InfoObject not found
     post:
       operationId: scheduleObject
-      summary: Schedule an object
+      summary: SAP Business Intelligence Schedule an object
       description: >-
         Create a new schedule for a report or program object.
       tags:
@@ -309,7 +309,7 @@ paths:
   /infostore/{objectId}/instances:
     get:
       operationId: listInstances
-      summary: List instances of an object
+      summary: SAP Business Intelligence List instances of an object
       description: >-
         Retrieve all report instances generated from scheduling or
         on-demand execution.
@@ -333,7 +333,7 @@ paths:
   /users:
     get:
       operationId: listUsers
-      summary: List users
+      summary: SAP Business Intelligence List users
       description: >-
         Retrieve a list of users in the BI Platform.
       tags:
@@ -353,7 +353,7 @@ paths:
   /users/{userId}:
     get:
       operationId: getUser
-      summary: Get a user
+      summary: SAP Business Intelligence Get a user
       description: >-
         Retrieve details of a specific user.
       tags:
@@ -374,7 +374,7 @@ paths:
   /servers:
     get:
       operationId: listServers
-      summary: List servers
+      summary: SAP Business Intelligence List servers
       description: >-
         Retrieve a list of all servers in the BI Platform deployment.
       tags:
@@ -391,7 +391,7 @@ paths:
   /servers/{serverId}:
     get:
       operationId: getServer
-      summary: Get a server
+      summary: SAP Business Intelligence Get a server
       description: >-
         Retrieve details and status of a specific BI Platform server.
       tags:

@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: SAP Analytics Cloud API
+  title: SAP Business Intelligence SAP Analytics Cloud API
   description: >-
     REST API for SAP Analytics Cloud enabling data integration, story
     management, model administration, and analytics operations. Provides
@@ -38,7 +38,7 @@ paths:
   /stories:
     get:
       operationId: listStories
-      summary: List stories
+      summary: SAP Business Intelligence List stories
       description: >-
         Retrieve a list of all analytics stories accessible to the
         authenticated user.
@@ -65,7 +65,7 @@ paths:
           description: Forbidden
     post:
       operationId: createStory
-      summary: Create a story
+      summary: SAP Business Intelligence Create a story
       description: >-
         Create a new analytics story with specified configuration and layout.
       tags:
@@ -90,7 +90,7 @@ paths:
   /stories/{storyId}:
     get:
       operationId: getStory
-      summary: Get a story
+      summary: SAP Business Intelligence Get a story
       description: >-
         Retrieve details of a specific analytics story including its pages
         and widgets.
@@ -111,7 +111,7 @@ paths:
           description: Story not found
     put:
       operationId: updateStory
-      summary: Update a story
+      summary: SAP Business Intelligence Update a story
       description: >-
         Update properties of an existing analytics story.
       tags:
@@ -139,7 +139,7 @@ paths:
           description: Story not found
     delete:
       operationId: deleteStory
-      summary: Delete a story
+      summary: SAP Business Intelligence Delete a story
       description: >-
         Delete an existing analytics story.
       tags:
@@ -156,7 +156,7 @@ paths:
   /stories/{storyId}/publish:
     post:
       operationId: publishStory
-      summary: Publish a story
+      summary: SAP Business Intelligence Publish a story
       description: >-
         Publish an analytics story to make it available to other users.
       tags:
@@ -177,7 +177,7 @@ paths:
   /models:
     get:
       operationId: listModels
-      summary: List models
+      summary: SAP Business Intelligence List models
       description: >-
         Retrieve a list of all data models available in the tenant.
       tags:
@@ -196,7 +196,7 @@ paths:
           description: Unauthorized
     post:
       operationId: createModel
-      summary: Create a model
+      summary: SAP Business Intelligence Create a model
       description: >-
         Create a new data model with specified dimensions and measures.
       tags:
@@ -221,7 +221,7 @@ paths:
   /models/{modelId}:
     get:
       operationId: getModel
-      summary: Get a model
+      summary: SAP Business Intelligence Get a model
       description: >-
         Retrieve details of a specific data model including dimensions
         and measures.
@@ -242,7 +242,7 @@ paths:
           description: Model not found
     put:
       operationId: updateModel
-      summary: Update a model
+      summary: SAP Business Intelligence Update a model
       description: >-
         Update properties of an existing data model.
       tags:
@@ -270,7 +270,7 @@ paths:
           description: Model not found
     delete:
       operationId: deleteModel
-      summary: Delete a model
+      summary: SAP Business Intelligence Delete a model
       description: >-
         Delete an existing data model.
       tags:
@@ -287,7 +287,7 @@ paths:
   /models/{modelId}/dimensions:
     get:
       operationId: listModelDimensions
-      summary: List model dimensions
+      summary: SAP Business Intelligence List model dimensions
       description: >-
         Retrieve all dimensions defined in a specific model.
       tags:
@@ -308,7 +308,7 @@ paths:
   /models/{modelId}/measures:
     get:
       operationId: listModelMeasures
-      summary: List model measures
+      summary: SAP Business Intelligence List model measures
       description: >-
         Retrieve all measures defined in a specific model.
       tags:
@@ -329,7 +329,7 @@ paths:
   /dataimport/models/{modelId}/jobs:
     get:
       operationId: listImportJobs
-      summary: List import jobs
+      summary: SAP Business Intelligence List import jobs
       description: >-
         Retrieve all data import jobs for a specific model.
       tags:
@@ -349,7 +349,7 @@ paths:
           description: Model not found
     post:
       operationId: createImportJob
-      summary: Create an import job
+      summary: SAP Business Intelligence Create an import job
       description: >-
         Create a new data import job to load data into a model.
       tags:
@@ -378,7 +378,7 @@ paths:
   /dataimport/models/{modelId}/jobs/{jobId}:
     get:
       operationId: getImportJob
-      summary: Get an import job
+      summary: SAP Business Intelligence Get an import job
       description: >-
         Retrieve status and details of a specific data import job.
       tags:
@@ -400,7 +400,7 @@ paths:
   /users:
     get:
       operationId: listUsers
-      summary: List users
+      summary: SAP Business Intelligence List users
       description: >-
         Retrieve a list of all users in the SAP Analytics Cloud tenant.
       tags:
@@ -420,7 +420,7 @@ paths:
   /users/{userId}:
     get:
       operationId: getUser
-      summary: Get a user
+      summary: SAP Business Intelligence Get a user
       description: >-
         Retrieve details of a specific user.
       tags:
@@ -441,7 +441,7 @@ paths:
   /folders:
     get:
       operationId: listFolders
-      summary: List folders
+      summary: SAP Business Intelligence List folders
       description: >-
         Retrieve a list of content folders in the SAP Analytics Cloud tenant.
       tags:
@@ -461,7 +461,7 @@ paths:
   /folders/{folderId}:
     get:
       operationId: getFolder
-      summary: Get a folder
+      summary: SAP Business Intelligence Get a folder
       description: >-
         Retrieve details and contents of a specific folder.
       tags:

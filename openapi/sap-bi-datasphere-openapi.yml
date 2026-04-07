@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: SAP Datasphere API
+  title: SAP Business Intelligence SAP Datasphere API
   description: >-
     APIs for SAP Datasphere (formerly SAP Data Warehouse Cloud) enabling
     data integration, space management, model deployment, and analytics.
@@ -40,7 +40,7 @@ paths:
   /spaces:
     get:
       operationId: listSpaces
-      summary: List spaces
+      summary: SAP Business Intelligence List spaces
       description: >-
         Retrieve a list of all spaces the authenticated user has access to.
       tags:
@@ -61,7 +61,7 @@ paths:
           description: Forbidden
     post:
       operationId: createSpace
-      summary: Create a space
+      summary: SAP Business Intelligence Create a space
       description: >-
         Create a new Datasphere space with specified configuration.
       tags:
@@ -86,7 +86,7 @@ paths:
   /spaces/{spaceId}:
     get:
       operationId: getSpace
-      summary: Get a space
+      summary: SAP Business Intelligence Get a space
       description: >-
         Retrieve details of a specific Datasphere space.
       tags:
@@ -106,7 +106,7 @@ paths:
           description: Space not found
     put:
       operationId: updateSpace
-      summary: Update a space
+      summary: SAP Business Intelligence Update a space
       description: >-
         Update properties of an existing Datasphere space.
       tags:
@@ -134,7 +134,7 @@ paths:
           description: Space not found
     delete:
       operationId: deleteSpace
-      summary: Delete a space
+      summary: SAP Business Intelligence Delete a space
       description: >-
         Delete an existing Datasphere space and its contents.
       tags:
@@ -151,7 +151,7 @@ paths:
   /spaces/{spaceId}/connections:
     get:
       operationId: listConnections
-      summary: List connections in a space
+      summary: SAP Business Intelligence List connections in a space
       description: >-
         Retrieve all data source connections configured in a specific space.
       tags:
@@ -171,7 +171,7 @@ paths:
           description: Space not found
     post:
       operationId: createConnection
-      summary: Create a connection
+      summary: SAP Business Intelligence Create a connection
       description: >-
         Create a new data source connection in a specific space.
       tags:
@@ -200,7 +200,7 @@ paths:
   /spaces/{spaceId}/connections/{connectionId}:
     get:
       operationId: getConnection
-      summary: Get a connection
+      summary: SAP Business Intelligence Get a connection
       description: >-
         Retrieve details of a specific data source connection.
       tags:
@@ -221,7 +221,7 @@ paths:
           description: Connection not found
     delete:
       operationId: deleteConnection
-      summary: Delete a connection
+      summary: SAP Business Intelligence Delete a connection
       description: >-
         Delete an existing data source connection.
       tags:
@@ -239,7 +239,7 @@ paths:
   /spaces/{spaceId}/dataflows:
     get:
       operationId: listDataFlows
-      summary: List data flows
+      summary: SAP Business Intelligence List data flows
       description: >-
         Retrieve all data flows configured in a specific space.
       tags:
@@ -260,7 +260,7 @@ paths:
   /spaces/{spaceId}/dataflows/{dataFlowId}:
     get:
       operationId: getDataFlow
-      summary: Get a data flow
+      summary: SAP Business Intelligence Get a data flow
       description: >-
         Retrieve details of a specific data flow.
       tags:
@@ -282,7 +282,7 @@ paths:
   /spaces/{spaceId}/dataflows/{dataFlowId}/run:
     post:
       operationId: runDataFlow
-      summary: Run a data flow
+      summary: SAP Business Intelligence Run a data flow
       description: >-
         Trigger execution of a data flow to replicate or transform data.
       tags:
@@ -304,7 +304,7 @@ paths:
   /spaces/{spaceId}/views:
     get:
       operationId: listViews
-      summary: List views
+      summary: SAP Business Intelligence List views
       description: >-
         Retrieve all views (analytical and relational) defined in a space.
       tags:
@@ -325,7 +325,7 @@ paths:
   /spaces/{spaceId}/views/{viewId}:
     get:
       operationId: getView
-      summary: Get a view
+      summary: SAP Business Intelligence Get a view
       description: >-
         Retrieve details and metadata of a specific view.
       tags:
@@ -347,7 +347,7 @@ paths:
   /spaces/{spaceId}/views/{viewId}/deploy:
     post:
       operationId: deployView
-      summary: Deploy a view
+      summary: SAP Business Intelligence Deploy a view
       description: >-
         Deploy a view to make it available for consumption.
       tags:
@@ -369,7 +369,7 @@ paths:
   /tasks:
     get:
       operationId: listTasks
-      summary: List tasks
+      summary: SAP Business Intelligence List tasks
       description: >-
         Retrieve a list of task executions across the tenant.
       tags:
@@ -398,7 +398,7 @@ paths:
   /tasks/{taskId}:
     get:
       operationId: getTask
-      summary: Get a task
+      summary: SAP Business Intelligence Get a task
       description: >-
         Retrieve details and status of a specific task execution.
       tags:
@@ -419,7 +419,7 @@ paths:
   /catalog:
     get:
       operationId: listCatalogAssets
-      summary: List catalog assets
+      summary: SAP Business Intelligence List catalog assets
       description: >-
         Browse the data catalog to discover available datasets, views,
         and other assets.
@@ -445,7 +445,7 @@ paths:
   /catalog/{assetId}:
     get:
       operationId: getCatalogAsset
-      summary: Get a catalog asset
+      summary: SAP Business Intelligence Get a catalog asset
       description: >-
         Retrieve details and metadata of a specific catalog asset.
       tags:
