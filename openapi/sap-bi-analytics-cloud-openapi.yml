@@ -22,16 +22,16 @@ servers:
         default: mytenant
         description: SAP Analytics Cloud tenant identifier
 tags:
-  - name: Stories
-    description: Manage analytics stories and dashboards
-  - name: Models
-    description: Manage data models and dimensions
   - name: Data Import
     description: Import data into models
-  - name: Users
-    description: Manage users and teams
   - name: Folders
     description: Manage content folders
+  - name: Models
+    description: Manage data models and dimensions
+  - name: Stories
+    description: Manage analytics stories and dashboards
+  - name: Users
+    description: Manage users and teams
 security:
   - oauth2: []
 paths:

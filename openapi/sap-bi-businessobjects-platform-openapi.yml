@@ -25,20 +25,18 @@ servers:
         default: '6405'
         description: BI Platform server port
 tags:
-  - name: Logon
-    description: Authentication and session management
   - name: InfoObjects
     description: Manage BI platform content objects
-  - name: Reports
-    description: Manage and schedule reports
-  - name: Folders
-    description: Manage content folders
-  - name: Users
-    description: Manage users and groups
-  - name: Servers
-    description: Monitor and manage BI Platform servers
   - name: Instances
     description: Manage scheduled report instances
+  - name: Logon
+    description: Authentication and session management
+  - name: Reports
+    description: Manage and schedule reports
+  - name: Servers
+    description: Monitor and manage BI Platform servers
+  - name: Users
+    description: Manage users and groups
 security:
   - logonToken: []
 paths:

@@ -22,18 +22,18 @@ servers:
         default: mytenant
         description: SAP Datasphere tenant identifier
 tags:
-  - name: Spaces
-    description: Manage Datasphere spaces
+  - name: Catalog
+    description: Browse the Datasphere data catalog
   - name: Connections
     description: Manage data source connections
   - name: Data Flows
     description: Manage data replication and transformation flows
-  - name: Views
-    description: Manage analytical and relational views
+  - name: Spaces
+    description: Manage Datasphere spaces
   - name: Tasks
     description: Manage and monitor task execution
-  - name: Catalog
-    description: Browse the Datasphere data catalog
+  - name: Views
+    description: Manage analytical and relational views
 security:
   - oauth2: []
 paths:

@@ -25,16 +25,16 @@ servers:
         default: '443'
         description: BW/4HANA server port
 tags:
-  - name: InfoProviders
-    description: Access InfoProvider metadata and data
-  - name: Queries
-    description: Execute and manage BW queries
   - name: Data Store Objects
     description: Manage advanced data store objects (aDSO)
-  - name: Process Chains
-    description: Monitor and manage process chains
+  - name: InfoProviders
+    description: Access InfoProvider metadata and data
   - name: Metadata
     description: Browse BW/4HANA metadata catalog
+  - name: Process Chains
+    description: Monitor and manage process chains
+  - name: Queries
+    description: Execute and manage BW queries
 security:
   - basicAuth: []
 paths:
