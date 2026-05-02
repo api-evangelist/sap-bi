@@ -1,0 +1,23 @@
+{
+  "count": 2,
+  "items": [
+    {
+      "id": "STORY_Q1_SALES",
+      "name": "Q1 2026 Sales Dashboard",
+      "description": "Quarterly sales performance with regional and product breakdowns",
+      "createdAt": "2026-01-05T08:00:00Z",
+      "modifiedAt": "2026-04-15T11:30:00Z",
+      "createdBy": "user.analyst@example.com",
+      "status": "published"
+    },
+    {
+      "id": "STORY_FIN_CLOSE",
+      "name": "Financial Close Monitor",
+      "description": "Real-time monitoring of period-end close activities",
+      "createdAt": "2025-12-01T09:00:00Z",
+      "modifiedAt": "2026-04-30T18:00:00Z",
+      "createdBy": "user.finance@example.com",
+      "status": "published"
+    }
+  ]
+}

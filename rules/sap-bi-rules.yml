@@ -1,0 +1,89 @@
+extends: spectral:oas
+rules:
+  sap-bi-operation-summary-title-case:
+    description: Operation summaries must use Title Case
+    message: Summary "{{value}}" should be in Title Case
+    given: "$.paths[*][*].summary"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  sap-bi-operation-id-camel-case:
+    description: OperationIds must use camelCase
+    message: OperationId "{{value}}" should use camelCase
+    given: "$.paths[*][*].operationId"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  sap-bi-tags-title-case:
+    description: All tags must use Title Case
+    message: Tag "{{value}}" should be in Title Case
+    given: "$.tags[*].name"
+    severity: warn
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  sap-bi-path-kebab-case:
+    description: API path segments must use kebab-case or camelCase (SAP convention)
+    message: Path segment should use lowercase with hyphens or camelCase
+    given: "$.paths"
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-zA-Z][a-zA-Z0-9-]*(/[a-zA-Z][a-zA-Z0-9-]*|/\\{[a-zA-Z][a-zA-Z0-9]*\\})*)*$"
+
+  sap-bi-oauth2-required:
+    description: SAP Business Intelligence APIs require OAuth 2.0 security
+    message: APIs should specify OAuth 2.0 or token-based security
+    given: "$.components.securitySchemes"
+    severity: warn
+    then:
+      function: truthy
+
+  sap-bi-response-200-schema:
+    description: GET operations must define a 200 response schema
+    message: GET operation should define a 200 response with content
+    given: "$.paths[*].get.responses.200.content"
+    severity: warn
+    then:
+      function: truthy
+
+  sap-bi-contact-info:
+    description: API info must include contact information
+    message: API info should include a contact block
+    given: "$.info.contact"
+    severity: warn
+    then:
+      function: truthy
+
+  sap-bi-servers-defined:
+    description: APIs must define at least one server URL
+    message: API should define at least one server in the servers array
+    given: "$.servers"
+    severity: error
+    then:
+      function: truthy
+
+  sap-bi-components-schemas:
+    description: APIs should define reusable schemas in components
+    message: API should define schemas in components.schemas for reusability
+    given: "$.components.schemas"
+    severity: info
+    then:
+      function: truthy
+
+  sap-bi-pagination-params:
+    description: Collection endpoints should support pagination parameters
+    message: List operations should define limit/offset or $top/$skip pagination parameters
+    given: "$.paths[*].get.parameters"
+    severity: info
+    then:
+      function: truthy

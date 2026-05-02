@@ -1,0 +1,183 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SAP Datasphere API"
+  description: "APIs for SAP Datasphere (formerly SAP Data Warehouse Cloud) enabling data integration, space management, connection management, and analytics view deployment."
+  tags:
+    - Analytics
+    - Cloud
+    - Data Integration
+    - Data Warehouse
+    - SAP
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAP_DATASPHERE_OAUTH_TOKEN: SAP_DATASPHERE_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: sap-bi-datasphere
+      baseUri: https://{tenant}.datasphere.cloud.sap/api/v1
+      description: "SAP Datasphere REST API for space management, connections, data flows, and catalog."
+      authentication:
+        type: bearer
+        token: "{{SAP_DATASPHERE_OAUTH_TOKEN}}"
+      resources:
+        - name: spaces
+          path: /spaces
+          description: "Manage Datasphere spaces."
+          operations:
+            - name: list-spaces
+              method: GET
+              description: "List all Datasphere spaces."
+              inputParameters:
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum number of results"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-space
+              method: POST
+              description: "Create a new Datasphere space."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  name: "{{tools.name}}"
+                  description: "{{tools.description}}"
+            - name: get-space
+              method: GET
+              description: "Get details of a specific space."
+              inputParameters:
+                - name: spaceId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The space identifier"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: connections
+          path: /connections
+          description: "Manage data source connections."
+          operations:
+            - name: list-connections
+              method: GET
+              description: "List all data source connections."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: catalog
+          path: /catalog
+          description: "Browse the Datasphere data catalog."
+          operations:
+            - name: list-catalog-items
+              method: GET
+              description: "Browse the Datasphere data catalog."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8103
+      namespace: sap-bi-datasphere-api
+      resources:
+        - path: /v1/spaces
+          name: spaces
+          description: "Datasphere spaces."
+          operations:
+            - method: GET
+              name: list-spaces
+              description: "List Datasphere spaces."
+              call: "sap-bi-datasphere.list-spaces"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/connections
+          name: connections
+          description: "Data source connections."
+          operations:
+            - method: GET
+              name: list-connections
+              description: "List data source connections."
+              call: "sap-bi-datasphere.list-connections"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/catalog
+          name: catalog
+          description: "Data catalog."
+          operations:
+            - method: GET
+              name: list-catalog-items
+              description: "Browse the data catalog."
+              call: "sap-bi-datasphere.list-catalog-items"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9103
+      namespace: sap-bi-datasphere-mcp
+      transport: http
+      tools:
+        - name: list-spaces
+          description: "List all SAP Datasphere spaces the user has access to."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-bi-datasphere.list-spaces"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-space
+          description: "Get configuration details of a specific Datasphere space."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sap-bi-datasphere.get-space"
+          with:
+            spaceId: "tools.spaceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-connections
+          description: "List all data source connections in Datasphere."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-bi-datasphere.list-connections"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: browse-catalog
+          description: "Browse the SAP Datasphere data catalog for available datasets."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-bi-datasphere.list-catalog-items"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,24 @@
+{
+  "name": "Space",
+  "description": "SAP Datasphere Space - isolated environment for data integration and modeling",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique space identifier" },
+    { "name": "name", "type": "string", "required": true, "description": "Display name of the space" },
+    { "name": "description", "type": "string", "required": false, "description": "Space description" },
+    { "name": "diskStorage", "type": "integer", "required": false, "description": "Allocated disk storage in GB" },
+    { "name": "status", "type": "string", "required": false, "description": "Space status", "enum": ["ACTIVE", "INACTIVE", "CREATING"] },
+    { "name": "createdAt", "type": "datetime", "required": false, "description": "Creation timestamp" },
+    {
+      "name": "members",
+      "type": "array",
+      "required": false,
+      "description": "Space members with their roles",
+      "items": {
+        "fields": [
+          { "name": "userId", "type": "string", "required": true, "description": "User identifier" },
+          { "name": "role", "type": "string", "required": true, "description": "Member role in the space" }
+        ]
+      }
+    }
+  ]
+}

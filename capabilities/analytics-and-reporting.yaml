@@ -1,0 +1,154 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SAP Business Intelligence Analytics and Reporting"
+  description: "Workflow capability for creating, managing, and distributing analytics content across SAP Analytics Cloud and SAP BusinessObjects BI Platform. Supports story authoring, report scheduling, and content governance. Used by BI developers, analysts, and report consumers."
+  tags:
+    - Analytics
+    - Business Intelligence
+    - Reporting
+    - SAP
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAP_BI_OAUTH_TOKEN: SAP_BI_OAUTH_TOKEN
+      SAP_BOBJ_LOGON_TOKEN: SAP_BOBJ_LOGON_TOKEN
+
+capability:
+  consumes:
+    - import: sap-bi-analytics-cloud
+      location: ./shared/analytics-cloud.yaml
+    - import: sap-bi-businessobjects
+      location: ./shared/businessobjects-platform.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: sap-bi-analytics-reporting-api
+      description: "Unified REST API for SAP Business Intelligence analytics and reporting workflows."
+      resources:
+        - path: /v1/stories
+          name: stories
+          description: "Analytics stories and dashboards."
+          operations:
+            - method: GET
+              name: list-stories
+              description: "List analytics stories."
+              call: "sap-bi-analytics-cloud.list-stories"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/stories/{storyId}
+          name: story
+          description: "Single analytics story."
+          operations:
+            - method: GET
+              name: get-story
+              description: "Get a story by ID."
+              call: "sap-bi-analytics-cloud.get-story"
+              with:
+                storyId: "rest.storyId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/models
+          name: models
+          description: "Analytics data models."
+          operations:
+            - method: GET
+              name: list-models
+              description: "List analytics models."
+              call: "sap-bi-analytics-cloud.list-models"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/reports
+          name: reports
+          description: "BusinessObjects reports."
+          operations:
+            - method: GET
+              name: list-reports
+              description: "List BusinessObjects reports."
+              call: "sap-bi-businessobjects.list-reports"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/content-objects
+          name: content-objects
+          description: "BI Platform InfoStore objects."
+          operations:
+            - method: GET
+              name: list-content-objects
+              description: "List InfoStore content objects."
+              call: "sap-bi-businessobjects.list-info-objects"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9080
+      namespace: sap-bi-analytics-reporting-mcp
+      transport: http
+      description: "MCP server for AI-assisted SAP BI analytics and reporting."
+      tools:
+        - name: list-stories
+          description: "List analytics stories in SAP Analytics Cloud."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-bi-analytics-cloud.list-stories"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-story
+          description: "Get details of a specific analytics story."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sap-bi-analytics-cloud.get-story"
+          with:
+            storyId: "tools.storyId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-story
+          description: "Create a new analytics story in SAP Analytics Cloud."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "sap-bi-analytics-cloud.create-story"
+          with:
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-models
+          description: "List analytics data models in SAP Analytics Cloud."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-bi-analytics-cloud.list-models"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-reports
+          description: "List reports available in the SAP BusinessObjects BI Platform."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-bi-businessobjects.list-reports"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: browse-content-library
+          description: "Browse content objects in the SAP BusinessObjects InfoStore repository."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-bi-businessobjects.list-info-objects"
+          outputParameters:
+            - type: object
+              mapping: "$."

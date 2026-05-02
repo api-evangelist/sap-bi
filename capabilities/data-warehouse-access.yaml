@@ -1,0 +1,155 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SAP Business Intelligence Data Warehouse Access"
+  description: "Workflow capability for accessing and querying data from SAP BW/4HANA data warehouse and SAP Datasphere platform. Enables data discovery, model browsing, connection management, and analytical data consumption. Used by data engineers, BI architects, and analytics platform administrators."
+  tags:
+    - Business Intelligence
+    - Data Warehouse
+    - Datasphere
+    - SAP
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAP_BW_USERNAME: SAP_BW_USERNAME
+      SAP_BW_PASSWORD: SAP_BW_PASSWORD
+      SAP_DATASPHERE_OAUTH_TOKEN: SAP_DATASPHERE_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - import: sap-bi-bw4hana
+      location: ./shared/bw4hana-odata.yaml
+    - import: sap-bi-datasphere
+      location: ./shared/datasphere.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: sap-bi-data-warehouse-api
+      description: "Unified REST API for SAP data warehouse access and Datasphere platform management."
+      resources:
+        - path: /v1/info-providers
+          name: info-providers
+          description: "BW/4HANA InfoProviders."
+          operations:
+            - method: GET
+              name: list-info-providers
+              description: "List InfoProviders in BW/4HANA."
+              call: "sap-bi-bw4hana.list-info-providers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/info-providers/{infoProviderName}
+          name: info-provider
+          description: "Single InfoProvider."
+          operations:
+            - method: GET
+              name: get-info-provider
+              description: "Get InfoProvider details."
+              call: "sap-bi-bw4hana.get-info-provider"
+              with:
+                infoProviderName: "rest.infoProviderName"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/spaces
+          name: spaces
+          description: "Datasphere spaces."
+          operations:
+            - method: GET
+              name: list-spaces
+              description: "List Datasphere spaces."
+              call: "sap-bi-datasphere.list-spaces"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/connections
+          name: connections
+          description: "Data source connections."
+          operations:
+            - method: GET
+              name: list-connections
+              description: "List data source connections."
+              call: "sap-bi-datasphere.list-connections"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/catalog
+          name: catalog
+          description: "Data catalog."
+          operations:
+            - method: GET
+              name: browse-catalog
+              description: "Browse the Datasphere data catalog."
+              call: "sap-bi-datasphere.list-catalog-items"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9081
+      namespace: sap-bi-data-warehouse-mcp
+      transport: http
+      description: "MCP server for AI-assisted SAP data warehouse access and platform management."
+      tools:
+        - name: bw-list-info-providers
+          description: "List all InfoProviders (InfoCubes, DSOs, CompositeProviders) in SAP BW/4HANA."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-bi-bw4hana.list-info-providers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: bw-get-info-provider
+          description: "Get metadata for a specific BW/4HANA InfoProvider."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sap-bi-bw4hana.get-info-provider"
+          with:
+            infoProviderName: "tools.infoProviderName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: datasphere-list-spaces
+          description: "List SAP Datasphere spaces the user has access to."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-bi-datasphere.list-spaces"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: datasphere-get-space
+          description: "Get configuration of a specific Datasphere space."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sap-bi-datasphere.get-space"
+          with:
+            spaceId: "tools.spaceId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: datasphere-list-connections
+          description: "List all data source connections configured in Datasphere."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-bi-datasphere.list-connections"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: datasphere-browse-catalog
+          description: "Browse the Datasphere data catalog for available datasets and views."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-bi-datasphere.list-catalog-items"
+          outputParameters:
+            - type: object
+              mapping: "$."

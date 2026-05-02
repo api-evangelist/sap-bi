@@ -1,0 +1,29 @@
+{
+  "count": 3,
+  "items": [
+    {
+      "id": "FINANCE_SPACE",
+      "name": "Finance Analytics",
+      "description": "Finance team data integration and modeling space",
+      "diskStorage": 100,
+      "status": "ACTIVE",
+      "createdAt": "2025-06-01T10:00:00Z"
+    },
+    {
+      "id": "SALES_SPACE",
+      "name": "Sales Intelligence",
+      "description": "Sales reporting and CRM data integration space",
+      "diskStorage": 50,
+      "status": "ACTIVE",
+      "createdAt": "2025-07-15T10:00:00Z"
+    },
+    {
+      "id": "SUPPLY_CHAIN_SPACE",
+      "name": "Supply Chain Analytics",
+      "description": "Supply chain and logistics analytics space",
+      "diskStorage": 75,
+      "status": "ACTIVE",
+      "createdAt": "2025-09-01T10:00:00Z"
+    }
+  ]
+}

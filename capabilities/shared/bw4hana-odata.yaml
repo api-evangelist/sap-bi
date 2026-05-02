@@ -1,0 +1,111 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SAP BW/4HANA OData API"
+  description: "OData services for accessing SAP BW/4HANA data warehouse content and metadata including InfoProviders, queries, process chains, and data store objects."
+  tags:
+    - Business Intelligence
+    - BW/4HANA
+    - Data Warehouse
+    - OData
+    - SAP
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAP_BW_USERNAME: SAP_BW_USERNAME
+      SAP_BW_PASSWORD: SAP_BW_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: sap-bi-bw4hana
+      baseUri: https://{server}:{port}/sap/opu/odata/sap
+      description: "SAP BW/4HANA OData API for data warehouse access."
+      authentication:
+        type: basic
+        username: "{{SAP_BW_USERNAME}}"
+        password: "{{SAP_BW_PASSWORD}}"
+      resources:
+        - name: info-providers
+          path: /RSOD_INFOPROV_SRV/InfoProviders
+          description: "Access InfoProvider metadata and data."
+          operations:
+            - name: list-info-providers
+              method: GET
+              description: "List all InfoProviders in the BW/4HANA system."
+              inputParameters:
+                - name: $top
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum records to return"
+                - name: $filter
+                  in: query
+                  type: string
+                  required: false
+                  description: "OData filter expression"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: get-info-provider
+              method: GET
+              description: "Get details of a specific InfoProvider."
+              inputParameters:
+                - name: infoProviderName
+                  in: path
+                  type: string
+                  required: true
+                  description: "The InfoProvider name"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: sap-bi-bw4hana-api
+      resources:
+        - path: /v1/info-providers
+          name: info-providers
+          description: "BW/4HANA InfoProviders."
+          operations:
+            - method: GET
+              name: list-info-providers
+              description: "List InfoProviders."
+              call: "sap-bi-bw4hana.list-info-providers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: sap-bi-bw4hana-mcp
+      transport: http
+      tools:
+        - name: list-info-providers
+          description: "List InfoProviders (InfoCubes, DSOs, CompositeProviders) in SAP BW/4HANA."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sap-bi-bw4hana.list-info-providers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-info-provider
+          description: "Get metadata details of a specific InfoProvider."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sap-bi-bw4hana.get-info-provider"
+          with:
+            infoProviderName: "tools.infoProviderName"
+          outputParameters:
+            - type: object
+              mapping: "$."

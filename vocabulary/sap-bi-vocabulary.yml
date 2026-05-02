@@ -1,0 +1,123 @@
+name: SAP Business Intelligence Vocabulary
+description: Domain vocabulary for SAP Business Intelligence platform including SAP Analytics Cloud, SAP BusinessObjects, SAP BW/4HANA, and SAP Datasphere.
+version: '1.0'
+created: '2026-05-02'
+modified: '2026-05-02'
+
+terms:
+  - term: Story
+    definition: >-
+      The primary visualization artifact in SAP Analytics Cloud. A story contains
+      pages with charts, tables, and other components providing business insights.
+      Stories can reference one or more analytics models.
+    category: Content
+    synonyms:
+      - Dashboard
+      - Report
+      - Analytics Story
+
+  - term: Model
+    definition: >-
+      A data model in SAP Analytics Cloud that structures business data for
+      analysis. Models define dimensions, measures, and hierarchies. Planning
+      models support write-back for budget and forecast processes.
+    category: Data
+
+  - term: InfoProvider
+    definition: >-
+      In SAP BW/4HANA, an InfoProvider is any data object that can deliver
+      data for queries and reports. Types include InfoCubes (star schema),
+      DataStore Objects (aDSO), and CompositeProviders (virtual combinations).
+    category: BW/4HANA
+    synonyms:
+      - InfoCube
+      - aDSO
+      - CompositeProvider
+
+  - term: Space
+    definition: >-
+      An isolated tenant environment within SAP Datasphere for organizing
+      data integration objects, connections, views, and models. Each space has
+      its own storage allocation, members, and access controls.
+    category: Datasphere
+
+  - term: Connection
+    definition: >-
+      A configured link in SAP Datasphere to an external data source
+      (e.g., S/4HANA, BW, databases, cloud storages). Connections enable
+      data replication, federation, and direct access from Datasphere spaces.
+    category: Datasphere
+
+  - term: Data Flow
+    definition: >-
+      A graphical data transformation pipeline in SAP Datasphere for
+      replicating and transforming data from source connections into
+      Datasphere tables and views.
+    category: Datasphere
+
+  - term: BusinessObjects BI Platform
+    definition: >-
+      The SAP enterprise BI platform (formerly Crystal Decisions/Business Objects)
+      providing Web Intelligence, Crystal Reports, and Analysis for Office.
+      Uses a CMS repository and REST API (biprws endpoint).
+    category: Platform
+    synonyms:
+      - BOBJ
+      - SAP BO
+
+  - term: InfoObject
+    definition: >-
+      In SAP BusinessObjects, an InfoObject is any managed item in the
+      CMS InfoStore including documents, folders, users, and server components.
+      Each InfoObject has a unique SI_ID.
+    category: BusinessObjects
+
+  - term: Process Chain
+    definition: >-
+      A sequence of background processes in SAP BW/4HANA that are linked
+      together for automated execution. Process chains manage ETL loads,
+      data activation, hierarchy updates, and reporting cache refreshes.
+    category: BW/4HANA
+
+  - term: Datasphere
+    definition: >-
+      SAP Datasphere (formerly SAP Data Warehouse Cloud) is SAP's cloud-native
+      data warehouse platform integrating data management, modeling, and data
+      marketplace capabilities. It provides a business data fabric for
+      enterprise-wide analytics.
+    category: Platform
+    synonyms:
+      - DWC
+      - Data Warehouse Cloud
+
+  - term: View
+    definition: >-
+      In SAP Datasphere, a view is a virtual data object based on SQL or
+      graphical transformations. Analytical views expose data in a dimensional
+      format for BI tools; relational views provide SQL-accessible data layers.
+    category: Datasphere
+
+  - term: Catalog
+    definition: >-
+      The SAP Datasphere catalog provides a searchable inventory of all
+      data products, views, models, and datasets available across spaces.
+      Used for data discovery and governance.
+    category: Datasphere
+
+  - term: BW/4HANA
+    definition: >-
+      SAP BW/4HANA is SAP's next-generation data warehouse platform built
+      exclusively on SAP HANA. It simplifies the data warehouse architecture
+      by consolidating InfoProviders into advanced DataStore Objects (aDSOs)
+      and CompositeProviders.
+    category: Platform
+    synonyms:
+      - BW4
+      - Business Warehouse
+
+  - term: OAuth 2.0
+    definition: >-
+      The authentication protocol used by SAP Analytics Cloud and SAP Datasphere
+      APIs. Tokens are issued by the SAP Identity Authentication Service (IAS)
+      or XSUAA service on SAP BTP.
+    category: Security

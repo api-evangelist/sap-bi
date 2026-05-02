@@ -1,0 +1,26 @@
+{
+  "name": "Story",
+  "description": "SAP Analytics Cloud Story - primary analytics visualization artifact",
+  "fields": [
+    { "name": "id", "type": "string", "required": true, "description": "Unique story identifier" },
+    { "name": "name", "type": "string", "required": true, "description": "Display name of the story" },
+    { "name": "description", "type": "string", "required": false, "description": "Text description of the story" },
+    { "name": "createdAt", "type": "datetime", "required": false, "description": "Creation timestamp" },
+    { "name": "modifiedAt", "type": "datetime", "required": false, "description": "Last modification timestamp" },
+    { "name": "createdBy", "type": "string", "required": false, "description": "Creator user identifier" },
+    { "name": "status", "type": "string", "required": false, "description": "Story publication status" },
+    {
+      "name": "pages",
+      "type": "array",
+      "required": false,
+      "description": "Story pages containing visualizations",
+      "items": {
+        "fields": [
+          { "name": "id", "type": "string", "required": true, "description": "Page identifier" },
+          { "name": "name", "type": "string", "required": true, "description": "Page name" },
+          { "name": "layout", "type": "string", "required": false, "description": "Page layout type" }
+        ]
+      }
+    }
+  ]
+}
