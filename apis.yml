@@ -74,7 +74,7 @@ apis:
         url: https://help.sap.com/docs/SAP_HANA_PLATFORM/4505d0bdaf4948449b7f7379d24d0f0d/df19a03dc07e4ba19db4e0006c1da429.html
       - type: Developer Guide
         url: https://help.sap.com/docs/SAP_HANA_PLATFORM/4505d0bdaf4948449b7f7379d24d0f0d/3ec885c07e844d9fb4f40e3c4af0adb8.html
-      - type: API Reference
+      - type: APIReference
         url: https://help.sap.com/docs/SAP_HANA_PLATFORM/4505d0bdaf4948449b7f7379d24d0f0d/c102c07e04c541cc906f5fcdb3e02105.html
   - name: SAP BW/4HANA OData API
     description: >-
@@ -113,7 +113,7 @@ apis:
         url: https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
       - type: OpenAPI
         url: https://api.sap.com/api/datasphere/overview
-      - type: API Reference
+      - type: APIReference
         url: https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
       - type: Authentication
         url: https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
@@ -148,9 +148,9 @@ common:
     url: https://support.sap.com/en/index.html
   - type: Community
     url: https://community.sap.com/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.sap.com/about/legal/terms-of-use.html
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.sap.com/about/legal/privacy.html
   - type: OpenAPI
     url: openapi/sap-bi-analytics-cloud-openapi.yml
@@ -160,7 +160,7 @@ common:
     url: openapi/sap-bi-bw4hana-odata-openapi.yml
   - type: OpenAPI
     url: openapi/sap-bi-datasphere-openapi.yml
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/sap-bi-context.jsonld
   - type: JSONSchema
     url: json-schema/sap-bi-story-schema.json
