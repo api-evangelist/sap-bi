@@ -1,0 +1,206 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP Business Intelligence SAP BusinessObjects BI Platform REST API — InfoObjects
+  description: 'SAP Business Intelligence SAP BusinessObjects BI Platform REST API — InfoObjects. 5 operations. Lead operation:
+    SAP Business Intelligence List InfoObjects. Self-contained Naftiko capability covering one Sap Bi business surface.'
+  tags:
+  - Sap Bi
+  - InfoObjects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_API_KEY: SAP_BI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: businessobjects-platform-infoobjects
+    baseUri: https://{server}:{port}/biprws
+    description: SAP Business Intelligence SAP BusinessObjects BI Platform REST API — InfoObjects business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: infostore
+      path: /infostore
+      operations:
+      - name: listinfoobjects
+        method: GET
+        description: SAP Business Intelligence List InfoObjects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: CMS query string to filter objects
+    - name: infostore-objectId
+      path: /infostore/{objectId}
+      operations:
+      - name: getinfoobject
+        method: GET
+        description: SAP Business Intelligence Get an InfoObject
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateinfoobject
+        method: PUT
+        description: SAP Business Intelligence Update an InfoObject
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteinfoobject
+        method: DELETE
+        description: SAP Business Intelligence Delete an InfoObject
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: infostore-objectId-children
+      path: /infostore/{objectId}/children
+      operations:
+      - name: listinfoobjectchildren
+        method: GET
+        description: SAP Business Intelligence List children of an InfoObject
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-SAP-LogonToken
+      value: '{{env.SAP_BI_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: businessobjects-platform-infoobjects-rest
+    port: 8080
+    description: REST adapter for SAP Business Intelligence SAP BusinessObjects BI Platform REST API — InfoObjects. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/infostore
+      name: infostore
+      description: REST surface for infostore.
+      operations:
+      - method: GET
+        name: listinfoobjects
+        description: SAP Business Intelligence List InfoObjects
+        call: businessobjects-platform-infoobjects.listinfoobjects
+        with:
+          query: rest.query
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/infostore/{objectid}
+      name: infostore-objectid
+      description: REST surface for infostore-objectId.
+      operations:
+      - method: GET
+        name: getinfoobject
+        description: SAP Business Intelligence Get an InfoObject
+        call: businessobjects-platform-infoobjects.getinfoobject
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateinfoobject
+        description: SAP Business Intelligence Update an InfoObject
+        call: businessobjects-platform-infoobjects.updateinfoobject
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteinfoobject
+        description: SAP Business Intelligence Delete an InfoObject
+        call: businessobjects-platform-infoobjects.deleteinfoobject
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/infostore/{objectid}/children
+      name: infostore-objectid-children
+      description: REST surface for infostore-objectId-children.
+      operations:
+      - method: GET
+        name: listinfoobjectchildren
+        description: SAP Business Intelligence List children of an InfoObject
+        call: businessobjects-platform-infoobjects.listinfoobjectchildren
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: businessobjects-platform-infoobjects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP Business Intelligence SAP BusinessObjects BI Platform REST API — InfoObjects. One tool
+      per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: sap-business-intelligence-list-infoobjects
+      description: SAP Business Intelligence List InfoObjects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: businessobjects-platform-infoobjects.listinfoobjects
+      with:
+        query: tools.query
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-business-intelligence-get-infoobject
+      description: SAP Business Intelligence Get an InfoObject
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: businessobjects-platform-infoobjects.getinfoobject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-business-intelligence-update-infoobject
+      description: SAP Business Intelligence Update an InfoObject
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: businessobjects-platform-infoobjects.updateinfoobject
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-business-intelligence-delete-infoobject
+      description: SAP Business Intelligence Delete an InfoObject
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: businessobjects-platform-infoobjects.deleteinfoobject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-business-intelligence-list-children
+      description: SAP Business Intelligence List children of an InfoObject
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: businessobjects-platform-infoobjects.listinfoobjectchildren
+      outputParameters:
+      - type: object
+        mapping: $.

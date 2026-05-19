@@ -1,0 +1,239 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP Business Intelligence SAP Analytics Cloud API — Stories
+  description: 'SAP Business Intelligence SAP Analytics Cloud API — Stories. 6 operations. Lead operation: SAP Business Intelligence
+    List stories. Self-contained Naftiko capability covering one Sap Bi business surface.'
+  tags:
+  - Sap Bi
+  - Stories
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_API_KEY: SAP_BI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: analytics-cloud-stories
+    baseUri: https://{tenant}.sapanalytics.cloud/api/v1
+    description: SAP Business Intelligence SAP Analytics Cloud API — Stories business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: stories
+      path: /stories
+      operations:
+      - name: liststories
+        method: GET
+        description: SAP Business Intelligence List stories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search
+          in: query
+          type: string
+          description: Search stories by name
+      - name: createstory
+        method: POST
+        description: SAP Business Intelligence Create a story
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: stories-storyId
+      path: /stories/{storyId}
+      operations:
+      - name: getstory
+        method: GET
+        description: SAP Business Intelligence Get a story
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatestory
+        method: PUT
+        description: SAP Business Intelligence Update a story
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletestory
+        method: DELETE
+        description: SAP Business Intelligence Delete a story
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: stories-storyId-publish
+      path: /stories/{storyId}/publish
+      operations:
+      - name: publishstory
+        method: POST
+        description: SAP Business Intelligence Publish a story
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SAP_BI_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: analytics-cloud-stories-rest
+    port: 8080
+    description: REST adapter for SAP Business Intelligence SAP Analytics Cloud API — Stories. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/stories
+      name: stories
+      description: REST surface for stories.
+      operations:
+      - method: GET
+        name: liststories
+        description: SAP Business Intelligence List stories
+        call: analytics-cloud-stories.liststories
+        with:
+          search: rest.search
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createstory
+        description: SAP Business Intelligence Create a story
+        call: analytics-cloud-stories.createstory
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stories/{storyid}
+      name: stories-storyid
+      description: REST surface for stories-storyId.
+      operations:
+      - method: GET
+        name: getstory
+        description: SAP Business Intelligence Get a story
+        call: analytics-cloud-stories.getstory
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatestory
+        description: SAP Business Intelligence Update a story
+        call: analytics-cloud-stories.updatestory
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletestory
+        description: SAP Business Intelligence Delete a story
+        call: analytics-cloud-stories.deletestory
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/stories/{storyid}/publish
+      name: stories-storyid-publish
+      description: REST surface for stories-storyId-publish.
+      operations:
+      - method: POST
+        name: publishstory
+        description: SAP Business Intelligence Publish a story
+        call: analytics-cloud-stories.publishstory
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: analytics-cloud-stories-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP Business Intelligence SAP Analytics Cloud API — Stories. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: sap-business-intelligence-list-stories
+      description: SAP Business Intelligence List stories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: analytics-cloud-stories.liststories
+      with:
+        search: tools.search
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-business-intelligence-create-story
+      description: SAP Business Intelligence Create a story
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: analytics-cloud-stories.createstory
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-business-intelligence-get-story
+      description: SAP Business Intelligence Get a story
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: analytics-cloud-stories.getstory
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-business-intelligence-update-story
+      description: SAP Business Intelligence Update a story
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: analytics-cloud-stories.updatestory
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-business-intelligence-delete-story
+      description: SAP Business Intelligence Delete a story
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: analytics-cloud-stories.deletestory
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-business-intelligence-publish-story
+      description: SAP Business Intelligence Publish a story
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: analytics-cloud-stories.publishstory
+      outputParameters:
+      - type: object
+        mapping: $.

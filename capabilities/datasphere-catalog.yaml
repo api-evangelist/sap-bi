@@ -1,0 +1,111 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP Business Intelligence SAP Datasphere API — Catalog
+  description: 'SAP Business Intelligence SAP Datasphere API — Catalog. 2 operations. Lead operation: SAP Business Intelligence
+    List catalog assets. Self-contained Naftiko capability covering one Sap Bi business surface.'
+  tags:
+  - Sap Bi
+  - Catalog
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_API_KEY: SAP_BI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: datasphere-catalog
+    baseUri: https://{tenant}.datasphere.cloud.sap/api/v1
+    description: SAP Business Intelligence SAP Datasphere API — Catalog business capability. Self-contained, no shared references.
+    resources:
+    - name: catalog
+      path: /catalog
+      operations:
+      - name: listcatalogassets
+        method: GET
+        description: SAP Business Intelligence List catalog assets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search
+          in: query
+          type: string
+          description: Search catalog assets by keyword
+    - name: catalog-assetId
+      path: /catalog/{assetId}
+      operations:
+      - name: getcatalogasset
+        method: GET
+        description: SAP Business Intelligence Get a catalog asset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.SAP_BI_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: datasphere-catalog-rest
+    port: 8080
+    description: REST adapter for SAP Business Intelligence SAP Datasphere API — Catalog. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/catalog
+      name: catalog
+      description: REST surface for catalog.
+      operations:
+      - method: GET
+        name: listcatalogassets
+        description: SAP Business Intelligence List catalog assets
+        call: datasphere-catalog.listcatalogassets
+        with:
+          search: rest.search
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/catalog/{assetid}
+      name: catalog-assetid
+      description: REST surface for catalog-assetId.
+      operations:
+      - method: GET
+        name: getcatalogasset
+        description: SAP Business Intelligence Get a catalog asset
+        call: datasphere-catalog.getcatalogasset
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: datasphere-catalog-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP Business Intelligence SAP Datasphere API — Catalog. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: sap-business-intelligence-list-catalog
+      description: SAP Business Intelligence List catalog assets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: datasphere-catalog.listcatalogassets
+      with:
+        search: tools.search
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-business-intelligence-get-catalog
+      description: SAP Business Intelligence Get a catalog asset
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: datasphere-catalog.getcatalogasset
+      outputParameters:
+      - type: object
+        mapping: $.

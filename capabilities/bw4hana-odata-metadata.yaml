@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP Business Intelligence SAP BW/4HANA OData API — Metadata
+  description: 'SAP Business Intelligence SAP BW/4HANA OData API — Metadata. 1 operations. Lead operation: SAP Business Intelligence
+    List metadata catalog entries. Self-contained Naftiko capability covering one Sap Bi business surface.'
+  tags:
+  - Sap Bi
+  - Metadata
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_API_KEY: SAP_BI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bw4hana-odata-metadata
+    baseUri: https://{server}:{port}/sap/opu/odata/sap
+    description: SAP Business Intelligence SAP BW/4HANA OData API — Metadata business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: RSOD_CATALOG_SRV-CatalogEntries
+      path: /RSOD_CATALOG_SRV/CatalogEntries
+      operations:
+      - name: listcatalogentries
+        method: GET
+        description: SAP Business Intelligence List metadata catalog entries
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.SAP_BI_USER}}'
+      password: '{{env.SAP_BI_PASS}}'
+  exposes:
+  - type: rest
+    namespace: bw4hana-odata-metadata-rest
+    port: 8080
+    description: REST adapter for SAP Business Intelligence SAP BW/4HANA OData API — Metadata. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/rsod-catalog-srv/catalogentries
+      name: rsod-catalog-srv-catalogentries
+      description: REST surface for RSOD_CATALOG_SRV-CatalogEntries.
+      operations:
+      - method: GET
+        name: listcatalogentries
+        description: SAP Business Intelligence List metadata catalog entries
+        call: bw4hana-odata-metadata.listcatalogentries
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bw4hana-odata-metadata-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP Business Intelligence SAP BW/4HANA OData API — Metadata. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: sap-business-intelligence-list-metadata
+      description: SAP Business Intelligence List metadata catalog entries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bw4hana-odata-metadata.listcatalogentries
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,104 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP Business Intelligence SAP BW/4HANA OData API — Data Store Objects
+  description: 'SAP Business Intelligence SAP BW/4HANA OData API — Data Store Objects. 2 operations. Lead operation: SAP Business
+    Intelligence List data store objects. Self-contained Naftiko capability covering one Sap Bi business surface.'
+  tags:
+  - Sap Bi
+  - Data Store Objects
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_BI_API_KEY: SAP_BI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: bw4hana-odata-data-store-objects
+    baseUri: https://{server}:{port}/sap/opu/odata/sap
+    description: SAP Business Intelligence SAP BW/4HANA OData API — Data Store Objects business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: RSOD_ADSO_SRV-DataStoreObjects
+      path: /RSOD_ADSO_SRV/DataStoreObjects
+      operations:
+      - name: listdatastoreobjects
+        method: GET
+        description: SAP Business Intelligence List data store objects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: RSOD_ADSO_SRV-DataStoreObjects('{adsoName}')
+      path: /RSOD_ADSO_SRV/DataStoreObjects('{adsoName}')
+      operations:
+      - name: getdatastoreobject
+        method: GET
+        description: SAP Business Intelligence Get a data store object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.SAP_BI_USER}}'
+      password: '{{env.SAP_BI_PASS}}'
+  exposes:
+  - type: rest
+    namespace: bw4hana-odata-data-store-objects-rest
+    port: 8080
+    description: REST adapter for SAP Business Intelligence SAP BW/4HANA OData API — Data Store Objects. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/rsod-adso-srv/datastoreobjects
+      name: rsod-adso-srv-datastoreobjects
+      description: REST surface for RSOD_ADSO_SRV-DataStoreObjects.
+      operations:
+      - method: GET
+        name: listdatastoreobjects
+        description: SAP Business Intelligence List data store objects
+        call: bw4hana-odata-data-store-objects.listdatastoreobjects
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rsod-adso-srv/datastoreobjects-adsoname
+      name: rsod-adso-srv-datastoreobjects-adsoname
+      description: REST surface for RSOD_ADSO_SRV-DataStoreObjects('{adsoName}').
+      operations:
+      - method: GET
+        name: getdatastoreobject
+        description: SAP Business Intelligence Get a data store object
+        call: bw4hana-odata-data-store-objects.getdatastoreobject
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: bw4hana-odata-data-store-objects-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP Business Intelligence SAP BW/4HANA OData API — Data Store Objects. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: sap-business-intelligence-list-data
+      description: SAP Business Intelligence List data store objects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bw4hana-odata-data-store-objects.listdatastoreobjects
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sap-business-intelligence-get-data
+      description: SAP Business Intelligence Get a data store object
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: bw4hana-odata-data-store-objects.getdatastoreobject
+      outputParameters:
+      - type: object
+        mapping: $.
