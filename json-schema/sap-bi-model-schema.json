@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Model",
+  "title": "Model",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the model"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the model"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the model"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Planning",
+        "Analytic",
+        "Dataset"
+      ],
+      "description": "Model type"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "User who created the model"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the model was created"
+    },
+    "modifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the model was last modified"
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Dimension"
+      },
+      "description": "Dimensions in the model"
+    },
+    "measures": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Measure"
+      },
+      "description": "Measures in the model"
+    }
+  }
+}

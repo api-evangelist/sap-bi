@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/View",
+  "title": "View",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "View unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "View name"
+    },
+    "description": {
+      "type": "string",
+      "description": "View description"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Analytical",
+        "Relational"
+      ],
+      "description": "View semantic type"
+    },
+    "deploymentStatus": {
+      "type": "string",
+      "enum": [
+        "Deployed",
+        "NotDeployed",
+        "Modified"
+      ],
+      "description": "Current deployment status"
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/ViewColumn"
+      },
+      "description": "View columns"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "User who created the view"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the view was created"
+    },
+    "modifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the view was last modified"
+    }
+  }
+}

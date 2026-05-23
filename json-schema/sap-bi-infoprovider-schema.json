@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/InfoProvider",
+  "title": "InfoProvider",
+  "type": "object",
+  "properties": {
+    "InfoProviderName": {
+      "type": "string",
+      "description": "Technical name of the InfoProvider"
+    },
+    "InfoProviderDescription": {
+      "type": "string",
+      "description": "Description of the InfoProvider"
+    },
+    "InfoProviderType": {
+      "type": "string",
+      "enum": [
+        "ADSO",
+        "CompositeProvider",
+        "InfoCube",
+        "InfoObject"
+      ],
+      "description": "Type of InfoProvider"
+    },
+    "InfoArea": {
+      "type": "string",
+      "description": "InfoArea containing the InfoProvider"
+    },
+    "CreatedBy": {
+      "type": "string",
+      "description": "User who created the InfoProvider"
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp"
+    },
+    "ChangedBy": {
+      "type": "string",
+      "description": "User who last changed the InfoProvider"
+    },
+    "ChangedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last change timestamp"
+    }
+  }
+}

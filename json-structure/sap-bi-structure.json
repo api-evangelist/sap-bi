@@ -1,0 +1,325 @@
+{
+  "provider": "SAP Business Intelligence",
+  "providerId": "sap-bi",
+  "kind": "json-structure",
+  "description": "Structural overview of the SAP Business Intelligence API surface; extracted from openapi/.",
+  "schemaCount": 21,
+  "operationCount": 20,
+  "schemas": [
+    {
+      "name": "StoryCollection",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Story",
+      "type": "object",
+      "propertyCount": 10,
+      "required": []
+    },
+    {
+      "name": "CreateStoryRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "UpdateStoryRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Page",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Widget",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ModelCollection",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Model",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "CreateModelRequest",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    {
+      "name": "UpdateModelRequest",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "DimensionCollection",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Dimension",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "MeasureCollection",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Measure",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ImportJobCollection",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "ImportJob",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "CreateImportJobRequest",
+      "type": "object",
+      "propertyCount": 2,
+      "required": [
+        "importType"
+      ]
+    },
+    {
+      "name": "UserCollection",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "User",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "FolderCollection",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "Folder",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/stories",
+      "operationId": "listStories",
+      "summary": "SAP Business Intelligence List stories",
+      "tags": [
+        "Stories"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/stories",
+      "operationId": "createStory",
+      "summary": "SAP Business Intelligence Create a story",
+      "tags": [
+        "Stories"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/stories/{storyId}",
+      "operationId": "getStory",
+      "summary": "SAP Business Intelligence Get a story",
+      "tags": [
+        "Stories"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/stories/{storyId}",
+      "operationId": "updateStory",
+      "summary": "SAP Business Intelligence Update a story",
+      "tags": [
+        "Stories"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/stories/{storyId}",
+      "operationId": "deleteStory",
+      "summary": "SAP Business Intelligence Delete a story",
+      "tags": [
+        "Stories"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/stories/{storyId}/publish",
+      "operationId": "publishStory",
+      "summary": "SAP Business Intelligence Publish a story",
+      "tags": [
+        "Stories"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/models",
+      "operationId": "listModels",
+      "summary": "SAP Business Intelligence List models",
+      "tags": [
+        "Models"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/models",
+      "operationId": "createModel",
+      "summary": "SAP Business Intelligence Create a model",
+      "tags": [
+        "Models"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/models/{modelId}",
+      "operationId": "getModel",
+      "summary": "SAP Business Intelligence Get a model",
+      "tags": [
+        "Models"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/models/{modelId}",
+      "operationId": "updateModel",
+      "summary": "SAP Business Intelligence Update a model",
+      "tags": [
+        "Models"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/models/{modelId}",
+      "operationId": "deleteModel",
+      "summary": "SAP Business Intelligence Delete a model",
+      "tags": [
+        "Models"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/models/{modelId}/dimensions",
+      "operationId": "listModelDimensions",
+      "summary": "SAP Business Intelligence List model dimensions",
+      "tags": [
+        "Models"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/models/{modelId}/measures",
+      "operationId": "listModelMeasures",
+      "summary": "SAP Business Intelligence List model measures",
+      "tags": [
+        "Models"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/dataimport/models/{modelId}/jobs",
+      "operationId": "listImportJobs",
+      "summary": "SAP Business Intelligence List import jobs",
+      "tags": [
+        "Data Import"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/dataimport/models/{modelId}/jobs",
+      "operationId": "createImportJob",
+      "summary": "SAP Business Intelligence Create an import job",
+      "tags": [
+        "Data Import"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/dataimport/models/{modelId}/jobs/{jobId}",
+      "operationId": "getImportJob",
+      "summary": "SAP Business Intelligence Get an import job",
+      "tags": [
+        "Data Import"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/users",
+      "operationId": "listUsers",
+      "summary": "SAP Business Intelligence List users",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/users/{userId}",
+      "operationId": "getUser",
+      "summary": "SAP Business Intelligence Get a user",
+      "tags": [
+        "Users"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/folders",
+      "operationId": "listFolders",
+      "summary": "SAP Business Intelligence List folders",
+      "tags": [
+        "Folders"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/folders/{folderId}",
+      "operationId": "getFolder",
+      "summary": "SAP Business Intelligence Get a folder",
+      "tags": [
+        "Folders"
+      ]
+    }
+  ]
+}

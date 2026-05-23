@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ImportJob",
+  "title": "ImportJob",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Import job unique identifier"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Running",
+        "Completed",
+        "Failed"
+      ],
+      "description": "Current job status"
+    },
+    "importType": {
+      "type": "string",
+      "enum": [
+        "Replace",
+        "Append",
+        "Update"
+      ],
+      "description": "How data is imported"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the job was created"
+    },
+    "completedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the job completed"
+    },
+    "rowsProcessed": {
+      "type": "integer",
+      "description": "Number of rows processed"
+    },
+    "errorMessage": {
+      "type": "string",
+      "description": "Error message if the job failed"
+    }
+  }
+}

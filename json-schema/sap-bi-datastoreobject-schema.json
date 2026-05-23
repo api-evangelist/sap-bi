@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataStoreObject",
+  "title": "DataStoreObject",
+  "type": "object",
+  "properties": {
+    "DataStoreObjectName": {
+      "type": "string",
+      "description": "Technical name of the aDSO"
+    },
+    "DataStoreObjectDescription": {
+      "type": "string",
+      "description": "Description of the aDSO"
+    },
+    "DataStoreObjectType": {
+      "type": "string",
+      "enum": [
+        "Standard",
+        "WriteOptimized",
+        "DirectUpdate"
+      ],
+      "description": "Data store object type"
+    },
+    "InfoArea": {
+      "type": "string",
+      "description": "InfoArea containing the aDSO"
+    },
+    "ActivationStatus": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Modified"
+      ],
+      "description": "Current activation status"
+    },
+    "RecordCount": {
+      "type": "integer",
+      "description": "Number of records in the active table"
+    }
+  }
+}

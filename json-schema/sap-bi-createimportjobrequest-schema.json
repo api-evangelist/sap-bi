@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateImportJobRequest",
+  "title": "CreateImportJobRequest",
+  "type": "object",
+  "required": [
+    "importType"
+  ],
+  "properties": {
+    "importType": {
+      "type": "string",
+      "enum": [
+        "Replace",
+        "Append",
+        "Update"
+      ],
+      "description": "How data should be imported"
+    },
+    "mapping": {
+      "type": "object",
+      "description": "Column-to-dimension/measure mapping"
+    }
+  }
+}

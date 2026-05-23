@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Schedule",
+  "title": "Schedule",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Schedule unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Schedule name"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Paused",
+        "Completed"
+      ],
+      "description": "Schedule status"
+    },
+    "recurrenceType": {
+      "type": "string",
+      "enum": [
+        "Once",
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "description": "Recurrence pattern"
+    },
+    "nextRunTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Next scheduled run time"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "PDF",
+        "Excel",
+        "CSV",
+        "HTML"
+      ],
+      "description": "Output format"
+    }
+  }
+}

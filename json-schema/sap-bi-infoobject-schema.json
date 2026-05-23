@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/InfoObject",
+  "title": "InfoObject",
+  "type": "object",
+  "properties": {
+    "SI_ID": {
+      "type": "integer",
+      "description": "System identifier"
+    },
+    "SI_CUID": {
+      "type": "string",
+      "description": "Cluster unique identifier"
+    },
+    "SI_NAME": {
+      "type": "string",
+      "description": "Object name"
+    },
+    "SI_DESCRIPTION": {
+      "type": "string",
+      "description": "Object description"
+    },
+    "SI_KIND": {
+      "type": "string",
+      "description": "Object type kind"
+    },
+    "SI_OWNER": {
+      "type": "string",
+      "description": "Object owner"
+    },
+    "SI_CREATION_TIME": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the object was created"
+    },
+    "SI_UPDATE_TS": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the object was last updated"
+    },
+    "SI_PARENT_FOLDER": {
+      "type": "integer",
+      "description": "Parent folder ID"
+    }
+  }
+}

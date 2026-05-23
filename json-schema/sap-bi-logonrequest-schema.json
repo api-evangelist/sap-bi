@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LogonRequest",
+  "title": "LogonRequest",
+  "type": "object",
+  "required": [
+    "userName",
+    "password",
+    "auth"
+  ],
+  "properties": {
+    "userName": {
+      "type": "string",
+      "description": "Login username"
+    },
+    "password": {
+      "type": "string",
+      "description": "Login password"
+    },
+    "auth": {
+      "type": "string",
+      "enum": [
+        "secEnterprise",
+        "secLDAP",
+        "secWinAD",
+        "secSAPR3"
+      ],
+      "description": "Authentication type"
+    }
+  }
+}

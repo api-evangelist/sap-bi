@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Measure",
+  "title": "Measure",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Measure unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Measure name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Measure description"
+    },
+    "aggregationType": {
+      "type": "string",
+      "enum": [
+        "SUM",
+        "COUNT",
+        "AVG",
+        "MIN",
+        "MAX"
+      ],
+      "description": "Aggregation type for the measure"
+    }
+  }
+}

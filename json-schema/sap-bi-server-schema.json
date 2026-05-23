@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Server",
+  "title": "Server",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Server unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Server name"
+    },
+    "kind": {
+      "type": "string",
+      "description": "Server type"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Running",
+        "Stopped",
+        "Starting",
+        "Stopping"
+      ],
+      "description": "Current server status"
+    },
+    "hostname": {
+      "type": "string",
+      "description": "Server hostname"
+    },
+    "port": {
+      "type": "integer",
+      "description": "Server port"
+    },
+    "pid": {
+      "type": "integer",
+      "description": "Process ID"
+    }
+  }
+}

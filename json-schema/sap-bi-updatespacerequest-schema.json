@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateSpaceRequest",
+  "title": "UpdateSpaceRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Updated name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Updated description"
+    },
+    "diskStorageQuota": {
+      "type": "integer",
+      "description": "Updated disk storage quota in GB"
+    },
+    "memoryStorageQuota": {
+      "type": "integer",
+      "description": "Updated in-memory storage quota in GB"
+    }
+  }
+}

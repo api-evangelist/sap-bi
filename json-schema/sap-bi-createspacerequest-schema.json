@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateSpaceRequest",
+  "title": "CreateSpaceRequest",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name for the new space"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description for the space"
+    },
+    "diskStorageQuota": {
+      "type": "integer",
+      "description": "Disk storage quota in GB"
+    },
+    "memoryStorageQuota": {
+      "type": "integer",
+      "description": "In-memory storage quota in GB"
+    }
+  }
+}

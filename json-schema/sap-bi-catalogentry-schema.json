@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CatalogEntry",
+  "title": "CatalogEntry",
+  "type": "object",
+  "properties": {
+    "ObjectName": {
+      "type": "string",
+      "description": "Technical name of the object"
+    },
+    "ObjectDescription": {
+      "type": "string",
+      "description": "Object description"
+    },
+    "ObjectType": {
+      "type": "string",
+      "description": "Object type (e.g., ADSO, CPROV, IOBJ)"
+    },
+    "InfoArea": {
+      "type": "string",
+      "description": "InfoArea of the object"
+    },
+    "Version": {
+      "type": "string",
+      "description": "Object version"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/TaskRunCollection",
+  "title": "TaskRunCollection",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/TaskRun"
+      }
+    },
+    "totalCount": {
+      "type": "integer",
+      "description": "Total number of task runs"
+    }
+  }
+}

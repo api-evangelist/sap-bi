@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BOBJUser",
+  "title": "BOBJUser",
+  "type": "object",
+  "properties": {
+    "SI_ID": {
+      "type": "integer",
+      "description": "User system identifier"
+    },
+    "SI_NAME": {
+      "type": "string",
+      "description": "Username"
+    },
+    "SI_DESCRIPTION": {
+      "type": "string",
+      "description": "User description"
+    },
+    "SI_EMAIL_ADDRESS": {
+      "type": "string",
+      "format": "email",
+      "description": "User email address"
+    },
+    "SI_DISABLED": {
+      "type": "boolean",
+      "description": "Whether the user account is disabled"
+    },
+    "SI_NAMEDUSER": {
+      "type": "boolean",
+      "description": "Whether the user is a named user"
+    }
+  }
+}

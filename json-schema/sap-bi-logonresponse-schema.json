@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LogonResponse",
+  "title": "LogonResponse",
+  "type": "object",
+  "properties": {
+    "logonToken": {
+      "type": "string",
+      "description": "Authentication token for subsequent requests"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/UpdateModelRequest",
+  "title": "UpdateModelRequest",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Updated name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Updated description"
+    }
+  }
+}

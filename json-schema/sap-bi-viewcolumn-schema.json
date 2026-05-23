@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ViewColumn",
+  "title": "ViewColumn",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Column name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Column description"
+    },
+    "dataType": {
+      "type": "string",
+      "description": "Column data type"
+    },
+    "semanticType": {
+      "type": "string",
+      "enum": [
+        "Dimension",
+        "Measure",
+        "Attribute"
+      ],
+      "description": "Semantic role of the column"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SpaceCollection",
+  "title": "SpaceCollection",
+  "type": "object",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Space"
+      }
+    },
+    "totalCount": {
+      "type": "integer",
+      "description": "Total number of spaces"
+    }
+  }
+}

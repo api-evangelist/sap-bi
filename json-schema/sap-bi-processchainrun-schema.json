@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ProcessChainRun",
+  "title": "ProcessChainRun",
+  "type": "object",
+  "properties": {
+    "RunId": {
+      "type": "string",
+      "description": "Execution run identifier"
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "Started",
+        "Running"
+      ],
+      "description": "Initial run status"
+    },
+    "StartTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the execution started"
+    }
+  }
+}

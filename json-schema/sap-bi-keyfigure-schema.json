@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/KeyFigure",
+  "title": "KeyFigure",
+  "type": "object",
+  "properties": {
+    "KeyFigureName": {
+      "type": "string",
+      "description": "Technical name of the key figure"
+    },
+    "KeyFigureDescription": {
+      "type": "string",
+      "description": "Description of the key figure"
+    },
+    "AggregationType": {
+      "type": "string",
+      "enum": [
+        "SUM",
+        "MIN",
+        "MAX",
+        "AVG",
+        "COUNT",
+        "NOP"
+      ],
+      "description": "Aggregation behavior"
+    },
+    "DataType": {
+      "type": "string",
+      "description": "Data type of the key figure"
+    },
+    "UnitOfMeasure": {
+      "type": "string",
+      "description": "Unit of measure or currency"
+    }
+  }
+}

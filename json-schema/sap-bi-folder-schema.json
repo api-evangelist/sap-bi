@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Folder",
+  "title": "Folder",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Folder unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Folder name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Folder description"
+    },
+    "parentFolderId": {
+      "type": "string",
+      "description": "Parent folder ID"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "User who created the folder"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the folder was created"
+    }
+  }
+}

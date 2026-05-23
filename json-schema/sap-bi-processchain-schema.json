@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ProcessChain",
+  "title": "ProcessChain",
+  "type": "object",
+  "properties": {
+    "ChainId": {
+      "type": "string",
+      "description": "Process chain identifier"
+    },
+    "Description": {
+      "type": "string",
+      "description": "Process chain description"
+    },
+    "Status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive"
+      ],
+      "description": "Chain status"
+    },
+    "LastRunStatus": {
+      "type": "string",
+      "enum": [
+        "Green",
+        "Yellow",
+        "Red"
+      ],
+      "description": "Status of the last execution"
+    },
+    "LastRunTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the chain last ran"
+    }
+  }
+}

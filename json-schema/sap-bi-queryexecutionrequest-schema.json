@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/QueryExecutionRequest",
+  "title": "QueryExecutionRequest",
+  "type": "object",
+  "properties": {
+    "Variables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "VariableName": {
+            "type": "string",
+            "description": "Variable technical name"
+          },
+          "Value": {
+            "type": "string",
+            "description": "Variable value"
+          }
+        }
+      },
+      "description": "Query variable values"
+    }
+  }
+}

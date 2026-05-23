@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Widget",
+  "title": "Widget",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Widget unique identifier"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Chart",
+        "Table",
+        "Filter",
+        "Text",
+        "Image",
+        "Shape"
+      ],
+      "description": "Type of widget"
+    },
+    "name": {
+      "type": "string",
+      "description": "Widget display name"
+    },
+    "modelId": {
+      "type": "string",
+      "description": "Associated model ID"
+    }
+  }
+}

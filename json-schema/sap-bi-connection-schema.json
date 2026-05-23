@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Connection",
+  "title": "Connection",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Connection unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Connection name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Connection description"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "HANA",
+        "S4HANA",
+        "SAP_BW",
+        "SAP_BW4HANA",
+        "ABAP_CDS",
+        "OData",
+        "Cloud_Data_Integration",
+        "Google_BigQuery",
+        "Microsoft_SQL_Server",
+        "Amazon_S3"
+      ],
+      "description": "Connection type"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Error"
+      ],
+      "description": "Connection status"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the connection was created"
+    }
+  }
+}

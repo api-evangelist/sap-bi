@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BwDimension",
+  "title": "BwDimension",
+  "type": "object",
+  "properties": {
+    "DimensionName": {
+      "type": "string",
+      "description": "Technical name of the dimension"
+    },
+    "DimensionDescription": {
+      "type": "string",
+      "description": "Description of the dimension"
+    },
+    "DimensionType": {
+      "type": "string",
+      "description": "Dimension type"
+    },
+    "InfoObjectName": {
+      "type": "string",
+      "description": "Associated InfoObject technical name"
+    }
+  }
+}

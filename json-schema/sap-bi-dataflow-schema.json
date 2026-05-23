@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataFlow",
+  "title": "DataFlow",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Data flow unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Data flow name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Data flow description"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Replication",
+        "Transformation"
+      ],
+      "description": "Data flow type"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive",
+        "Error"
+      ],
+      "description": "Data flow status"
+    },
+    "sourceConnection": {
+      "type": "string",
+      "description": "Source connection ID"
+    },
+    "targetView": {
+      "type": "string",
+      "description": "Target view ID"
+    },
+    "lastRunTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the data flow last ran"
+    },
+    "lastRunStatus": {
+      "type": "string",
+      "enum": [
+        "Completed",
+        "Failed",
+        "Running"
+      ],
+      "description": "Status of the last execution"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Space",
+  "title": "Space",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Space unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Space name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Space description"
+    },
+    "storageAssignment": {
+      "type": "string",
+      "enum": [
+        "InMemory",
+        "Disk"
+      ],
+      "description": "Storage type assignment"
+    },
+    "diskStorageQuota": {
+      "type": "integer",
+      "description": "Disk storage quota in GB"
+    },
+    "memoryStorageQuota": {
+      "type": "integer",
+      "description": "In-memory storage quota in GB"
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/SpaceMember"
+      },
+      "description": "Space members"
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "User who created the space"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the space was created"
+    },
+    "modifiedTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the space was last modified"
+    }
+  }
+}

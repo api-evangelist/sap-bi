@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CreateStoryRequest",
+  "title": "CreateStoryRequest",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name for the new story"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description for the story"
+    },
+    "folderId": {
+      "type": "string",
+      "description": "Target folder ID"
+    }
+  }
+}

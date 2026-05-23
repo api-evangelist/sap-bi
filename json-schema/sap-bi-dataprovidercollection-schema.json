@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataProviderCollection",
+  "title": "DataProviderCollection",
+  "type": "object",
+  "properties": {
+    "dataproviders": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DataProvider"
+      }
+    }
+  }
+}

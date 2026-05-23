@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Instance",
+  "title": "Instance",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Instance unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Instance title"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Running",
+        "Success",
+        "Failed",
+        "Paused"
+      ],
+      "description": "Execution status"
+    },
+    "startTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the instance began running"
+    },
+    "endTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the instance completed"
+    },
+    "format": {
+      "type": "string",
+      "description": "Output format"
+    }
+  }
+}

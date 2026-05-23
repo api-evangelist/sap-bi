@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SpaceMember",
+  "title": "SpaceMember",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "string",
+      "description": "User identifier"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "Admin",
+        "Modeler",
+        "Viewer"
+      ],
+      "description": "Member role in the space"
+    }
+  }
+}

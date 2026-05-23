@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CatalogAsset",
+  "title": "CatalogAsset",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Asset unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Asset name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Asset description"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "Dataset",
+        "View",
+        "Table",
+        "Connection"
+      ],
+      "description": "Asset type"
+    },
+    "spaceId": {
+      "type": "string",
+      "description": "Space containing the asset"
+    },
+    "owner": {
+      "type": "string",
+      "description": "Asset owner"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Tags assigned to the asset"
+    },
+    "createdTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the asset was cataloged"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Parameter",
+  "title": "Parameter",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Parameter identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Parameter name"
+    },
+    "type": {
+      "type": "string",
+      "description": "Parameter data type"
+    },
+    "optional": {
+      "type": "boolean",
+      "description": "Whether the parameter is optional"
+    },
+    "allowMultipleValues": {
+      "type": "boolean",
+      "description": "Whether multiple values can be provided"
+    },
+    "defaultValues": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Default parameter values"
+    }
+  }
+}

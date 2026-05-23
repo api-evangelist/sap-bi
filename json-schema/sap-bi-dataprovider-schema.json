@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/DataProvider",
+  "title": "DataProvider",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Data provider identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Data provider name"
+    },
+    "dataSourceType": {
+      "type": "string",
+      "description": "Type of data source"
+    },
+    "query": {
+      "type": "string",
+      "description": "Query text"
+    }
+  }
+}

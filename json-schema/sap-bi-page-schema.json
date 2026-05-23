@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Page",
+  "title": "Page",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Page unique identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Page name"
+    },
+    "widgets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Widget"
+      },
+      "description": "Widgets on the page"
+    }
+  }
+}

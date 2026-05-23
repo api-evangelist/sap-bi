@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/BwQuery",
+  "title": "BwQuery",
+  "type": "object",
+  "properties": {
+    "QueryName": {
+      "type": "string",
+      "description": "Technical name of the query"
+    },
+    "QueryDescription": {
+      "type": "string",
+      "description": "Description of the query"
+    },
+    "InfoProviderName": {
+      "type": "string",
+      "description": "Underlying InfoProvider"
+    },
+    "CreatedBy": {
+      "type": "string",
+      "description": "User who created the query"
+    },
+    "ChangedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last modification timestamp"
+    }
+  }
+}
