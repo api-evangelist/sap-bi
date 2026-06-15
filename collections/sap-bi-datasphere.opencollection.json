@@ -1,0 +1,500 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP Business Intelligence SAP Datasphere API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.datasphere.cloud.sap/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Spaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List spaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all spaces the authenticated user has access to."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Create a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Datasphere space with specified configuration."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific Datasphere space."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Update a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update properties of an existing Datasphere space."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Delete a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              }
+            ]
+          },
+          "docs": "Delete an existing Datasphere space and its contents."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List connections in a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId/connections",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve all data source connections configured in a specific space."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Create a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId/connections",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new data source connection in a specific space."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId/connections/:connectionId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Connection unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific data source connection."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Delete a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId/connections/:connectionId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Connection unique identifier"
+              }
+            ]
+          },
+          "docs": "Delete an existing data source connection."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Flows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List data flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId/dataflows",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve all data flows configured in a specific space."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a data flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId/dataflows/:dataFlowId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              },
+              {
+                "name": "dataFlowId",
+                "value": "",
+                "type": "path",
+                "description": "Data flow unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific data flow."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Run a data flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId/dataflows/:dataFlowId/run",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              },
+              {
+                "name": "dataFlowId",
+                "value": "",
+                "type": "path",
+                "description": "Data flow unique identifier"
+              }
+            ]
+          },
+          "docs": "Trigger execution of a data flow to replicate or transform data."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Views",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List views",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId/views",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve all views (analytical and relational) defined in a space."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a view",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId/views/:viewId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              },
+              {
+                "name": "viewId",
+                "value": "",
+                "type": "path",
+                "description": "View unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details and metadata of a specific view."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Deploy a view",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/spaces/:spaceId/views/:viewId/deploy",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              },
+              {
+                "name": "viewId",
+                "value": "",
+                "type": "path",
+                "description": "View unique identifier"
+              }
+            ]
+          },
+          "docs": "Deploy a view to make it available for consumption."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/tasks",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by task status"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of task executions across the tenant."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/tasks/:taskId",
+            "params": [
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "path",
+                "description": "Task execution unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details and status of a specific task execution."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List catalog assets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/catalog",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search catalog assets by keyword"
+              }
+            ]
+          },
+          "docs": "Browse the data catalog to discover available datasets, views, and other assets."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a catalog asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.datasphere.cloud.sap/api/v1/catalog/:assetId",
+            "params": [
+              {
+                "name": "assetId",
+                "value": "",
+                "type": "path",
+                "description": "Catalog asset unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details and metadata of a specific catalog asset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

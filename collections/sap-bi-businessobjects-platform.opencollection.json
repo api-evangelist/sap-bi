@@ -1,0 +1,419 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP Business Intelligence SAP BusinessObjects BI Platform REST API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-SAP-LogonToken",
+      "value": "{{X-SAP-LogonToken}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Logon",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence Log on to BI Platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:{port}/biprws/logon/long",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticate to the BI Platform and obtain a logon token for subsequent API calls."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Log off from BI Platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:{port}/biprws/logoff"
+          },
+          "docs": "Invalidate the current logon token and end the session."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "InfoObjects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List InfoObjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:{port}/biprws/infostore",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "CMS query string to filter objects"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Query and retrieve InfoObjects from the BI Platform content management system using CMS queries."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get an InfoObject",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:{port}/biprws/infostore/:objectId",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "InfoObject unique identifier (CUID or SI_ID)"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific InfoObject by its ID."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Update an InfoObject",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{server}:{port}/biprws/infostore/:objectId",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "InfoObject unique identifier (CUID or SI_ID)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update properties of an existing InfoObject."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Delete an InfoObject",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{server}:{port}/biprws/infostore/:objectId",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "InfoObject unique identifier (CUID or SI_ID)"
+              }
+            ]
+          },
+          "docs": "Delete an InfoObject from the BI Platform."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence List children of an InfoObject",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:{port}/biprws/infostore/:objectId/children",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "InfoObject unique identifier (CUID or SI_ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve child objects of a folder or container InfoObject."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a report document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:{port}/biprws/documents/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Report document unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific report document with its metadata."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence List report parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:{port}/biprws/documents/:documentId/parameters",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Report document unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve the prompt parameters for a report document."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence List data providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:{port}/biprws/documents/:documentId/dataproviders",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Report document unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve data providers associated with a report document."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List schedules for an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:{port}/biprws/infostore/:objectId/schedules",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "InfoObject unique identifier (CUID or SI_ID)"
+              }
+            ]
+          },
+          "docs": "Retrieve all schedules configured for a specific InfoObject."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Schedule an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{server}:{port}/biprws/infostore/:objectId/schedules",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "InfoObject unique identifier (CUID or SI_ID)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new schedule for a report or program object."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence List instances of an object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:{port}/biprws/infostore/:objectId/instances",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "InfoObject unique identifier (CUID or SI_ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve all report instances generated from scheduling or on-demand execution."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:{port}/biprws/users",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of users in the BI Platform."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:{port}/biprws/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "User unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:{port}/biprws/servers"
+          },
+          "docs": "Retrieve a list of all servers in the BI Platform deployment."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{server}:{port}/biprws/servers/:serverId",
+            "params": [
+              {
+                "name": "serverId",
+                "value": "",
+                "type": "path",
+                "description": "Server unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details and status of a specific BI Platform server."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
