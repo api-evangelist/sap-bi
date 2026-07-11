@@ -144,6 +144,10 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: Authentication
+    url: authentication/sap-bi-authentication.yml
+  - type: OAuthScopes
+    url: scopes/sap-bi-scopes.yml
   - type: GitHubOrganization
     url: https://github.com/SAP
   - type: Portal
@@ -183,3 +187,5 @@ common:
     url: rules/sap-bi-rules.yml
   - type: Vocabulary
     url: vocabulary/sap-bi-vocabulary.yml
+  - url: https://news.sap.com/feed/
+    type: Blog

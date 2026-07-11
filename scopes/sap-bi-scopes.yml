@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/sap-bi-analytics-cloud-openapi.yml, openapi/sap-bi-datasphere-openapi.yml
+docs: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/4f43b54398fc4acaa5efa32badfe3df6.html
+note: >-
+  SAP does not publish named OAuth scope strings for these APIs; SAP Analytics Cloud
+  OAuth clients are authorized via client Purpose/Access selections (Interactive Usage,
+  or API Access with Story Listing / User Provisioning privileges) and SAP Datasphere
+  OAuth clients via global and scoped roles/privileges
+  (https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3f92b46fe0314e8ba60720e409c219fc.html).
+schemes:
+- name: oauth2
+  source: openapi/sap-bi-analytics-cloud-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://{tenant}.sapanalytics.cloud/oauth/token
+  description: OAuth 2.0 authentication for SAP Analytics Cloud
+- name: oauth2
+  source: openapi/sap-bi-datasphere-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://{tenant}.datasphere.cloud.sap/oauth/token
+  description: OAuth 2.0 authentication for SAP Datasphere
+scopes: []
