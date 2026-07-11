@@ -144,6 +144,10 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: VulnerabilityDisclosure
+    url: security/sap-bi-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/sap-bi-domain-security.yml
   - type: Authentication
     url: authentication/sap-bi-authentication.yml
   - type: OAuthScopes

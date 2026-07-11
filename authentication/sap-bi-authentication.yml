@@ -1,0 +1,37 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/sap-bi-analytics-cloud-openapi.yml, openapi/sap-bi-businessobjects-platform-openapi.yml,
+  openapi/sap-bi-bw4hana-odata-openapi.yml, openapi/sap-bi-datasphere-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://{tenant}.sapanalytics.cloud/oauth/token
+    scopes: 0
+  description: OAuth 2.0 authentication for SAP Analytics Cloud
+  sources:
+  - openapi/sap-bi-analytics-cloud-openapi.yml
+  - openapi/sap-bi-datasphere-openapi.yml
+- name: logonToken
+  type: apiKey
+  in: header
+  parameter: X-SAP-LogonToken
+  description: SAP BusinessObjects logon token obtained from the logon endpoint
+  sources:
+  - openapi/sap-bi-businessobjects-platform-openapi.yml
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: SAP user credentials for BW/4HANA system
+  sources:
+  - openapi/sap-bi-bw4hana-odata-openapi.yml
