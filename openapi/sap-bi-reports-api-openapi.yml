@@ -1,0 +1,191 @@
+openapi: 3.1.0
+info:
+  title: SAP Business Intelligence SAP Analytics Cloud Catalog Reports API
+  description: REST API for SAP Analytics Cloud enabling data integration, story management, model administration, and analytics operations. Provides programmatic access to create and manage stories, models, data imports, and user administration within SAP Analytics Cloud.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://{tenant}.sapanalytics.cloud/api/v1
+  description: SAP Analytics Cloud Tenant
+  variables:
+    tenant:
+      default: mytenant
+      description: SAP Analytics Cloud tenant identifier
+security:
+- oauth2: []
+tags:
+- name: Reports
+  description: Manage and schedule reports
+paths:
+  /documents/{documentId}:
+    get:
+      operationId: getDocument
+      summary: SAP Business Intelligence Get a report document
+      description: Retrieve a specific report document with its metadata.
+      tags:
+      - Reports
+      parameters:
+      - $ref: '#/components/parameters/documentId'
+      responses:
+        '200':
+          description: Report document details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Document not found
+  /documents/{documentId}/parameters:
+    get:
+      operationId: listDocumentParameters
+      summary: SAP Business Intelligence List report parameters
+      description: Retrieve the prompt parameters for a report document.
+      tags:
+      - Reports
+      parameters:
+      - $ref: '#/components/parameters/documentId'
+      responses:
+        '200':
+          description: Report parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParameterCollection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Document not found
+  /documents/{documentId}/dataproviders:
+    get:
+      operationId: listDataProviders
+      summary: SAP Business Intelligence List data providers
+      description: Retrieve data providers associated with a report document.
+      tags:
+      - Reports
+      parameters:
+      - $ref: '#/components/parameters/documentId'
+      responses:
+        '200':
+          description: List of data providers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataProviderCollection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Document not found
+components:
+  schemas:
+    DataProvider:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Data provider identifier
+        name:
+          type: string
+          description: Data provider name
+        dataSourceType:
+          type: string
+          description: Type of data source
+        query:
+          type: string
+          description: Query text
+    DataProviderCollection:
+      type: object
+      properties:
+        dataproviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataProvider'
+    ParameterCollection:
+      type: object
+      properties:
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Parameter'
+    Report:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Report unique identifier
+        cuid:
+          type: string
+          description: Cluster unique identifier
+        name:
+          type: string
+          description: Report name
+        description:
+          type: string
+          description: Report description
+        type:
+          type: string
+          enum:
+          - CrystalReport
+          - Webi
+          - Publication
+          description: Report type
+        owner:
+          type: string
+          description: Report owner
+        createdTime:
+          type: string
+          format: date-time
+          description: When the report was created
+        modifiedTime:
+          type: string
+          format: date-time
+          description: When the report was last modified
+        folderId:
+          type: integer
+          description: Parent folder ID
+    Parameter:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Parameter identifier
+        name:
+          type: string
+          description: Parameter name
+        type:
+          type: string
+          description: Parameter data type
+        optional:
+          type: boolean
+          description: Whether the parameter is optional
+        allowMultipleValues:
+          type: boolean
+          description: Whether multiple values can be provided
+        defaultValues:
+          type: array
+          items:
+            type: string
+          description: Default parameter values
+  parameters:
+    documentId:
+      name: documentId
+      in: path
+      required: true
+      description: Report document unique identifier
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for SAP Analytics Cloud
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.sapanalytics.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: SAP Analytics Cloud API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD

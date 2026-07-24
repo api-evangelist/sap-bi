@@ -1,0 +1,115 @@
+openapi: 3.1.0
+info:
+  title: SAP Business Intelligence SAP Analytics Cloud Catalog Servers API
+  description: REST API for SAP Analytics Cloud enabling data integration, story management, model administration, and analytics operations. Provides programmatic access to create and manage stories, models, data imports, and user administration within SAP Analytics Cloud.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://{tenant}.sapanalytics.cloud/api/v1
+  description: SAP Analytics Cloud Tenant
+  variables:
+    tenant:
+      default: mytenant
+      description: SAP Analytics Cloud tenant identifier
+security:
+- oauth2: []
+tags:
+- name: Servers
+  description: Monitor and manage BI Platform servers
+paths:
+  /servers:
+    get:
+      operationId: listServers
+      summary: SAP Business Intelligence List servers
+      description: Retrieve a list of all servers in the BI Platform deployment.
+      tags:
+      - Servers
+      responses:
+        '200':
+          description: List of servers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerCollection'
+        '401':
+          description: Unauthorized
+  /servers/{serverId}:
+    get:
+      operationId: getServer
+      summary: SAP Business Intelligence Get a server
+      description: Retrieve details and status of a specific BI Platform server.
+      tags:
+      - Servers
+      parameters:
+      - $ref: '#/components/parameters/serverId'
+      responses:
+        '200':
+          description: Server details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Server not found
+components:
+  schemas:
+    Server:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Server unique identifier
+        name:
+          type: string
+          description: Server name
+        kind:
+          type: string
+          description: Server type
+        status:
+          type: string
+          enum:
+          - Running
+          - Stopped
+          - Starting
+          - Stopping
+          description: Current server status
+        hostname:
+          type: string
+          description: Server hostname
+        port:
+          type: integer
+          description: Server port
+        pid:
+          type: integer
+          description: Process ID
+    ServerCollection:
+      type: object
+      properties:
+        servers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Server'
+  parameters:
+    serverId:
+      name: serverId
+      in: path
+      required: true
+      description: Server unique identifier
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for SAP Analytics Cloud
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.sapanalytics.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: SAP Analytics Cloud API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD

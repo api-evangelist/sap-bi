@@ -1,0 +1,175 @@
+openapi: 3.1.0
+info:
+  title: SAP Business Intelligence SAP Analytics Cloud Catalog Data Import API
+  description: REST API for SAP Analytics Cloud enabling data integration, story management, model administration, and analytics operations. Provides programmatic access to create and manage stories, models, data imports, and user administration within SAP Analytics Cloud.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://{tenant}.sapanalytics.cloud/api/v1
+  description: SAP Analytics Cloud Tenant
+  variables:
+    tenant:
+      default: mytenant
+      description: SAP Analytics Cloud tenant identifier
+security:
+- oauth2: []
+tags:
+- name: Data Import
+  description: Import data into models
+paths:
+  /dataimport/models/{modelId}/jobs:
+    get:
+      operationId: listImportJobs
+      summary: SAP Business Intelligence List import jobs
+      description: Retrieve all data import jobs for a specific model.
+      tags:
+      - Data Import
+      parameters:
+      - $ref: '#/components/parameters/modelId'
+      responses:
+        '200':
+          description: List of import jobs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJobCollection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Model not found
+    post:
+      operationId: createImportJob
+      summary: SAP Business Intelligence Create an import job
+      description: Create a new data import job to load data into a model.
+      tags:
+      - Data Import
+      parameters:
+      - $ref: '#/components/parameters/modelId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImportJobRequest'
+      responses:
+        '201':
+          description: Import job created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJob'
+        '400':
+          description: Invalid request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Model not found
+  /dataimport/models/{modelId}/jobs/{jobId}:
+    get:
+      operationId: getImportJob
+      summary: SAP Business Intelligence Get an import job
+      description: Retrieve status and details of a specific data import job.
+      tags:
+      - Data Import
+      parameters:
+      - $ref: '#/components/parameters/modelId'
+      - $ref: '#/components/parameters/jobId'
+      responses:
+        '200':
+          description: Import job details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJob'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Import job not found
+components:
+  schemas:
+    ImportJobCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportJob'
+    CreateImportJobRequest:
+      type: object
+      required:
+      - importType
+      properties:
+        importType:
+          type: string
+          enum:
+          - Replace
+          - Append
+          - Update
+          description: How data should be imported
+        mapping:
+          type: object
+          description: Column-to-dimension/measure mapping
+    ImportJob:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Import job unique identifier
+        status:
+          type: string
+          enum:
+          - Pending
+          - Running
+          - Completed
+          - Failed
+          description: Current job status
+        importType:
+          type: string
+          enum:
+          - Replace
+          - Append
+          - Update
+          description: How data is imported
+        createdTime:
+          type: string
+          format: date-time
+          description: When the job was created
+        completedTime:
+          type: string
+          format: date-time
+          description: When the job completed
+        rowsProcessed:
+          type: integer
+          description: Number of rows processed
+        errorMessage:
+          type: string
+          description: Error message if the job failed
+  parameters:
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      description: Import job unique identifier
+      schema:
+        type: string
+    modelId:
+      name: modelId
+      in: path
+      required: true
+      description: Model unique identifier
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for SAP Analytics Cloud
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.sapanalytics.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: SAP Analytics Cloud API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD

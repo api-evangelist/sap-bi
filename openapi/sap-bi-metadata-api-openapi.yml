@@ -1,0 +1,117 @@
+openapi: 3.1.0
+info:
+  title: SAP Business Intelligence SAP Analytics Cloud Catalog Metadata API
+  description: REST API for SAP Analytics Cloud enabling data integration, story management, model administration, and analytics operations. Provides programmatic access to create and manage stories, models, data imports, and user administration within SAP Analytics Cloud.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://{tenant}.sapanalytics.cloud/api/v1
+  description: SAP Analytics Cloud Tenant
+  variables:
+    tenant:
+      default: mytenant
+      description: SAP Analytics Cloud tenant identifier
+security:
+- oauth2: []
+tags:
+- name: Metadata
+  description: Browse BW/4HANA metadata catalog
+paths:
+  /RSOD_CATALOG_SRV/CatalogEntries:
+    get:
+      operationId: listCatalogEntries
+      summary: SAP Business Intelligence List metadata catalog entries
+      description: Browse the BW/4HANA metadata catalog to discover available objects across the system.
+      tags:
+      - Metadata
+      parameters:
+      - $ref: '#/components/parameters/topParam'
+      - $ref: '#/components/parameters/skipParam'
+      - $ref: '#/components/parameters/filterParam'
+      - $ref: '#/components/parameters/formatParam'
+      responses:
+        '200':
+          description: List of catalog entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogEntryCollection'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    CatalogEntry:
+      type: object
+      properties:
+        ObjectName:
+          type: string
+          description: Technical name of the object
+        ObjectDescription:
+          type: string
+          description: Object description
+        ObjectType:
+          type: string
+          description: Object type (e.g., ADSO, CPROV, IOBJ)
+        InfoArea:
+          type: string
+          description: InfoArea of the object
+        Version:
+          type: string
+          description: Object version
+    CatalogEntryCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/CatalogEntry'
+  parameters:
+    topParam:
+      name: $top
+      in: query
+      description: Maximum number of results to return (OData)
+      schema:
+        type: integer
+        default: 100
+        minimum: 1
+    filterParam:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    skipParam:
+      name: $skip
+      in: query
+      description: Number of results to skip for pagination (OData)
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    formatParam:
+      name: $format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for SAP Analytics Cloud
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.sapanalytics.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: SAP Analytics Cloud API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD

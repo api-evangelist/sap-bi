@@ -1,0 +1,214 @@
+openapi: 3.1.0
+info:
+  title: SAP Business Intelligence SAP Analytics Cloud Catalog Views API
+  description: REST API for SAP Analytics Cloud enabling data integration, story management, model administration, and analytics operations. Provides programmatic access to create and manage stories, models, data imports, and user administration within SAP Analytics Cloud.
+  version: '1.0'
+  contact:
+    name: SAP Support
+    url: https://support.sap.com/en/index.html
+  termsOfService: https://www.sap.com/about/legal/terms-of-use.html
+servers:
+- url: https://{tenant}.sapanalytics.cloud/api/v1
+  description: SAP Analytics Cloud Tenant
+  variables:
+    tenant:
+      default: mytenant
+      description: SAP Analytics Cloud tenant identifier
+security:
+- oauth2: []
+tags:
+- name: Views
+  description: Manage analytical and relational views
+paths:
+  /spaces/{spaceId}/views:
+    get:
+      operationId: listViews
+      summary: SAP Business Intelligence List views
+      description: Retrieve all views (analytical and relational) defined in a space.
+      tags:
+      - Views
+      parameters:
+      - $ref: '#/components/parameters/spaceId'
+      responses:
+        '200':
+          description: List of views
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViewCollection'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Space not found
+  /spaces/{spaceId}/views/{viewId}:
+    get:
+      operationId: getView
+      summary: SAP Business Intelligence Get a view
+      description: Retrieve details and metadata of a specific view.
+      tags:
+      - Views
+      parameters:
+      - $ref: '#/components/parameters/spaceId'
+      - $ref: '#/components/parameters/viewId'
+      responses:
+        '200':
+          description: View details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/View'
+        '401':
+          description: Unauthorized
+        '404':
+          description: View not found
+  /spaces/{spaceId}/views/{viewId}/deploy:
+    post:
+      operationId: deployView
+      summary: SAP Business Intelligence Deploy a view
+      description: Deploy a view to make it available for consumption.
+      tags:
+      - Views
+      parameters:
+      - $ref: '#/components/parameters/spaceId'
+      - $ref: '#/components/parameters/viewId'
+      responses:
+        '202':
+          description: View deployment started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskRun'
+        '401':
+          description: Unauthorized
+        '404':
+          description: View not found
+components:
+  schemas:
+    ViewCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/View'
+    TaskRun:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Task run unique identifier
+        type:
+          type: string
+          enum:
+          - DataFlowExecution
+          - ViewDeployment
+          - DataReplication
+          description: Task type
+        status:
+          type: string
+          enum:
+          - Pending
+          - Running
+          - Completed
+          - Failed
+          description: Task execution status
+        startTime:
+          type: string
+          format: date-time
+          description: When the task started
+        endTime:
+          type: string
+          format: date-time
+          description: When the task completed
+        rowsProcessed:
+          type: integer
+          description: Number of rows processed
+        errorMessage:
+          type: string
+          description: Error message if the task failed
+    ViewColumn:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Column name
+        description:
+          type: string
+          description: Column description
+        dataType:
+          type: string
+          description: Column data type
+        semanticType:
+          type: string
+          enum:
+          - Dimension
+          - Measure
+          - Attribute
+          description: Semantic role of the column
+    View:
+      type: object
+      properties:
+        id:
+          type: string
+          description: View unique identifier
+        name:
+          type: string
+          description: View name
+        description:
+          type: string
+          description: View description
+        type:
+          type: string
+          enum:
+          - Analytical
+          - Relational
+          description: View semantic type
+        deploymentStatus:
+          type: string
+          enum:
+          - Deployed
+          - NotDeployed
+          - Modified
+          description: Current deployment status
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ViewColumn'
+          description: View columns
+        createdBy:
+          type: string
+          description: User who created the view
+        createdTime:
+          type: string
+          format: date-time
+          description: When the view was created
+        modifiedTime:
+          type: string
+          format: date-time
+          description: When the view was last modified
+  parameters:
+    spaceId:
+      name: spaceId
+      in: path
+      required: true
+      description: Space unique identifier
+      schema:
+        type: string
+    viewId:
+      name: viewId
+      in: path
+      required: true
+      description: View unique identifier
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for SAP Analytics Cloud
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.sapanalytics.cloud/oauth/token
+          scopes: {}
+externalDocs:
+  description: SAP Analytics Cloud API Documentation
+  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
