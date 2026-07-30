@@ -2,6 +2,19 @@ name: SAP Business Intelligence
 description: >-
   Collection of APIs for SAP Business Intelligence (BI) platform, including analytics, reporting, and data visualization
   services.
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
 url: https://api.sap.com/business-intelligence
 tags:
@@ -14,132 +27,968 @@ created: '2024'
 modified: '2026-05-19'
 specificationVersion: '0.18'
 apis:
-  - name: SAP Analytics Cloud API
-    description: REST API for SAP Analytics Cloud enabling data integration, story management, and analytics operations.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
-    humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
-    baseURL: https://[tenant].sapanalytics.cloud/api/v1
-    tags:
-      - Analytics
-      - Cloud
-      - Dashboards
-    properties:
-      - type: Documentation
-        url: >-
-          https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
-      - type: OpenAPI
-        url: https://api.sap.com/api/API_ANALYTICS_CLOUD/overview
-      - type: Authentication
-        url: >-
-          https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
-      - type: Swagger
-        url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
-      - type: OpenAPI
-        url: openapi/sap-bi-analytics-cloud-openapi.yml
-  - name: SAP BusinessObjects BI Platform REST API
-    description: RESTful web services for SAP BusinessObjects BI Platform administration, content management, and reporting.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
-    humanURL: https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM
-    baseURL: https://[server]:[port]/biprws
-    tags:
-      - BusinessObjects
-      - Platform Administration
-      - Reports
-    properties:
-      - type: Documentation
-        url: >-
-          https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
-      - type: OpenAPI
-        url: https://api.sap.com/api/BOBJ_BIPLATFORM/overview
-      - type: SDK Documentation
-        url: >-
-          https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
-      - type: Authentication
-        url: >-
-          https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
-      - type: OpenAPI
-        url: openapi/sap-bi-businessobjects-platform-openapi.yml
-  - name: SAP HANA XS Advanced API
-    description: APIs for building analytics applications on SAP HANA XS Advanced platform.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
-    humanURL: https://help.sap.com/docs/SAP_HANA_PLATFORM
-    baseURL: https://[host]:[port]
-    tags:
-      - Analytics
-      - Database
-      - HANA
-      - XS Advanced
-    properties:
-      - type: Documentation
-        url: >-
-          https://help.sap.com/docs/SAP_HANA_PLATFORM/4505d0bdaf4948449b7f7379d24d0f0d/df19a03dc07e4ba19db4e0006c1da429.html
-      - type: Developer Guide
-        url: >-
-          https://help.sap.com/docs/SAP_HANA_PLATFORM/4505d0bdaf4948449b7f7379d24d0f0d/3ec885c07e844d9fb4f40e3c4af0adb8.html
-      - type: APIReference
-        url: >-
-          https://help.sap.com/docs/SAP_HANA_PLATFORM/4505d0bdaf4948449b7f7379d24d0f0d/c102c07e04c541cc906f5fcdb3e02105.html
-  - name: SAP BW/4HANA OData API
-    description: OData services for accessing SAP BW/4HANA data warehouse content and metadata.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
-    humanURL: https://help.sap.com/docs/SAP_BW4HANA
-    baseURL: https://[server]:[port]/sap/opu/odata/sap/
-    tags:
-      - BW/4HANA
-      - Data Warehouse
-      - ETL
-      - OData
-    properties:
-      - type: Documentation
-        url: https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
-      - type: OData Reference
-        url: https://api.sap.com/package/SAPBW4HANA/odata
-      - type: Integration Guide
-        url: https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
-      - type: OpenAPI
-        url: openapi/sap-bi-bw4hana-odata-openapi.yml
-  - name: SAP Datasphere API
-    description: APIs for SAP Datasphere (formerly SAP Data Warehouse Cloud) for data integration and analytics.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
-    humanURL: https://help.sap.com/docs/SAP_DATASPHERE
-    baseURL: https://[tenant].datasphere.cloud.sap/api/v1
-    tags:
-      - Cloud
-      - Data Integration
-      - Data Warehouse
-      - Datasphere
-    properties:
-      - type: Documentation
-        url: >-
-          https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
-      - type: OpenAPI
-        url: https://api.sap.com/api/datasphere/overview
-      - type: APIReference
-        url: >-
-          https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
-      - type: Authentication
-        url: >-
-          https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
-      - type: OpenAPI
-        url: openapi/sap-bi-datasphere-openapi.yml
-  - name: SAP Crystal Reports API
-    description: APIs for embedding and automating SAP Crystal Reports in applications.
-    image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
-    humanURL: https://help.sap.com/docs/SAP_CRYSTAL_REPORTS
-    baseURL: https://[server]/crystal/
-    tags:
-      - Crystal Reports
-      - Embedded Analytics
-      - Reporting
-    properties:
-      - type: Documentation
-        url: >-
-          https://help.sap.com/docs/SAP_CRYSTAL_REPORTS/9e08a56e98d446b58af012538c121ff9/4650e1fe6d6d1014b3fc9283b0e91070.html
-      - type: SDK Guide
-        url: >-
-          https://help.sap.com/docs/SAP_CRYSTAL_REPORTS/9e08a56e98d446b58af012538c121ff9/461aff6a6d6d1014910c91fa5b0c2cc3.html
-      - type: Integration Samples
-        url: https://wiki.scn.sap.com/wiki/display/BOBJ/Crystal+Reports+Developer+Center
+- name: SAP HANA XS Advanced API
+  description: APIs for building analytics applications on SAP HANA XS Advanced platform.
+  image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+  humanURL: https://help.sap.com/docs/SAP_HANA_PLATFORM
+  baseURL: https://[host]:[port]
+  tags:
+  - Analytics
+  - Database
+  - HANA
+  - XS Advanced
+  properties:
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_HANA_PLATFORM/4505d0bdaf4948449b7f7379d24d0f0d/df19a03dc07e4ba19db4e0006c1da429.html
+  - type: Developer Guide
+    url: >-
+      https://help.sap.com/docs/SAP_HANA_PLATFORM/4505d0bdaf4948449b7f7379d24d0f0d/3ec885c07e844d9fb4f40e3c4af0adb8.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_HANA_PLATFORM/4505d0bdaf4948449b7f7379d24d0f0d/c102c07e04c541cc906f5fcdb3e02105.html
+- name: SAP Crystal Reports API
+  description: APIs for embedding and automating SAP Crystal Reports in applications.
+  image: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+  humanURL: https://help.sap.com/docs/SAP_CRYSTAL_REPORTS
+  baseURL: https://[server]/crystal/
+  tags:
+  - Crystal Reports
+  - Embedded Analytics
+  - Reporting
+  properties:
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_CRYSTAL_REPORTS/9e08a56e98d446b58af012538c121ff9/4650e1fe6d6d1014b3fc9283b0e91070.html
+  - type: SDK Guide
+    url: >-
+      https://help.sap.com/docs/SAP_CRYSTAL_REPORTS/9e08a56e98d446b58af012538c121ff9/461aff6a6d6d1014910c91fa5b0c2cc3.html
+  - type: Integration Samples
+    url: https://wiki.scn.sap.com/wiki/display/BOBJ/Crystal+Reports+Developer+Center
+- aid: sap-bi:sap-bi-catalog-api
+  name: SAP Business Intelligence Catalog API
+  description: Browse the Datasphere data catalog
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-catalog-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-connections-api
+  name: SAP Business Intelligence Connections API
+  description: Manage data source connections
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Connections
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-connections-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-data-flows-api
+  name: SAP Business Intelligence Data Flows API
+  description: Manage data replication and transformation flows
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Data Flows
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-data-flows-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-data-import-api
+  name: SAP Business Intelligence Data Import API
+  description: Import data into models
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Data Import
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-data-import-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-data-store-objects-api
+  name: SAP Business Intelligence Data Store Objects API
+  description: Manage advanced data store objects (aDSO)
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Data Store Objects
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-data-store-objects-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-folders-api
+  name: SAP Business Intelligence Folders API
+  description: Manage content folders
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-folders-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-infoobjects-api
+  name: SAP Business Intelligence InfoObjects API
+  description: Manage BI platform content objects
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - InfoObjects
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-infoobjects-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-infoproviders-api
+  name: SAP Business Intelligence InfoProviders API
+  description: Access InfoProvider metadata and data
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - InfoProviders
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-infoproviders-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-instances-api
+  name: SAP Business Intelligence Instances API
+  description: Manage scheduled report instances
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Instances
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-instances-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-logon-api
+  name: SAP Business Intelligence Logon API
+  description: Authentication and session management
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Logon
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-logon-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-metadata-api
+  name: SAP Business Intelligence Metadata API
+  description: Browse BW/4HANA metadata catalog
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-metadata-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-models-api
+  name: SAP Business Intelligence Models API
+  description: Manage data models and dimensions
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Models
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-models-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-process-chains-api
+  name: SAP Business Intelligence Process Chains API
+  description: Monitor and manage process chains
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Process Chains
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-process-chains-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-queries-api
+  name: SAP Business Intelligence Queries API
+  description: Execute and manage BW queries
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Queries
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-queries-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-reports-api
+  name: SAP Business Intelligence Reports API
+  description: Manage and schedule reports
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-reports-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-servers-api
+  name: SAP Business Intelligence Servers API
+  description: Monitor and manage BI Platform servers
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Servers
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-servers-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-spaces-api
+  name: SAP Business Intelligence Spaces API
+  description: Manage Datasphere spaces
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Spaces
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-spaces-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-stories-api
+  name: SAP Business Intelligence Stories API
+  description: Manage analytics stories and dashboards
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Stories
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-stories-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-tasks-api
+  name: SAP Business Intelligence Tasks API
+  description: Manage and monitor task execution
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-tasks-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-users-api
+  name: SAP Business Intelligence Users API
+  description: Manage users and teams
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-users-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
+- aid: sap-bi:sap-bi-views-api
+  name: SAP Business Intelligence Views API
+  description: Manage analytical and relational views
+  humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  baseURL: https://[tenant].sapanalytics.cloud/api/v1
+  tags:
+  - Views
+  properties:
+  - type: OpenAPI
+    url: openapi/sap-bi-views-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/14cac91febef464dbb1efce20e3f1613/147c1fd5bb3-4f8ba65b37acf1d6dbce.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_ANALYTICS_CLOUD/00f68c2e08b941f081002fd3691d86a7/c7e7c53f91bb41f8bd1440afd47ca49e.html
+  - type: Swagger
+    url: https://[tenant].sapanalytics.cloud/api/v1/swagger-ui.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/5051e4f36d6d1014b3fc9283b0e91070.html
+  - type: SDK Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/49e9e7f26d6d1014910c91fa5b0c2cc3.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/ca1da879759d4c76894329a42c5b88c3/4f0990926d6d1014a74b9c23f567b6f4.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/5e467a851e874e48afcfa4cc88b5dd28.html
+  - type: OData Reference
+    url: https://api.sap.com/package/SAPBW4HANA/odata
+  - type: Integration Guide
+    url: >-
+      https://help.sap.com/docs/SAP_BW4HANA/107a6e8a38b74ede94c833ca3b7b6f51/3801c14d27f046a79eed60a22ac6bd23.html
+  - type: Documentation
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/7f1a91f95e794a5e9f29abce8856c8cf.html
+  - type: APIReference
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/c8a54ee704e94e15926551293243fd1d/6c35457c1fc54a47b39aa5cdbc16d5e7.html
+  - type: Authentication
+    url: >-
+      https://help.sap.com/docs/SAP_DATASPHERE/9f804b8efa8043539289f42f372c4862/3de81838d5cd43ee91576a3b0b4e5e36.html
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
