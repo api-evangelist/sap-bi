@@ -1019,13 +1019,13 @@ common:
   - type: PrivacyPolicy
     url: https://www.sap.com/about/legal/privacy.html
   - type: OpenAPI
-    url: openapi/sap-bi-analytics-cloud-openapi.yml
+    url: openapi/_original/sap-bi-analytics-cloud-openapi.yml
   - type: OpenAPI
-    url: openapi/sap-bi-businessobjects-platform-openapi.yml
+    url: openapi/_original/sap-bi-businessobjects-platform-openapi.yml
   - type: OpenAPI
-    url: openapi/sap-bi-bw4hana-odata-openapi.yml
+    url: openapi/_original/sap-bi-bw4hana-odata-openapi.yml
   - type: OpenAPI
-    url: openapi/sap-bi-datasphere-openapi.yml
+    url: openapi/_original/sap-bi-datasphere-openapi.yml
   - type: JSONLD
     url: json-ld/sap-bi-context.jsonld
   - type: JSONSchema
