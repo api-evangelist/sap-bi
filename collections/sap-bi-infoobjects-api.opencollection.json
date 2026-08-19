@@ -1,0 +1,152 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP Business Intelligence SAP Analytics Cloud Catalog InfoObjects API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.sapanalytics.cloud/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "InfoObjects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List InfoObjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/infostore",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "CMS query string to filter objects"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Query and retrieve InfoObjects from the BI Platform content management system using CMS queries."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get an InfoObject",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/infostore/:objectId",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "InfoObject unique identifier (CUID or SI_ID)"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific InfoObject by its ID."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Update an InfoObject",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/infostore/:objectId",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "InfoObject unique identifier (CUID or SI_ID)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update properties of an existing InfoObject."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Delete an InfoObject",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/infostore/:objectId",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "InfoObject unique identifier (CUID or SI_ID)"
+              }
+            ]
+          },
+          "docs": "Delete an InfoObject from the BI Platform."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence List children of an InfoObject",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/infostore/:objectId/children",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "path",
+                "description": "InfoObject unique identifier (CUID or SI_ID)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              }
+            ]
+          },
+          "docs": "Retrieve child objects of a folder or container InfoObject."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

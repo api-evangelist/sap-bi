@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP Business Intelligence SAP Analytics Cloud Catalog API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.sapanalytics.cloud/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List catalog assets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/catalog",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search catalog assets by keyword"
+              }
+            ]
+          },
+          "docs": "Browse the data catalog to discover available datasets, views, and other assets."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a catalog asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/catalog/:assetId",
+            "params": [
+              {
+                "name": "assetId",
+                "value": "",
+                "type": "path",
+                "description": "Catalog asset unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details and metadata of a specific catalog asset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP Business Intelligence SAP Analytics Cloud Catalog Data Flows API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.sapanalytics.cloud/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Flows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List data flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/spaces/:spaceId/dataflows",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve all data flows configured in a specific space."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a data flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/spaces/:spaceId/dataflows/:dataFlowId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              },
+              {
+                "name": "dataFlowId",
+                "value": "",
+                "type": "path",
+                "description": "Data flow unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific data flow."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Run a data flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/spaces/:spaceId/dataflows/:dataFlowId/run",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              },
+              {
+                "name": "dataFlowId",
+                "value": "",
+                "type": "path",
+                "description": "Data flow unique identifier"
+              }
+            ]
+          },
+          "docs": "Trigger execution of a data flow to replicate or transform data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

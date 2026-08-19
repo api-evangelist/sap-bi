@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP Business Intelligence SAP Analytics Cloud Catalog Connections API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.sapanalytics.cloud/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List connections in a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/spaces/:spaceId/connections",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve all data source connections configured in a specific space."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Create a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/spaces/:spaceId/connections",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new data source connection in a specific space."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/spaces/:spaceId/connections/:connectionId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Connection unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific data source connection."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Delete a connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/spaces/:spaceId/connections/:connectionId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Connection unique identifier"
+              }
+            ]
+          },
+          "docs": "Delete an existing data source connection."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

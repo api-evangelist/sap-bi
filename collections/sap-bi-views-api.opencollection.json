@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP Business Intelligence SAP Analytics Cloud Catalog Views API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.sapanalytics.cloud/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Views",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List views",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/spaces/:spaceId/views",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve all views (analytical and relational) defined in a space."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get a view",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/spaces/:spaceId/views/:viewId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              },
+              {
+                "name": "viewId",
+                "value": "",
+                "type": "path",
+                "description": "View unique identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve details and metadata of a specific view."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Deploy a view",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/spaces/:spaceId/views/:viewId/deploy",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "Space unique identifier"
+              },
+              {
+                "name": "viewId",
+                "value": "",
+                "type": "path",
+                "description": "View unique identifier"
+              }
+            ]
+          },
+          "docs": "Deploy a view to make it available for consumption."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

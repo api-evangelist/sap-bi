@@ -1,0 +1,147 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP Business Intelligence SAP Analytics Cloud Catalog InfoProviders API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.sapanalytics.cloud/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "InfoProviders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "SAP Business Intelligence List InfoProviders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/RSOD_INFOPROV_SRV/InfoProviders",
+            "params": [
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return (OData)"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination (OData)"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression"
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to return"
+              },
+              {
+                "name": "$format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of all InfoProviders (InfoCubes, DataStore Objects, CompositeProviders) available in the BW/4HANA system."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence Get an InfoProvider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/RSOD_INFOPROV_SRV/InfoProviders(':infoProviderName')",
+            "params": [
+              {
+                "name": "infoProviderName",
+                "value": "",
+                "type": "path",
+                "description": "InfoProvider technical name"
+              },
+              {
+                "name": "$format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Retrieve details and metadata of a specific InfoProvider."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence List InfoProvider dimensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/RSOD_INFOPROV_SRV/InfoProviders(':infoProviderName')/Dimensions",
+            "params": [
+              {
+                "name": "infoProviderName",
+                "value": "",
+                "type": "path",
+                "description": "InfoProvider technical name"
+              },
+              {
+                "name": "$format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Retrieve all dimensions associated with a specific InfoProvider."
+        },
+        {
+          "info": {
+            "name": "SAP Business Intelligence List InfoProvider key figures",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.sapanalytics.cloud/api/v1/RSOD_INFOPROV_SRV/InfoProviders(':infoProviderName')/KeyFigures",
+            "params": [
+              {
+                "name": "infoProviderName",
+                "value": "",
+                "type": "path",
+                "description": "InfoProvider technical name"
+              },
+              {
+                "name": "$format",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              }
+            ]
+          },
+          "docs": "Retrieve all key figures (measures) associated with a specific InfoProvider."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
