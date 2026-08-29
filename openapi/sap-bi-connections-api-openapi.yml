@@ -1,19 +1,19 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: SAP Business Intelligence SAP Analytics Cloud Catalog Connections API
-  description: REST API for SAP Analytics Cloud enabling data integration, story management, model administration, and analytics operations. Provides programmatic access to create and manage stories, models, data imports, and user administration within SAP Analytics Cloud.
+  title: SAP Business Intelligence SAP Datasphere Connections API
+  description: APIs for SAP Datasphere (formerly SAP Data Warehouse Cloud) enabling data integration, space management, model deployment, and analytics. Provides programmatic access to manage spaces, connections, data flows, and consume analytical datasets from the Datasphere platform.
   version: '1.0'
   contact:
     name: SAP Support
     url: https://support.sap.com/en/index.html
   termsOfService: https://www.sap.com/about/legal/terms-of-use.html
 servers:
-- url: https://{tenant}.sapanalytics.cloud/api/v1
-  description: SAP Analytics Cloud Tenant
+- url: https://{tenant}.datasphere.cloud.sap/api/v1
+  description: SAP Datasphere Tenant
   variables:
     tenant:
       default: mytenant
-      description: SAP Analytics Cloud tenant identifier
+      description: SAP Datasphere tenant identifier
 security:
 - oauth2: []
 tags:
@@ -106,18 +106,18 @@ paths:
           description: Connection not found
 components:
   parameters:
-    connectionId:
-      name: connectionId
-      in: path
-      required: true
-      description: Connection unique identifier
-      schema:
-        type: string
     spaceId:
       name: spaceId
       in: path
       required: true
       description: Space unique identifier
+      schema:
+        type: string
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      description: Connection unique identifier
       schema:
         type: string
   schemas:
@@ -186,11 +186,11 @@ components:
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0 authentication for SAP Analytics Cloud
+      description: OAuth 2.0 authentication for SAP Datasphere
       flows:
         clientCredentials:
-          tokenUrl: https://{tenant}.sapanalytics.cloud/oauth/token
+          tokenUrl: https://{tenant}.datasphere.cloud.sap/oauth/token
           scopes: {}
 externalDocs:
-  description: SAP Analytics Cloud API Documentation
-  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  description: SAP Datasphere API Documentation
+  url: https://help.sap.com/docs/SAP_DATASPHERE

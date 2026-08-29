@@ -1,21 +1,24 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: SAP Business Intelligence SAP Analytics Cloud Catalog Logon API
-  description: REST API for SAP Analytics Cloud enabling data integration, story management, model administration, and analytics operations. Provides programmatic access to create and manage stories, models, data imports, and user administration within SAP Analytics Cloud.
+  title: SAP Business Intelligence SAP BusinessObjects BI Platform REST Logon API
+  description: RESTful web services for SAP BusinessObjects BI Platform administration, content management, scheduling, and reporting. Provides access to manage reports, users, folders, server infrastructure, and content within the BusinessObjects environment via the biprws endpoint.
   version: '1.0'
   contact:
     name: SAP Support
     url: https://support.sap.com/en/index.html
   termsOfService: https://www.sap.com/about/legal/terms-of-use.html
 servers:
-- url: https://{tenant}.sapanalytics.cloud/api/v1
-  description: SAP Analytics Cloud Tenant
+- url: https://{server}:{port}/biprws
+  description: SAP BusinessObjects BI Platform Server
   variables:
-    tenant:
-      default: mytenant
-      description: SAP Analytics Cloud tenant identifier
+    server:
+      default: localhost
+      description: BI Platform server hostname
+    port:
+      default: '6405'
+      description: BI Platform server port
 security:
-- oauth2: []
+- logonToken: []
 tags:
 - name: Logon
   description: Authentication and session management
@@ -85,13 +88,11 @@ components:
           type: string
           description: Authentication token for subsequent requests
   securitySchemes:
-    oauth2:
-      type: oauth2
-      description: OAuth 2.0 authentication for SAP Analytics Cloud
-      flows:
-        clientCredentials:
-          tokenUrl: https://{tenant}.sapanalytics.cloud/oauth/token
-          scopes: {}
+    logonToken:
+      type: apiKey
+      in: header
+      name: X-SAP-LogonToken
+      description: SAP BusinessObjects logon token obtained from the logon endpoint
 externalDocs:
-  description: SAP Analytics Cloud API Documentation
-  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  description: SAP BusinessObjects BI Platform REST API Documentation
+  url: https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM

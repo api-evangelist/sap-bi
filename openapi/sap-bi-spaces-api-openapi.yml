@@ -1,19 +1,19 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: SAP Business Intelligence SAP Analytics Cloud Catalog Spaces API
-  description: REST API for SAP Analytics Cloud enabling data integration, story management, model administration, and analytics operations. Provides programmatic access to create and manage stories, models, data imports, and user administration within SAP Analytics Cloud.
+  title: SAP Business Intelligence SAP Datasphere Spaces API
+  description: APIs for SAP Datasphere (formerly SAP Data Warehouse Cloud) enabling data integration, space management, model deployment, and analytics. Provides programmatic access to manage spaces, connections, data flows, and consume analytical datasets from the Datasphere platform.
   version: '1.0'
   contact:
     name: SAP Support
     url: https://support.sap.com/en/index.html
   termsOfService: https://www.sap.com/about/legal/terms-of-use.html
 servers:
-- url: https://{tenant}.sapanalytics.cloud/api/v1
-  description: SAP Analytics Cloud Tenant
+- url: https://{tenant}.datasphere.cloud.sap/api/v1
+  description: SAP Datasphere Tenant
   variables:
     tenant:
       default: mytenant
-      description: SAP Analytics Cloud tenant identifier
+      description: SAP Datasphere tenant identifier
 security:
 - oauth2: []
 tags:
@@ -128,15 +128,6 @@ paths:
           description: Space not found
 components:
   parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        minimum: 1
-        maximum: 1000
     spaceId:
       name: spaceId
       in: path
@@ -152,6 +143,15 @@ components:
         type: integer
         default: 0
         minimum: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        minimum: 1
+        maximum: 1000
   schemas:
     SpaceCollection:
       type: object
@@ -163,19 +163,38 @@ components:
         totalCount:
           type: integer
           description: Total number of spaces
-    SpaceMember:
+    UpdateSpaceRequest:
       type: object
       properties:
-        userId:
+        name:
           type: string
-          description: User identifier
-        role:
+          description: Updated name
+        description:
           type: string
-          enum:
-          - Admin
-          - Modeler
-          - Viewer
-          description: Member role in the space
+          description: Updated description
+        diskStorageQuota:
+          type: integer
+          description: Updated disk storage quota in GB
+        memoryStorageQuota:
+          type: integer
+          description: Updated in-memory storage quota in GB
+    CreateSpaceRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name for the new space
+        description:
+          type: string
+          description: Description for the space
+        diskStorageQuota:
+          type: integer
+          description: Disk storage quota in GB
+        memoryStorageQuota:
+          type: integer
+          description: In-memory storage quota in GB
     Space:
       type: object
       properties:
@@ -216,46 +235,27 @@ components:
           type: string
           format: date-time
           description: When the space was last modified
-    UpdateSpaceRequest:
+    SpaceMember:
       type: object
       properties:
-        name:
+        userId:
           type: string
-          description: Updated name
-        description:
+          description: User identifier
+        role:
           type: string
-          description: Updated description
-        diskStorageQuota:
-          type: integer
-          description: Updated disk storage quota in GB
-        memoryStorageQuota:
-          type: integer
-          description: Updated in-memory storage quota in GB
-    CreateSpaceRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name for the new space
-        description:
-          type: string
-          description: Description for the space
-        diskStorageQuota:
-          type: integer
-          description: Disk storage quota in GB
-        memoryStorageQuota:
-          type: integer
-          description: In-memory storage quota in GB
+          enum:
+          - Admin
+          - Modeler
+          - Viewer
+          description: Member role in the space
   securitySchemes:
     oauth2:
       type: oauth2
-      description: OAuth 2.0 authentication for SAP Analytics Cloud
+      description: OAuth 2.0 authentication for SAP Datasphere
       flows:
         clientCredentials:
-          tokenUrl: https://{tenant}.sapanalytics.cloud/oauth/token
+          tokenUrl: https://{tenant}.datasphere.cloud.sap/oauth/token
           scopes: {}
 externalDocs:
-  description: SAP Analytics Cloud API Documentation
-  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  description: SAP Datasphere API Documentation
+  url: https://help.sap.com/docs/SAP_DATASPHERE

@@ -1,21 +1,24 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: SAP Business Intelligence SAP Analytics Cloud Catalog Process Chains API
-  description: REST API for SAP Analytics Cloud enabling data integration, story management, model administration, and analytics operations. Provides programmatic access to create and manage stories, models, data imports, and user administration within SAP Analytics Cloud.
+  title: SAP Business Intelligence SAP BW/4HANA OData Process Chains API
+  description: OData services for accessing SAP BW/4HANA data warehouse content and metadata. Provides programmatic access to query InfoProviders, manage data store objects, browse metadata, and execute analytical queries against the BW/4HANA data warehouse.
   version: '1.0'
   contact:
     name: SAP Support
     url: https://support.sap.com/en/index.html
   termsOfService: https://www.sap.com/about/legal/terms-of-use.html
 servers:
-- url: https://{tenant}.sapanalytics.cloud/api/v1
-  description: SAP Analytics Cloud Tenant
+- url: https://{server}:{port}/sap/opu/odata/sap
+  description: SAP BW/4HANA OData Endpoint
   variables:
-    tenant:
-      default: mytenant
-      description: SAP Analytics Cloud tenant identifier
+    server:
+      default: localhost
+      description: BW/4HANA server hostname
+    port:
+      default: '443'
+      description: BW/4HANA server port
 security:
-- oauth2: []
+- basicAuth: []
 tags:
 - name: Process Chains
   description: Monitor and manage process chains
@@ -83,14 +86,16 @@ paths:
           description: Process chain not found
 components:
   parameters:
-    topParam:
-      name: $top
+    formatParam:
+      name: $format
       in: query
-      description: Maximum number of results to return (OData)
+      description: Response format
       schema:
-        type: integer
-        default: 100
-        minimum: 1
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
     skipParam:
       name: $skip
       in: query
@@ -106,43 +111,15 @@ components:
       description: Process chain identifier
       schema:
         type: string
-    formatParam:
-      name: $format
+    topParam:
+      name: $top
       in: query
-      description: Response format
+      description: Maximum number of results to return (OData)
       schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
+        type: integer
+        default: 100
+        minimum: 1
   schemas:
-    ProcessChainCollection:
-      type: object
-      properties:
-        d:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                $ref: '#/components/schemas/ProcessChain'
-    ProcessChainRun:
-      type: object
-      properties:
-        RunId:
-          type: string
-          description: Execution run identifier
-        Status:
-          type: string
-          enum:
-          - Started
-          - Running
-          description: Initial run status
-        StartTime:
-          type: string
-          format: date-time
-          description: When the execution started
     ProcessChain:
       type: object
       properties:
@@ -169,14 +146,37 @@ components:
           type: string
           format: date-time
           description: When the chain last ran
+    ProcessChainRun:
+      type: object
+      properties:
+        RunId:
+          type: string
+          description: Execution run identifier
+        Status:
+          type: string
+          enum:
+          - Started
+          - Running
+          description: Initial run status
+        StartTime:
+          type: string
+          format: date-time
+          description: When the execution started
+    ProcessChainCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/ProcessChain'
   securitySchemes:
-    oauth2:
-      type: oauth2
-      description: OAuth 2.0 authentication for SAP Analytics Cloud
-      flows:
-        clientCredentials:
-          tokenUrl: https://{tenant}.sapanalytics.cloud/oauth/token
-          scopes: {}
+    basicAuth:
+      type: http
+      scheme: basic
+      description: SAP user credentials for BW/4HANA system
 externalDocs:
-  description: SAP Analytics Cloud API Documentation
-  url: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
+  description: SAP BW/4HANA OData API Documentation
+  url: https://help.sap.com/docs/SAP_BW4HANA

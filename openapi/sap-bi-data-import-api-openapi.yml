@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: SAP Business Intelligence SAP Analytics Cloud Catalog Data Import API
+  title: SAP Business Intelligence SAP Analytics Cloud Data Import API
   description: REST API for SAP Analytics Cloud enabling data integration, story management, model administration, and analytics operations. Provides programmatic access to create and manage stories, models, data imports, and user administration within SAP Analytics Cloud.
   version: '1.0'
   contact:
@@ -90,28 +90,6 @@ paths:
           description: Import job not found
 components:
   schemas:
-    ImportJobCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImportJob'
-    CreateImportJobRequest:
-      type: object
-      required:
-      - importType
-      properties:
-        importType:
-          type: string
-          enum:
-          - Replace
-          - Append
-          - Update
-          description: How data should be imported
-        mapping:
-          type: object
-          description: Column-to-dimension/measure mapping
     ImportJob:
       type: object
       properties:
@@ -147,6 +125,28 @@ components:
         errorMessage:
           type: string
           description: Error message if the job failed
+    CreateImportJobRequest:
+      type: object
+      required:
+      - importType
+      properties:
+        importType:
+          type: string
+          enum:
+          - Replace
+          - Append
+          - Update
+          description: How data should be imported
+        mapping:
+          type: object
+          description: Column-to-dimension/measure mapping
+    ImportJobCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportJob'
   parameters:
     jobId:
       name: jobId
