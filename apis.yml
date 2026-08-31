@@ -171,7 +171,7 @@ apis:
   humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
   baseURL: https://[tenant].sapanalytics.cloud/api/v1
   tags:
-  - Dataflows
+  - Data Flows
   tags_raw:
   - Data Flows
   properties:
