@@ -744,6 +744,8 @@ apis:
   humanURL: https://help.sap.com/docs/SAP_ANALYTICS_CLOUD
   baseURL: https://[tenant].sapanalytics.cloud/api/v1
   tags:
+  - Space
+  tags_raw:
   - Spaces
   properties:
   - type: OpenAPI
