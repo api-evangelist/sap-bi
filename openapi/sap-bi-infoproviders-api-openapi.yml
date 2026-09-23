@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: SAP Business Intelligence SAP BW/4HANA OData Info Providers API
+  title: SAP Business Intelligence SAP BW/4HANA OData Info Providers…
   description: OData services for accessing SAP BW/4HANA data warehouse content and metadata. Provides programmatic access to query InfoProviders, manage data store objects, browse metadata, and execute analytical queries against the BW/4HANA data warehouse.
   version: '1.0'
   contact:
@@ -111,63 +111,32 @@ paths:
         '404':
           description: InfoProvider not found
 components:
-  parameters:
-    formatParam:
-      name: $format
-      in: query
-      description: Response format
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
-    skipParam:
-      name: $skip
-      in: query
-      description: Number of results to skip for pagination (OData)
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    selectParam:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to return
-      schema:
-        type: string
-    filterParam:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    infoProviderName:
-      name: infoProviderName
-      in: path
-      required: true
-      description: InfoProvider technical name
-      schema:
-        type: string
-    topParam:
-      name: $top
-      in: query
-      description: Maximum number of results to return (OData)
-      schema:
-        type: integer
-        default: 100
-        minimum: 1
   schemas:
-    KeyFigureCollection:
+    KeyFigure:
       type: object
       properties:
-        d:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                $ref: '#/components/schemas/KeyFigure'
+        KeyFigureName:
+          type: string
+          description: Technical name of the key figure
+        KeyFigureDescription:
+          type: string
+          description: Description of the key figure
+        AggregationType:
+          type: string
+          enum:
+          - SUM
+          - MIN
+          - MAX
+          - AVG
+          - COUNT
+          - NOP
+          description: Aggregation behavior
+        DataType:
+          type: string
+          description: Data type of the key figure
+        UnitOfMeasure:
+          type: string
+          description: Unit of measure or currency
     BwDimension:
       type: object
       properties:
@@ -183,6 +152,26 @@ components:
         InfoObjectName:
           type: string
           description: Associated InfoObject technical name
+    KeyFigureCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/KeyFigure'
+    BwDimensionCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/BwDimension'
     InfoProvider:
       type: object
       properties:
@@ -217,16 +206,6 @@ components:
           type: string
           format: date-time
           description: Last change timestamp
-    BwDimensionCollection:
-      type: object
-      properties:
-        d:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                $ref: '#/components/schemas/BwDimension'
     InfoProviderCollection:
       type: object
       properties:
@@ -237,31 +216,52 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/InfoProvider'
-    KeyFigure:
-      type: object
-      properties:
-        KeyFigureName:
-          type: string
-          description: Technical name of the key figure
-        KeyFigureDescription:
-          type: string
-          description: Description of the key figure
-        AggregationType:
-          type: string
-          enum:
-          - SUM
-          - MIN
-          - MAX
-          - AVG
-          - COUNT
-          - NOP
-          description: Aggregation behavior
-        DataType:
-          type: string
-          description: Data type of the key figure
-        UnitOfMeasure:
-          type: string
-          description: Unit of measure or currency
+  parameters:
+    selectParam:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to return
+      schema:
+        type: string
+    filterParam:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    skipParam:
+      name: $skip
+      in: query
+      description: Number of results to skip for pagination (OData)
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    formatParam:
+      name: $format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+    infoProviderName:
+      name: infoProviderName
+      in: path
+      required: true
+      description: InfoProvider technical name
+      schema:
+        type: string
+    topParam:
+      name: $top
+      in: query
+      description: Maximum number of results to return (OData)
+      schema:
+        type: integer
+        default: 100
+        minimum: 1
   securitySchemes:
     basicAuth:
       type: http

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: SAP Business Intelligence SAP BusinessObjects BI Platform REST Reports API
+  title: SAP Business Intelligence SAP BusinessObjects BI Platform…
   description: RESTful web services for SAP BusinessObjects BI Platform administration, content management, scheduling, and reporting. Provides access to manage reports, users, folders, server infrastructure, and content within the BusinessObjects environment via the biprws endpoint.
   version: '1.0'
   contact:
@@ -85,6 +85,13 @@ paths:
           description: Document not found
 components:
   schemas:
+    DataProviderCollection:
+      type: object
+      properties:
+        dataproviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataProvider'
     DataProvider:
       type: object
       properties:
@@ -100,20 +107,6 @@ components:
         query:
           type: string
           description: Query text
-    ParameterCollection:
-      type: object
-      properties:
-        parameters:
-          type: array
-          items:
-            $ref: '#/components/schemas/Parameter'
-    DataProviderCollection:
-      type: object
-      properties:
-        dataproviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataProvider'
     Parameter:
       type: object
       properties:
@@ -137,6 +130,13 @@ components:
           items:
             type: string
           description: Default parameter values
+    ParameterCollection:
+      type: object
+      properties:
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Parameter'
     Report:
       type: object
       properties:

@@ -29,7 +29,9 @@
     "sap-bi-tasks-api-openapi.yml",
     "sap-bi-views-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -38,14 +40,16 @@
     "sap-bi-businessobjects-platform-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "sap-bi-bw4hana-odata-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "sap-bi-datasphere-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tag 'Users' spans 2 source specs (sap-bi-analytics-cloud-openapi.yml, sap-bi-businessobjects-platform-openapi.yml): per-path servers applied"
+    "tag 'Users' spans 2 source specs (sap-bi-analytics-cloud-openapi.yml, sap-bi-businessobjects-platform-openapi.yml): per-path servers applied",
+    "superseded outputs removed: sap-bi-dataflows-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 23 total)"
   ],
   "skipped": [
     "sap-bi-catalog-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "sap-bi-connections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "sap-bi-data-flows-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "sap-bi-data-import-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "sap-bi-data-store-objects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-bi-dataflows-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "sap-bi-folders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "sap-bi-infoobjects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "sap-bi-infoproviders-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -93,47 +93,26 @@ paths:
         '404':
           description: Query not found
 components:
-  parameters:
-    formatParam:
-      name: $format
-      in: query
-      description: Response format
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
-    skipParam:
-      name: $skip
-      in: query
-      description: Number of results to skip for pagination (OData)
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    filterParam:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    queryName:
-      name: queryName
-      in: path
-      required: true
-      description: BW query technical name
-      schema:
-        type: string
-    topParam:
-      name: $top
-      in: query
-      description: Maximum number of results to return (OData)
-      schema:
-        type: integer
-        default: 100
-        minimum: 1
   schemas:
+    BwQuery:
+      type: object
+      properties:
+        QueryName:
+          type: string
+          description: Technical name of the query
+        QueryDescription:
+          type: string
+          description: Description of the query
+        InfoProviderName:
+          type: string
+          description: Underlying InfoProvider
+        CreatedBy:
+          type: string
+          description: User who created the query
+        ChangedAt:
+          type: string
+          format: date-time
+          description: Last modification timestamp
     QueryCollection:
       type: object
       properties:
@@ -173,25 +152,46 @@ components:
                 type: string
                 description: Variable value
           description: Query variable values
-    BwQuery:
-      type: object
-      properties:
-        QueryName:
-          type: string
-          description: Technical name of the query
-        QueryDescription:
-          type: string
-          description: Description of the query
-        InfoProviderName:
-          type: string
-          description: Underlying InfoProvider
-        CreatedBy:
-          type: string
-          description: User who created the query
-        ChangedAt:
-          type: string
-          format: date-time
-          description: Last modification timestamp
+  parameters:
+    filterParam:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    skipParam:
+      name: $skip
+      in: query
+      description: Number of results to skip for pagination (OData)
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    formatParam:
+      name: $format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+    queryName:
+      name: queryName
+      in: path
+      required: true
+      description: BW query technical name
+      schema:
+        type: string
+    topParam:
+      name: $top
+      in: query
+      description: Maximum number of results to return (OData)
+      schema:
+        type: integer
+        default: 100
+        minimum: 1
   securitySchemes:
     basicAuth:
       type: http

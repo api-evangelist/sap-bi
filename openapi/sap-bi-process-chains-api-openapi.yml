@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: SAP Business Intelligence SAP BW/4HANA OData Process Chains API
+  title: SAP Business Intelligence SAP BW/4HANA OData Process Chains…
   description: OData services for accessing SAP BW/4HANA data warehouse content and metadata. Provides programmatic access to query InfoProviders, manage data store objects, browse metadata, and execute analytical queries against the BW/4HANA data warehouse.
   version: '1.0'
   contact:
@@ -85,41 +85,23 @@ paths:
         '404':
           description: Process chain not found
 components:
-  parameters:
-    formatParam:
-      name: $format
-      in: query
-      description: Response format
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
-    skipParam:
-      name: $skip
-      in: query
-      description: Number of results to skip for pagination (OData)
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    chainId:
-      name: chainId
-      in: path
-      required: true
-      description: Process chain identifier
-      schema:
-        type: string
-    topParam:
-      name: $top
-      in: query
-      description: Maximum number of results to return (OData)
-      schema:
-        type: integer
-        default: 100
-        minimum: 1
   schemas:
+    ProcessChainRun:
+      type: object
+      properties:
+        RunId:
+          type: string
+          description: Execution run identifier
+        Status:
+          type: string
+          enum:
+          - Started
+          - Running
+          description: Initial run status
+        StartTime:
+          type: string
+          format: date-time
+          description: When the execution started
     ProcessChain:
       type: object
       properties:
@@ -146,22 +128,6 @@ components:
           type: string
           format: date-time
           description: When the chain last ran
-    ProcessChainRun:
-      type: object
-      properties:
-        RunId:
-          type: string
-          description: Execution run identifier
-        Status:
-          type: string
-          enum:
-          - Started
-          - Running
-          description: Initial run status
-        StartTime:
-          type: string
-          format: date-time
-          description: When the execution started
     ProcessChainCollection:
       type: object
       properties:
@@ -172,6 +138,40 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/ProcessChain'
+  parameters:
+    chainId:
+      name: chainId
+      in: path
+      required: true
+      description: Process chain identifier
+      schema:
+        type: string
+    skipParam:
+      name: $skip
+      in: query
+      description: Number of results to skip for pagination (OData)
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    formatParam:
+      name: $format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+    topParam:
+      name: $top
+      in: query
+      description: Maximum number of results to return (OData)
+      schema:
+        type: integer
+        default: 100
+        minimum: 1
   securitySchemes:
     basicAuth:
       type: http

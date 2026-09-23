@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: SAP Business Intelligence SAP BusinessObjects BI Platform REST Servers API
+  title: SAP Business Intelligence SAP BusinessObjects BI Platform…
   description: RESTful web services for SAP BusinessObjects BI Platform administration, content management, scheduling, and reporting. Provides access to manage reports, users, folders, server infrastructure, and content within the BusinessObjects environment via the biprws endpoint.
   version: '1.0'
   contact:
@@ -61,13 +61,6 @@ paths:
           description: Server not found
 components:
   schemas:
-    ServerCollection:
-      type: object
-      properties:
-        servers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Server'
     Server:
       type: object
       properties:
@@ -97,6 +90,13 @@ components:
         pid:
           type: integer
           description: Process ID
+    ServerCollection:
+      type: object
+      properties:
+        servers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Server'
   parameters:
     serverId:
       name: serverId

@@ -17,7 +17,7 @@ servers:
 security:
 - oauth2: []
 tags:
-- name: Data Flows
+- name: Dataflows
   description: Manage data replication and transformation flows
 paths:
   /spaces/{spaceId}/dataflows:
@@ -26,7 +26,7 @@ paths:
       summary: SAP Business Intelligence List data flows
       description: Retrieve all data flows configured in a specific space.
       tags:
-      - Data Flows
+      - Dataflows
       parameters:
       - $ref: '#/components/parameters/spaceId'
       responses:
@@ -46,7 +46,7 @@ paths:
       summary: SAP Business Intelligence Get a data flow
       description: Retrieve details of a specific data flow.
       tags:
-      - Data Flows
+      - Dataflows
       parameters:
       - $ref: '#/components/parameters/spaceId'
       - $ref: '#/components/parameters/dataFlowId'
@@ -67,7 +67,7 @@ paths:
       summary: SAP Business Intelligence Run a data flow
       description: Trigger execution of a data flow to replicate or transform data.
       tags:
-      - Data Flows
+      - Dataflows
       parameters:
       - $ref: '#/components/parameters/spaceId'
       - $ref: '#/components/parameters/dataFlowId'
@@ -99,6 +99,13 @@ components:
       schema:
         type: string
   schemas:
+    DataFlowCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFlow'
     DataFlow:
       type: object
       properties:
@@ -141,13 +148,6 @@ components:
           - Failed
           - Running
           description: Status of the last execution
-    DataFlowCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataFlow'
     TaskRun:
       type: object
       properties:

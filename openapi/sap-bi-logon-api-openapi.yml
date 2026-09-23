@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: SAP Business Intelligence SAP BusinessObjects BI Platform REST Logon API
+  title: SAP Business Intelligence SAP BusinessObjects BI Platform…
   description: RESTful web services for SAP BusinessObjects BI Platform administration, content management, scheduling, and reporting. Provides access to manage reports, users, folders, server infrastructure, and content within the BusinessObjects environment via the biprws endpoint.
   version: '1.0'
   contact:

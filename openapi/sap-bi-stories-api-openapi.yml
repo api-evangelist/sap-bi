@@ -152,6 +152,31 @@ paths:
         '404':
           description: Story not found
 components:
+  parameters:
+    storyId:
+      name: storyId
+      in: path
+      required: true
+      description: Story unique identifier
+      schema:
+        type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        minimum: 1
+        maximum: 1000
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   schemas:
     StoryCollection:
       type: object
@@ -163,42 +188,20 @@ components:
         totalCount:
           type: integer
           description: Total number of stories available
-    Page:
+    CreateStoryRequest:
       type: object
+      required:
+      - name
       properties:
-        id:
-          type: string
-          description: Page unique identifier
         name:
           type: string
-          description: Page name
-        widgets:
-          type: array
-          items:
-            $ref: '#/components/schemas/Widget'
-          description: Widgets on the page
-    Widget:
-      type: object
-      properties:
-        id:
+          description: Name for the new story
+        description:
           type: string
-          description: Widget unique identifier
-        type:
+          description: Description for the story
+        folderId:
           type: string
-          enum:
-          - Chart
-          - Table
-          - Filter
-          - Text
-          - Image
-          - Shape
-          description: Type of widget
-        name:
-          type: string
-          description: Widget display name
-        modelId:
-          type: string
-          description: Associated model ID
+          description: Target folder ID
     Story:
       type: object
       properties:
@@ -239,20 +242,20 @@ components:
           items:
             $ref: '#/components/schemas/Page'
           description: Pages within the story
-    CreateStoryRequest:
+    Page:
       type: object
-      required:
-      - name
       properties:
+        id:
+          type: string
+          description: Page unique identifier
         name:
           type: string
-          description: Name for the new story
-        description:
-          type: string
-          description: Description for the story
-        folderId:
-          type: string
-          description: Target folder ID
+          description: Page name
+        widgets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Widget'
+          description: Widgets on the page
     UpdateStoryRequest:
       type: object
       properties:
@@ -265,31 +268,28 @@ components:
         folderId:
           type: string
           description: Updated folder ID
-  parameters:
-    storyId:
-      name: storyId
-      in: path
-      required: true
-      description: Story unique identifier
-      schema:
-        type: string
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        minimum: 1
-        maximum: 1000
+    Widget:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Widget unique identifier
+        type:
+          type: string
+          enum:
+          - Chart
+          - Table
+          - Filter
+          - Text
+          - Image
+          - Shape
+          description: Type of widget
+        name:
+          type: string
+          description: Widget display name
+        modelId:
+          type: string
+          description: Associated model ID
   securitySchemes:
     oauth2:
       type: oauth2
