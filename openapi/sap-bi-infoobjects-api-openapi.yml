@@ -133,16 +133,6 @@ paths:
           description: Parent InfoObject not found
 components:
   schemas:
-    InfoObjectCollection:
-      type: object
-      properties:
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/InfoObject'
-        totalCount:
-          type: integer
-          description: Total number of matching objects
     InfoObject:
       type: object
       properties:
@@ -184,14 +174,17 @@ components:
         SI_DESCRIPTION:
           type: string
           description: Updated description
+    InfoObjectCollection:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/InfoObject'
+        totalCount:
+          type: integer
+          description: Total number of matching objects
   parameters:
-    objectId:
-      name: objectId
-      in: path
-      required: true
-      description: InfoObject unique identifier (CUID or SI_ID)
-      schema:
-        type: string
     limitParam:
       name: limit
       in: query
@@ -201,6 +194,13 @@ components:
         default: 50
         minimum: 1
         maximum: 1000
+    objectId:
+      name: objectId
+      in: path
+      required: true
+      description: InfoObject unique identifier (CUID or SI_ID)
+      schema:
+        type: string
     offsetParam:
       name: offset
       in: query

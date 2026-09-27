@@ -94,6 +94,21 @@ paths:
           description: Query not found
 components:
   schemas:
+    QueryExecutionRequest:
+      type: object
+      properties:
+        Variables:
+          type: array
+          items:
+            type: object
+            properties:
+              VariableName:
+                type: string
+                description: Variable technical name
+              Value:
+                type: string
+                description: Variable value
+          description: Query variable values
     BwQuery:
       type: object
       properties:
@@ -113,16 +128,6 @@ components:
           type: string
           format: date-time
           description: Last modification timestamp
-    QueryCollection:
-      type: object
-      properties:
-        d:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                $ref: '#/components/schemas/BwQuery'
     QueryResult:
       type: object
       properties:
@@ -137,26 +142,22 @@ components:
             __count:
               type: string
               description: Total result count
-    QueryExecutionRequest:
+    QueryCollection:
       type: object
       properties:
-        Variables:
-          type: array
-          items:
-            type: object
-            properties:
-              VariableName:
-                type: string
-                description: Variable technical name
-              Value:
-                type: string
-                description: Variable value
-          description: Query variable values
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/BwQuery'
   parameters:
-    filterParam:
-      name: $filter
-      in: query
-      description: OData filter expression
+    queryName:
+      name: queryName
+      in: path
+      required: true
+      description: BW query technical name
       schema:
         type: string
     skipParam:
@@ -167,21 +168,10 @@ components:
         type: integer
         default: 0
         minimum: 0
-    formatParam:
-      name: $format
+    filterParam:
+      name: $filter
       in: query
-      description: Response format
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
-    queryName:
-      name: queryName
-      in: path
-      required: true
-      description: BW query technical name
+      description: OData filter expression
       schema:
         type: string
     topParam:
@@ -192,6 +182,16 @@ components:
         type: integer
         default: 100
         minimum: 1
+    formatParam:
+      name: $format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
   securitySchemes:
     basicAuth:
       type: http

@@ -153,13 +153,6 @@ paths:
           description: Story not found
 components:
   parameters:
-    storyId:
-      name: storyId
-      in: path
-      required: true
-      description: Story unique identifier
-      schema:
-        type: string
     limitParam:
       name: limit
       in: query
@@ -169,6 +162,13 @@ components:
         default: 50
         minimum: 1
         maximum: 1000
+    storyId:
+      name: storyId
+      in: path
+      required: true
+      description: Story unique identifier
+      schema:
+        type: string
     offsetParam:
       name: offset
       in: query
@@ -178,30 +178,18 @@ components:
         default: 0
         minimum: 0
   schemas:
-    StoryCollection:
+    UpdateStoryRequest:
       type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Story'
-        totalCount:
-          type: integer
-          description: Total number of stories available
-    CreateStoryRequest:
-      type: object
-      required:
-      - name
       properties:
         name:
           type: string
-          description: Name for the new story
+          description: Updated name
         description:
           type: string
-          description: Description for the story
+          description: Updated description
         folderId:
           type: string
-          description: Target folder ID
+          description: Updated folder ID
     Story:
       type: object
       properties:
@@ -256,18 +244,6 @@ components:
           items:
             $ref: '#/components/schemas/Widget'
           description: Widgets on the page
-    UpdateStoryRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Updated name
-        description:
-          type: string
-          description: Updated description
-        folderId:
-          type: string
-          description: Updated folder ID
     Widget:
       type: object
       properties:
@@ -290,6 +266,30 @@ components:
         modelId:
           type: string
           description: Associated model ID
+    StoryCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Story'
+        totalCount:
+          type: integer
+          description: Total number of stories available
+    CreateStoryRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name for the new story
+        description:
+          type: string
+          description: Description for the story
+        folderId:
+          type: string
+          description: Target folder ID
   securitySchemes:
     oauth2:
       type: oauth2

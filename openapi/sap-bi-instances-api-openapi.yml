@@ -94,13 +94,6 @@ paths:
           description: InfoObject not found
 components:
   schemas:
-    ScheduleCollection:
-      type: object
-      properties:
-        schedules:
-          type: array
-          items:
-            $ref: '#/components/schemas/Schedule'
     Instance:
       type: object
       properties:
@@ -130,6 +123,56 @@ components:
         format:
           type: string
           description: Output format
+    CreateScheduleRequest:
+      type: object
+      required:
+      - name
+      - recurrenceType
+      properties:
+        name:
+          type: string
+          description: Schedule name
+        recurrenceType:
+          type: string
+          enum:
+          - Once
+          - Daily
+          - Weekly
+          - Monthly
+          description: Recurrence pattern
+        startTime:
+          type: string
+          format: date-time
+          description: When the schedule starts
+        endTime:
+          type: string
+          format: date-time
+          description: When the schedule ends
+        format:
+          type: string
+          enum:
+          - PDF
+          - Excel
+          - CSV
+          - HTML
+          description: Output format
+    InstanceCollection:
+      type: object
+      properties:
+        instances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Instance'
+        totalCount:
+          type: integer
+          description: Total number of instances
+    ScheduleCollection:
+      type: object
+      properties:
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schedule'
     Schedule:
       type: object
       properties:
@@ -166,57 +209,7 @@ components:
           - CSV
           - HTML
           description: Output format
-    InstanceCollection:
-      type: object
-      properties:
-        instances:
-          type: array
-          items:
-            $ref: '#/components/schemas/Instance'
-        totalCount:
-          type: integer
-          description: Total number of instances
-    CreateScheduleRequest:
-      type: object
-      required:
-      - name
-      - recurrenceType
-      properties:
-        name:
-          type: string
-          description: Schedule name
-        recurrenceType:
-          type: string
-          enum:
-          - Once
-          - Daily
-          - Weekly
-          - Monthly
-          description: Recurrence pattern
-        startTime:
-          type: string
-          format: date-time
-          description: When the schedule starts
-        endTime:
-          type: string
-          format: date-time
-          description: When the schedule ends
-        format:
-          type: string
-          enum:
-          - PDF
-          - Excel
-          - CSV
-          - HTML
-          description: Output format
   parameters:
-    objectId:
-      name: objectId
-      in: path
-      required: true
-      description: InfoObject unique identifier (CUID or SI_ID)
-      schema:
-        type: string
     limitParam:
       name: limit
       in: query
@@ -226,6 +219,13 @@ components:
         default: 50
         minimum: 1
         maximum: 1000
+    objectId:
+      name: objectId
+      in: path
+      required: true
+      description: InfoObject unique identifier (CUID or SI_ID)
+      schema:
+        type: string
     offsetParam:
       name: offset
       in: query

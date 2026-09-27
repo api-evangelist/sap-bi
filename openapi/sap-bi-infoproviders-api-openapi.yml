@@ -112,56 +112,6 @@ paths:
           description: InfoProvider not found
 components:
   schemas:
-    KeyFigure:
-      type: object
-      properties:
-        KeyFigureName:
-          type: string
-          description: Technical name of the key figure
-        KeyFigureDescription:
-          type: string
-          description: Description of the key figure
-        AggregationType:
-          type: string
-          enum:
-          - SUM
-          - MIN
-          - MAX
-          - AVG
-          - COUNT
-          - NOP
-          description: Aggregation behavior
-        DataType:
-          type: string
-          description: Data type of the key figure
-        UnitOfMeasure:
-          type: string
-          description: Unit of measure or currency
-    BwDimension:
-      type: object
-      properties:
-        DimensionName:
-          type: string
-          description: Technical name of the dimension
-        DimensionDescription:
-          type: string
-          description: Description of the dimension
-        DimensionType:
-          type: string
-          description: Dimension type
-        InfoObjectName:
-          type: string
-          description: Associated InfoObject technical name
-    KeyFigureCollection:
-      type: object
-      properties:
-        d:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                $ref: '#/components/schemas/KeyFigure'
     BwDimensionCollection:
       type: object
       properties:
@@ -172,6 +122,16 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/BwDimension'
+    InfoProviderCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/InfoProvider'
     InfoProvider:
       type: object
       properties:
@@ -206,7 +166,22 @@ components:
           type: string
           format: date-time
           description: Last change timestamp
-    InfoProviderCollection:
+    BwDimension:
+      type: object
+      properties:
+        DimensionName:
+          type: string
+          description: Technical name of the dimension
+        DimensionDescription:
+          type: string
+          description: Description of the dimension
+        DimensionType:
+          type: string
+          description: Dimension type
+        InfoObjectName:
+          type: string
+          description: Associated InfoObject technical name
+    KeyFigureCollection:
       type: object
       properties:
         d:
@@ -215,7 +190,32 @@ components:
             results:
               type: array
               items:
-                $ref: '#/components/schemas/InfoProvider'
+                $ref: '#/components/schemas/KeyFigure'
+    KeyFigure:
+      type: object
+      properties:
+        KeyFigureName:
+          type: string
+          description: Technical name of the key figure
+        KeyFigureDescription:
+          type: string
+          description: Description of the key figure
+        AggregationType:
+          type: string
+          enum:
+          - SUM
+          - MIN
+          - MAX
+          - AVG
+          - COUNT
+          - NOP
+          description: Aggregation behavior
+        DataType:
+          type: string
+          description: Data type of the key figure
+        UnitOfMeasure:
+          type: string
+          description: Unit of measure or currency
   parameters:
     selectParam:
       name: $select
@@ -237,6 +237,21 @@ components:
         type: integer
         default: 0
         minimum: 0
+    topParam:
+      name: $top
+      in: query
+      description: Maximum number of results to return (OData)
+      schema:
+        type: integer
+        default: 100
+        minimum: 1
+    infoProviderName:
+      name: infoProviderName
+      in: path
+      required: true
+      description: InfoProvider technical name
+      schema:
+        type: string
     formatParam:
       name: $format
       in: query
@@ -247,21 +262,6 @@ components:
         - json
         - xml
         default: json
-    infoProviderName:
-      name: infoProviderName
-      in: path
-      required: true
-      description: InfoProvider technical name
-      schema:
-        type: string
-    topParam:
-      name: $top
-      in: query
-      description: Maximum number of results to return (OData)
-      schema:
-        type: integer
-        default: 100
-        minimum: 1
   securitySchemes:
     basicAuth:
       type: http

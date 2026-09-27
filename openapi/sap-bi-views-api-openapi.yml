@@ -83,48 +83,42 @@ paths:
         '404':
           description: View not found
 components:
-  parameters:
-    spaceId:
-      name: spaceId
-      in: path
-      required: true
-      description: Space unique identifier
-      schema:
-        type: string
-    viewId:
-      name: viewId
-      in: path
-      required: true
-      description: View unique identifier
-      schema:
-        type: string
   schemas:
-    ViewCollection:
+    TaskRun:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/View'
-    ViewColumn:
-      type: object
-      properties:
-        name:
+        id:
           type: string
-          description: Column name
-        description:
-          type: string
-          description: Column description
-        dataType:
-          type: string
-          description: Column data type
-        semanticType:
+          description: Task run unique identifier
+        type:
           type: string
           enum:
-          - Dimension
-          - Measure
-          - Attribute
-          description: Semantic role of the column
+          - DataFlowExecution
+          - ViewDeployment
+          - DataReplication
+          description: Task type
+        status:
+          type: string
+          enum:
+          - Pending
+          - Running
+          - Completed
+          - Failed
+          description: Task execution status
+        startTime:
+          type: string
+          format: date-time
+          description: When the task started
+        endTime:
+          type: string
+          format: date-time
+          description: When the task completed
+        rowsProcessed:
+          type: integer
+          description: Number of rows processed
+        errorMessage:
+          type: string
+          description: Error message if the task failed
     View:
       type: object
       properties:
@@ -166,41 +160,47 @@ components:
           type: string
           format: date-time
           description: When the view was last modified
-    TaskRun:
+    ViewColumn:
       type: object
       properties:
-        id:
+        name:
           type: string
-          description: Task run unique identifier
-        type:
+          description: Column name
+        description:
+          type: string
+          description: Column description
+        dataType:
+          type: string
+          description: Column data type
+        semanticType:
           type: string
           enum:
-          - DataFlowExecution
-          - ViewDeployment
-          - DataReplication
-          description: Task type
-        status:
-          type: string
-          enum:
-          - Pending
-          - Running
-          - Completed
-          - Failed
-          description: Task execution status
-        startTime:
-          type: string
-          format: date-time
-          description: When the task started
-        endTime:
-          type: string
-          format: date-time
-          description: When the task completed
-        rowsProcessed:
-          type: integer
-          description: Number of rows processed
-        errorMessage:
-          type: string
-          description: Error message if the task failed
+          - Dimension
+          - Measure
+          - Attribute
+          description: Semantic role of the column
+    ViewCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/View'
+  parameters:
+    spaceId:
+      name: spaceId
+      in: path
+      required: true
+      description: Space unique identifier
+      schema:
+        type: string
+    viewId:
+      name: viewId
+      in: path
+      required: true
+      description: View unique identifier
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

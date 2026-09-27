@@ -166,6 +166,15 @@ paths:
           description: Model not found
 components:
   parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        minimum: 1
+        maximum: 1000
     modelId:
       name: modelId
       in: path
@@ -181,110 +190,7 @@ components:
         type: integer
         default: 0
         minimum: 0
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        minimum: 1
-        maximum: 1000
   schemas:
-    ModelCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Model'
-        totalCount:
-          type: integer
-          description: Total number of models available
-    MeasureCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Measure'
-    Dimension:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Dimension unique identifier
-        name:
-          type: string
-          description: Dimension name
-        description:
-          type: string
-          description: Dimension description
-        type:
-          type: string
-          enum:
-          - Generic
-          - Account
-          - Date
-          - Organization
-          - Version
-          description: Dimension type
-    Measure:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Measure unique identifier
-        name:
-          type: string
-          description: Measure name
-        description:
-          type: string
-          description: Measure description
-        aggregationType:
-          type: string
-          enum:
-          - SUM
-          - COUNT
-          - AVG
-          - MIN
-          - MAX
-          description: Aggregation type for the measure
-    DimensionCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Dimension'
-    CreateModelRequest:
-      type: object
-      required:
-      - name
-      - type
-      properties:
-        name:
-          type: string
-          description: Name for the new model
-        description:
-          type: string
-          description: Description for the model
-        type:
-          type: string
-          enum:
-          - Planning
-          - Analytic
-          - Dataset
-          description: Model type
-    UpdateModelRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Updated name
-        description:
-          type: string
-          description: Updated description
     Model:
       type: object
       properties:
@@ -325,6 +231,100 @@ components:
           items:
             $ref: '#/components/schemas/Measure'
           description: Measures in the model
+    UpdateModelRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name
+        description:
+          type: string
+          description: Updated description
+    ModelCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+        totalCount:
+          type: integer
+          description: Total number of models available
+    MeasureCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+    CreateModelRequest:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: Name for the new model
+        description:
+          type: string
+          description: Description for the model
+        type:
+          type: string
+          enum:
+          - Planning
+          - Analytic
+          - Dataset
+          description: Model type
+    Measure:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Measure unique identifier
+        name:
+          type: string
+          description: Measure name
+        description:
+          type: string
+          description: Measure description
+        aggregationType:
+          type: string
+          enum:
+          - SUM
+          - COUNT
+          - AVG
+          - MIN
+          - MAX
+          description: Aggregation type for the measure
+    Dimension:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Dimension unique identifier
+        name:
+          type: string
+          description: Dimension name
+        description:
+          type: string
+          description: Dimension description
+        type:
+          type: string
+          enum:
+          - Generic
+          - Account
+          - Date
+          - Organization
+          - Version
+          description: Dimension type
+    DimensionCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dimension'
   securitySchemes:
     oauth2:
       type: oauth2
