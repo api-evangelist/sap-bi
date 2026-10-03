@@ -127,74 +127,7 @@ paths:
         '404':
           description: Space not found
 components:
-  parameters:
-    spaceId:
-      name: spaceId
-      in: path
-      required: true
-      description: Space unique identifier
-      schema:
-        type: string
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        minimum: 1
-        maximum: 1000
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
   schemas:
-    CreateSpaceRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name for the new space
-        description:
-          type: string
-          description: Description for the space
-        diskStorageQuota:
-          type: integer
-          description: Disk storage quota in GB
-        memoryStorageQuota:
-          type: integer
-          description: In-memory storage quota in GB
-    SpaceCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Space'
-        totalCount:
-          type: integer
-          description: Total number of spaces
-    UpdateSpaceRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Updated name
-        description:
-          type: string
-          description: Updated description
-        diskStorageQuota:
-          type: integer
-          description: Updated disk storage quota in GB
-        memoryStorageQuota:
-          type: integer
-          description: Updated in-memory storage quota in GB
     Space:
       type: object
       properties:
@@ -235,6 +168,38 @@ components:
           type: string
           format: date-time
           description: When the space was last modified
+    CreateSpaceRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name for the new space
+        description:
+          type: string
+          description: Description for the space
+        diskStorageQuota:
+          type: integer
+          description: Disk storage quota in GB
+        memoryStorageQuota:
+          type: integer
+          description: In-memory storage quota in GB
+    UpdateSpaceRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name
+        description:
+          type: string
+          description: Updated description
+        diskStorageQuota:
+          type: integer
+          description: Updated disk storage quota in GB
+        memoryStorageQuota:
+          type: integer
+          description: Updated in-memory storage quota in GB
     SpaceMember:
       type: object
       properties:
@@ -248,6 +213,41 @@ components:
           - Modeler
           - Viewer
           description: Member role in the space
+    SpaceCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Space'
+        totalCount:
+          type: integer
+          description: Total number of spaces
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        minimum: 1
+        maximum: 1000
+    spaceId:
+      name: spaceId
+      in: path
+      required: true
+      description: Space unique identifier
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

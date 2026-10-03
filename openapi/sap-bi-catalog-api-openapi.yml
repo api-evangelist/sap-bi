@@ -65,32 +65,17 @@ paths:
         '404':
           description: Catalog asset not found
 components:
-  parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        minimum: 1
-        maximum: 1000
-    assetId:
-      name: assetId
-      in: path
-      required: true
-      description: Catalog asset unique identifier
-      schema:
-        type: string
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
   schemas:
+    CatalogAssetCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CatalogAsset'
+        totalCount:
+          type: integer
+          description: Total number of catalog assets
     CatalogAsset:
       type: object
       properties:
@@ -126,16 +111,31 @@ components:
           type: string
           format: date-time
           description: When the asset was cataloged
-    CatalogAssetCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/CatalogAsset'
-        totalCount:
-          type: integer
-          description: Total number of catalog assets
+  parameters:
+    assetId:
+      name: assetId
+      in: path
+      required: true
+      description: Catalog asset unique identifier
+      schema:
+        type: string
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        minimum: 1
+        maximum: 1000
   securitySchemes:
     oauth2:
       type: oauth2

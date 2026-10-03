@@ -89,22 +89,29 @@ paths:
         '404':
           description: Import job not found
 components:
+  parameters:
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      description: Import job unique identifier
+      schema:
+        type: string
+    modelId:
+      name: modelId
+      in: path
+      required: true
+      description: Model unique identifier
+      schema:
+        type: string
   schemas:
-    CreateImportJobRequest:
+    ImportJobCollection:
       type: object
-      required:
-      - importType
       properties:
-        importType:
-          type: string
-          enum:
-          - Replace
-          - Append
-          - Update
-          description: How data should be imported
-        mapping:
-          type: object
-          description: Column-to-dimension/measure mapping
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportJob'
     ImportJob:
       type: object
       properties:
@@ -140,28 +147,21 @@ components:
         errorMessage:
           type: string
           description: Error message if the job failed
-    ImportJobCollection:
+    CreateImportJobRequest:
       type: object
+      required:
+      - importType
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImportJob'
-  parameters:
-    modelId:
-      name: modelId
-      in: path
-      required: true
-      description: Model unique identifier
-      schema:
-        type: string
-    jobId:
-      name: jobId
-      in: path
-      required: true
-      description: Import job unique identifier
-      schema:
-        type: string
+        importType:
+          type: string
+          enum:
+          - Replace
+          - Append
+          - Update
+          description: How data should be imported
+        mapping:
+          type: object
+          description: Column-to-dimension/measure mapping
   securitySchemes:
     oauth2:
       type: oauth2

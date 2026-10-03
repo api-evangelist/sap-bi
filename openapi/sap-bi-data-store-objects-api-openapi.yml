@@ -107,35 +107,6 @@ components:
               items:
                 $ref: '#/components/schemas/DataStoreObject'
   parameters:
-    filterParam:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    skipParam:
-      name: $skip
-      in: query
-      description: Number of results to skip for pagination (OData)
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    topParam:
-      name: $top
-      in: query
-      description: Maximum number of results to return (OData)
-      schema:
-        type: integer
-        default: 100
-        minimum: 1
-    adsoName:
-      name: adsoName
-      in: path
-      required: true
-      description: Advanced data store object technical name
-      schema:
-        type: string
     formatParam:
       name: $format
       in: query
@@ -146,6 +117,35 @@ components:
         - json
         - xml
         default: json
+    topParam:
+      name: $top
+      in: query
+      description: Maximum number of results to return (OData)
+      schema:
+        type: integer
+        default: 100
+        minimum: 1
+    filterParam:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    adsoName:
+      name: adsoName
+      in: path
+      required: true
+      description: Advanced data store object technical name
+      schema:
+        type: string
+    skipParam:
+      name: $skip
+      in: query
+      description: Number of results to skip for pagination (OData)
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   securitySchemes:
     basicAuth:
       type: http

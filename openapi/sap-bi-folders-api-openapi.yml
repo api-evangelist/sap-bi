@@ -61,15 +61,6 @@ paths:
           description: Folder not found
 components:
   parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        minimum: 1
-        maximum: 1000
     folderId:
       name: folderId
       in: path
@@ -85,6 +76,15 @@ components:
         type: integer
         default: 0
         minimum: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        minimum: 1
+        maximum: 1000
   schemas:
     Folder:
       type: object

@@ -84,52 +84,15 @@ paths:
         '404':
           description: Document not found
 components:
+  parameters:
+    documentId:
+      name: documentId
+      in: path
+      required: true
+      description: Report document unique identifier
+      schema:
+        type: string
   schemas:
-    Parameter:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Parameter identifier
-        name:
-          type: string
-          description: Parameter name
-        type:
-          type: string
-          description: Parameter data type
-        optional:
-          type: boolean
-          description: Whether the parameter is optional
-        allowMultipleValues:
-          type: boolean
-          description: Whether multiple values can be provided
-        defaultValues:
-          type: array
-          items:
-            type: string
-          description: Default parameter values
-    DataProviderCollection:
-      type: object
-      properties:
-        dataproviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataProvider'
-    DataProvider:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Data provider identifier
-        name:
-          type: string
-          description: Data provider name
-        dataSourceType:
-          type: string
-          description: Type of data source
-        query:
-          type: string
-          description: Query text
     Report:
       type: object
       properties:
@@ -173,14 +136,51 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Parameter'
-  parameters:
-    documentId:
-      name: documentId
-      in: path
-      required: true
-      description: Report document unique identifier
-      schema:
-        type: string
+    DataProvider:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Data provider identifier
+        name:
+          type: string
+          description: Data provider name
+        dataSourceType:
+          type: string
+          description: Type of data source
+        query:
+          type: string
+          description: Query text
+    DataProviderCollection:
+      type: object
+      properties:
+        dataproviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataProvider'
+    Parameter:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Parameter identifier
+        name:
+          type: string
+          description: Parameter name
+        type:
+          type: string
+          description: Parameter data type
+        optional:
+          type: boolean
+          description: Whether the parameter is optional
+        allowMultipleValues:
+          type: boolean
+          description: Whether multiple values can be provided
+        defaultValues:
+          type: array
+          items:
+            type: string
+          description: Default parameter values
   securitySchemes:
     logonToken:
       type: apiKey

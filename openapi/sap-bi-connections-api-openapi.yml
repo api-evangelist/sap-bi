@@ -105,22 +105,14 @@ paths:
         '404':
           description: Connection not found
 components:
-  parameters:
-    spaceId:
-      name: spaceId
-      in: path
-      required: true
-      description: Space unique identifier
-      schema:
-        type: string
-    connectionId:
-      name: connectionId
-      in: path
-      required: true
-      description: Connection unique identifier
-      schema:
-        type: string
   schemas:
+    ConnectionCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Connection'
     CreateConnectionRequest:
       type: object
       required:
@@ -176,13 +168,21 @@ components:
           type: string
           format: date-time
           description: When the connection was created
-    ConnectionCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Connection'
+  parameters:
+    connectionId:
+      name: connectionId
+      in: path
+      required: true
+      description: Connection unique identifier
+      schema:
+        type: string
+    spaceId:
+      name: spaceId
+      in: path
+      required: true
+      description: Space unique identifier
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

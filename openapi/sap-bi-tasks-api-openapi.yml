@@ -70,6 +70,16 @@ paths:
           description: Task not found
 components:
   schemas:
+    TaskRunCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskRun'
+        totalCount:
+          type: integer
+          description: Total number of task runs
     TaskRun:
       type: object
       properties:
@@ -105,26 +115,7 @@ components:
         errorMessage:
           type: string
           description: Error message if the task failed
-    TaskRunCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaskRun'
-        totalCount:
-          type: integer
-          description: Total number of task runs
   parameters:
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        minimum: 1
-        maximum: 1000
     offsetParam:
       name: offset
       in: query
@@ -140,6 +131,15 @@ components:
       description: Task execution unique identifier
       schema:
         type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        minimum: 1
+        maximum: 1000
   securitySchemes:
     oauth2:
       type: oauth2

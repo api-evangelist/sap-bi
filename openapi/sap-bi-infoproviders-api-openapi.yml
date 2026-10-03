@@ -111,8 +111,54 @@ paths:
         '404':
           description: InfoProvider not found
 components:
+  parameters:
+    infoProviderName:
+      name: infoProviderName
+      in: path
+      required: true
+      description: InfoProvider technical name
+      schema:
+        type: string
+    formatParam:
+      name: $format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+    topParam:
+      name: $top
+      in: query
+      description: Maximum number of results to return (OData)
+      schema:
+        type: integer
+        default: 100
+        minimum: 1
+    filterParam:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    selectParam:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to return
+      schema:
+        type: string
+    skipParam:
+      name: $skip
+      in: query
+      description: Number of results to skip for pagination (OData)
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   schemas:
-    BwDimensionCollection:
+    KeyFigureCollection:
       type: object
       properties:
         d:
@@ -121,7 +167,32 @@ components:
             results:
               type: array
               items:
-                $ref: '#/components/schemas/BwDimension'
+                $ref: '#/components/schemas/KeyFigure'
+    KeyFigure:
+      type: object
+      properties:
+        KeyFigureName:
+          type: string
+          description: Technical name of the key figure
+        KeyFigureDescription:
+          type: string
+          description: Description of the key figure
+        AggregationType:
+          type: string
+          enum:
+          - SUM
+          - MIN
+          - MAX
+          - AVG
+          - COUNT
+          - NOP
+          description: Aggregation behavior
+        DataType:
+          type: string
+          description: Data type of the key figure
+        UnitOfMeasure:
+          type: string
+          description: Unit of measure or currency
     InfoProviderCollection:
       type: object
       properties:
@@ -166,6 +237,16 @@ components:
           type: string
           format: date-time
           description: Last change timestamp
+    BwDimensionCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/BwDimension'
     BwDimension:
       type: object
       properties:
@@ -181,87 +262,6 @@ components:
         InfoObjectName:
           type: string
           description: Associated InfoObject technical name
-    KeyFigureCollection:
-      type: object
-      properties:
-        d:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                $ref: '#/components/schemas/KeyFigure'
-    KeyFigure:
-      type: object
-      properties:
-        KeyFigureName:
-          type: string
-          description: Technical name of the key figure
-        KeyFigureDescription:
-          type: string
-          description: Description of the key figure
-        AggregationType:
-          type: string
-          enum:
-          - SUM
-          - MIN
-          - MAX
-          - AVG
-          - COUNT
-          - NOP
-          description: Aggregation behavior
-        DataType:
-          type: string
-          description: Data type of the key figure
-        UnitOfMeasure:
-          type: string
-          description: Unit of measure or currency
-  parameters:
-    selectParam:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to return
-      schema:
-        type: string
-    filterParam:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    skipParam:
-      name: $skip
-      in: query
-      description: Number of results to skip for pagination (OData)
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    topParam:
-      name: $top
-      in: query
-      description: Maximum number of results to return (OData)
-      schema:
-        type: integer
-        default: 100
-        minimum: 1
-    infoProviderName:
-      name: infoProviderName
-      in: path
-      required: true
-      description: InfoProvider technical name
-      schema:
-        type: string
-    formatParam:
-      name: $format
-      in: query
-      description: Response format
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
   securitySchemes:
     basicAuth:
       type: http
