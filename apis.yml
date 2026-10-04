@@ -1014,6 +1014,9 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: CapabilityMap
+  url: capabilities/sap-bi-capability-edges.yml
+  name: SAP Business Intelligence Business Capability Map
 - type: Website
   url: https://sap.com
 - type: AgenticAccess

@@ -1,0 +1,51 @@
+slug: sap-bi
+provider: SAP Business Intelligence
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Reports
+  spec_file: sap-bi-reports-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.8
+  evidence: GET /documents/{documentId} getDocument 'Get a report document'; schemas Report, DataProvider
+  reason: BusinessObjects report documents and their data providers — reporting/BI delivery.
+- tag: Stories
+  spec_file: sap-bi-stories-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.8
+  evidence: POST /stories/{storyId}/publish publishStory; schemas Story, Page, Widget
+  reason: SAC stories are dashboards/visualisations — analytics and BI delivery.
+- tag: Models
+  spec_file: sap-bi-models-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.75
+  evidence: POST /models createModel ... GET /models/{modelId}/dimensions listModelDimensions, listModelMeasures;
+    'REST API for SAP Analytics Cloud enabling data integration, story management, model administration,
+    and analytics operations'
+  reason: Analytics data models (dimensions/measures) for BI delivery — Analytics & BI Management; could
+    arguably be data architecture, hence 0.75.
+- tag: Queries
+  spec_file: sap-bi-queries-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.75
+  evidence: POST /RSOD_BW_QUERY_SRV/Queries('{queryName}')/Execute executeQuery; 'execute analytical queries
+    against the BW/4HANA data warehouse'
+  reason: Execution of analytical BW queries is BI/analytics delivery.
