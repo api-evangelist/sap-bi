@@ -67,6 +67,16 @@ paths:
           description: Data store object not found
 components:
   schemas:
+    DataStoreObjectCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/DataStoreObject'
     DataStoreObject:
       type: object
       properties:
@@ -96,27 +106,7 @@ components:
         RecordCount:
           type: integer
           description: Number of records in the active table
-    DataStoreObjectCollection:
-      type: object
-      properties:
-        d:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                $ref: '#/components/schemas/DataStoreObject'
   parameters:
-    formatParam:
-      name: $format
-      in: query
-      description: Response format
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
     topParam:
       name: $top
       in: query
@@ -125,6 +115,14 @@ components:
         type: integer
         default: 100
         minimum: 1
+    skipParam:
+      name: $skip
+      in: query
+      description: Number of results to skip for pagination (OData)
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
     filterParam:
       name: $filter
       in: query
@@ -138,14 +136,16 @@ components:
       description: Advanced data store object technical name
       schema:
         type: string
-    skipParam:
-      name: $skip
+    formatParam:
+      name: $format
       in: query
-      description: Number of results to skip for pagination (OData)
+      description: Response format
       schema:
-        type: integer
-        default: 0
-        minimum: 0
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
   securitySchemes:
     basicAuth:
       type: http

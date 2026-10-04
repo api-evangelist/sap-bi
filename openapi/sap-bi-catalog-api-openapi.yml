@@ -65,6 +65,31 @@ paths:
         '404':
           description: Catalog asset not found
 components:
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    assetId:
+      name: assetId
+      in: path
+      required: true
+      description: Catalog asset unique identifier
+      schema:
+        type: string
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        minimum: 1
+        maximum: 1000
   schemas:
     CatalogAssetCollection:
       type: object
@@ -111,31 +136,6 @@ components:
           type: string
           format: date-time
           description: When the asset was cataloged
-  parameters:
-    assetId:
-      name: assetId
-      in: path
-      required: true
-      description: Catalog asset unique identifier
-      schema:
-        type: string
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        minimum: 1
-        maximum: 1000
   securitySchemes:
     oauth2:
       type: oauth2

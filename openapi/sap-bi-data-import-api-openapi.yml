@@ -90,13 +90,6 @@ paths:
           description: Import job not found
 components:
   parameters:
-    jobId:
-      name: jobId
-      in: path
-      required: true
-      description: Import job unique identifier
-      schema:
-        type: string
     modelId:
       name: modelId
       in: path
@@ -104,7 +97,29 @@ components:
       description: Model unique identifier
       schema:
         type: string
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      description: Import job unique identifier
+      schema:
+        type: string
   schemas:
+    CreateImportJobRequest:
+      type: object
+      required:
+      - importType
+      properties:
+        importType:
+          type: string
+          enum:
+          - Replace
+          - Append
+          - Update
+          description: How data should be imported
+        mapping:
+          type: object
+          description: Column-to-dimension/measure mapping
     ImportJobCollection:
       type: object
       properties:
@@ -147,21 +162,6 @@ components:
         errorMessage:
           type: string
           description: Error message if the job failed
-    CreateImportJobRequest:
-      type: object
-      required:
-      - importType
-      properties:
-        importType:
-          type: string
-          enum:
-          - Replace
-          - Append
-          - Update
-          description: How data should be imported
-        mapping:
-          type: object
-          description: Column-to-dimension/measure mapping
   securitySchemes:
     oauth2:
       type: oauth2

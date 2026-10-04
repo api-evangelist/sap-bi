@@ -60,6 +60,12 @@ paths:
           description: Unauthorized
 components:
   schemas:
+    LogonResponse:
+      type: object
+      properties:
+        logonToken:
+          type: string
+          description: Authentication token for subsequent requests
     LogonRequest:
       type: object
       required:
@@ -81,12 +87,6 @@ components:
           - secWinAD
           - secSAPR3
           description: Authentication type
-    LogonResponse:
-      type: object
-      properties:
-        logonToken:
-          type: string
-          description: Authentication token for subsequent requests
   securitySchemes:
     logonToken:
       type: apiKey

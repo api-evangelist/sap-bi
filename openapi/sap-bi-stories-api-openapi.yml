@@ -153,6 +153,28 @@ paths:
           description: Story not found
 components:
   schemas:
+    Widget:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Widget unique identifier
+        type:
+          type: string
+          enum:
+          - Chart
+          - Table
+          - Filter
+          - Text
+          - Image
+          - Shape
+          description: Type of widget
+        name:
+          type: string
+          description: Widget display name
+        modelId:
+          type: string
+          description: Associated model ID
     Story:
       type: object
       properties:
@@ -193,64 +215,6 @@ components:
           items:
             $ref: '#/components/schemas/Page'
           description: Pages within the story
-    UpdateStoryRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Updated name
-        description:
-          type: string
-          description: Updated description
-        folderId:
-          type: string
-          description: Updated folder ID
-    Page:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Page unique identifier
-        name:
-          type: string
-          description: Page name
-        widgets:
-          type: array
-          items:
-            $ref: '#/components/schemas/Widget'
-          description: Widgets on the page
-    Widget:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Widget unique identifier
-        type:
-          type: string
-          enum:
-          - Chart
-          - Table
-          - Filter
-          - Text
-          - Image
-          - Shape
-          description: Type of widget
-        name:
-          type: string
-          description: Widget display name
-        modelId:
-          type: string
-          description: Associated model ID
-    StoryCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Story'
-        totalCount:
-          type: integer
-          description: Total number of stories available
     CreateStoryRequest:
       type: object
       required:
@@ -265,14 +229,43 @@ components:
         folderId:
           type: string
           description: Target folder ID
+    Page:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Page unique identifier
+        name:
+          type: string
+          description: Page name
+        widgets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Widget'
+          description: Widgets on the page
+    UpdateStoryRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Updated name
+        description:
+          type: string
+          description: Updated description
+        folderId:
+          type: string
+          description: Updated folder ID
+    StoryCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Story'
+        totalCount:
+          type: integer
+          description: Total number of stories available
   parameters:
-    storyId:
-      name: storyId
-      in: path
-      required: true
-      description: Story unique identifier
-      schema:
-        type: string
     offsetParam:
       name: offset
       in: query
@@ -290,6 +283,13 @@ components:
         default: 50
         minimum: 1
         maximum: 1000
+    storyId:
+      name: storyId
+      in: path
+      required: true
+      description: Story unique identifier
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

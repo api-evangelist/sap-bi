@@ -133,13 +133,6 @@ paths:
           description: Parent InfoObject not found
 components:
   parameters:
-    objectId:
-      name: objectId
-      in: path
-      required: true
-      description: InfoObject unique identifier (CUID or SI_ID)
-      schema:
-        type: string
     offsetParam:
       name: offset
       in: query
@@ -148,6 +141,13 @@ components:
         type: integer
         default: 0
         minimum: 0
+    objectId:
+      name: objectId
+      in: path
+      required: true
+      description: InfoObject unique identifier (CUID or SI_ID)
+      schema:
+        type: string
     limitParam:
       name: limit
       in: query

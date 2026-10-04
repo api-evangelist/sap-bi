@@ -60,6 +60,14 @@ paths:
         '404':
           description: Server not found
 components:
+  parameters:
+    serverId:
+      name: serverId
+      in: path
+      required: true
+      description: Server unique identifier
+      schema:
+        type: string
   schemas:
     Server:
       type: object
@@ -97,14 +105,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Server'
-  parameters:
-    serverId:
-      name: serverId
-      in: path
-      required: true
-      description: Server unique identifier
-      schema:
-        type: string
   securitySchemes:
     logonToken:
       type: apiKey
