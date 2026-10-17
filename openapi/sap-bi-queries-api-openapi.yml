@@ -94,6 +94,16 @@ paths:
           description: Query not found
 components:
   schemas:
+    QueryCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/BwQuery'
     QueryExecutionRequest:
       type: object
       properties:
@@ -109,6 +119,20 @@ components:
                 type: string
                 description: Variable value
           description: Query variable values
+    QueryResult:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                type: object
+              description: Result rows
+            __count:
+              type: string
+              description: Total result count
     BwQuery:
       type: object
       properties:
@@ -128,31 +152,14 @@ components:
           type: string
           format: date-time
           description: Last modification timestamp
-    QueryResult:
-      type: object
-      properties:
-        d:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                type: object
-              description: Result rows
-            __count:
-              type: string
-              description: Total result count
-    QueryCollection:
-      type: object
-      properties:
-        d:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                $ref: '#/components/schemas/BwQuery'
   parameters:
+    queryName:
+      name: queryName
+      in: path
+      required: true
+      description: BW query technical name
+      schema:
+        type: string
     topParam:
       name: $top
       in: query
@@ -185,13 +192,6 @@ components:
         - json
         - xml
         default: json
-    queryName:
-      name: queryName
-      in: path
-      required: true
-      description: BW query technical name
-      schema:
-        type: string
   securitySchemes:
     basicAuth:
       type: http

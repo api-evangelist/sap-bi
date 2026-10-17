@@ -106,6 +106,31 @@ paths:
           description: Connection not found
 components:
   schemas:
+    CreateConnectionRequest:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: Connection name
+        description:
+          type: string
+          description: Connection description
+        type:
+          type: string
+          description: Connection type
+        properties:
+          type: object
+          description: Connection-specific properties (host, port, credentials, etc.)
+    ConnectionCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Connection'
     Connection:
       type: object
       properties:
@@ -143,31 +168,6 @@ components:
           type: string
           format: date-time
           description: When the connection was created
-    ConnectionCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Connection'
-    CreateConnectionRequest:
-      type: object
-      required:
-      - name
-      - type
-      properties:
-        name:
-          type: string
-          description: Connection name
-        description:
-          type: string
-          description: Connection description
-        type:
-          type: string
-          description: Connection type
-        properties:
-          type: object
-          description: Connection-specific properties (host, port, credentials, etc.)
   parameters:
     connectionId:
       name: connectionId

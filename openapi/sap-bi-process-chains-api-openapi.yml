@@ -139,14 +139,6 @@ components:
           format: date-time
           description: When the chain last ran
   parameters:
-    skipParam:
-      name: $skip
-      in: query
-      description: Number of results to skip for pagination (OData)
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
     topParam:
       name: $top
       in: query
@@ -155,6 +147,14 @@ components:
         type: integer
         default: 100
         minimum: 1
+    skipParam:
+      name: $skip
+      in: query
+      description: Number of results to skip for pagination (OData)
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
     formatParam:
       name: $format
       in: query

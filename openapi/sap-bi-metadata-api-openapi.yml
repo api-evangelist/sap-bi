@@ -45,6 +45,39 @@ paths:
         '401':
           description: Unauthorized
 components:
+  parameters:
+    topParam:
+      name: $top
+      in: query
+      description: Maximum number of results to return (OData)
+      schema:
+        type: integer
+        default: 100
+        minimum: 1
+    skipParam:
+      name: $skip
+      in: query
+      description: Number of results to skip for pagination (OData)
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+    filterParam:
+      name: $filter
+      in: query
+      description: OData filter expression
+      schema:
+        type: string
+    formatParam:
+      name: $format
+      in: query
+      description: Response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
   schemas:
     CatalogEntryCollection:
       type: object
@@ -74,39 +107,6 @@ components:
         Version:
           type: string
           description: Object version
-  parameters:
-    skipParam:
-      name: $skip
-      in: query
-      description: Number of results to skip for pagination (OData)
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    topParam:
-      name: $top
-      in: query
-      description: Maximum number of results to return (OData)
-      schema:
-        type: integer
-        default: 100
-        minimum: 1
-    filterParam:
-      name: $filter
-      in: query
-      description: OData filter expression
-      schema:
-        type: string
-    formatParam:
-      name: $format
-      in: query
-      description: Response format
-      schema:
-        type: string
-        enum:
-        - json
-        - xml
-        default: json
   securitySchemes:
     basicAuth:
       type: http

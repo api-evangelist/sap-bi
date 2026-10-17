@@ -85,6 +85,58 @@ paths:
           description: Document not found
 components:
   schemas:
+    Parameter:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Parameter identifier
+        name:
+          type: string
+          description: Parameter name
+        type:
+          type: string
+          description: Parameter data type
+        optional:
+          type: boolean
+          description: Whether the parameter is optional
+        allowMultipleValues:
+          type: boolean
+          description: Whether multiple values can be provided
+        defaultValues:
+          type: array
+          items:
+            type: string
+          description: Default parameter values
+    DataProvider:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Data provider identifier
+        name:
+          type: string
+          description: Data provider name
+        dataSourceType:
+          type: string
+          description: Type of data source
+        query:
+          type: string
+          description: Query text
+    DataProviderCollection:
+      type: object
+      properties:
+        dataproviders:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataProvider'
+    ParameterCollection:
+      type: object
+      properties:
+        parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Parameter'
     Report:
       type: object
       properties:
@@ -121,58 +173,6 @@ components:
         folderId:
           type: integer
           description: Parent folder ID
-    DataProvider:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Data provider identifier
-        name:
-          type: string
-          description: Data provider name
-        dataSourceType:
-          type: string
-          description: Type of data source
-        query:
-          type: string
-          description: Query text
-    Parameter:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Parameter identifier
-        name:
-          type: string
-          description: Parameter name
-        type:
-          type: string
-          description: Parameter data type
-        optional:
-          type: boolean
-          description: Whether the parameter is optional
-        allowMultipleValues:
-          type: boolean
-          description: Whether multiple values can be provided
-        defaultValues:
-          type: array
-          items:
-            type: string
-          description: Default parameter values
-    ParameterCollection:
-      type: object
-      properties:
-        parameters:
-          type: array
-          items:
-            $ref: '#/components/schemas/Parameter'
-    DataProviderCollection:
-      type: object
-      properties:
-        dataproviders:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataProvider'
   parameters:
     documentId:
       name: documentId

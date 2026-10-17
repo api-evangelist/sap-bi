@@ -119,13 +119,6 @@ components:
         errorMessage:
           type: string
           description: Error message if the task failed
-    DataFlowCollection:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataFlow'
     DataFlow:
       type: object
       properties:
@@ -168,6 +161,13 @@ components:
           - Failed
           - Running
           description: Status of the last execution
+    DataFlowCollection:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFlow'
   parameters:
     spaceId:
       name: spaceId

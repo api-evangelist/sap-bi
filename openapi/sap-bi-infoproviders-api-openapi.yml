@@ -112,66 +112,6 @@ paths:
           description: InfoProvider not found
 components:
   schemas:
-    BwDimension:
-      type: object
-      properties:
-        DimensionName:
-          type: string
-          description: Technical name of the dimension
-        DimensionDescription:
-          type: string
-          description: Description of the dimension
-        DimensionType:
-          type: string
-          description: Dimension type
-        InfoObjectName:
-          type: string
-          description: Associated InfoObject technical name
-    KeyFigure:
-      type: object
-      properties:
-        KeyFigureName:
-          type: string
-          description: Technical name of the key figure
-        KeyFigureDescription:
-          type: string
-          description: Description of the key figure
-        AggregationType:
-          type: string
-          enum:
-          - SUM
-          - MIN
-          - MAX
-          - AVG
-          - COUNT
-          - NOP
-          description: Aggregation behavior
-        DataType:
-          type: string
-          description: Data type of the key figure
-        UnitOfMeasure:
-          type: string
-          description: Unit of measure or currency
-    KeyFigureCollection:
-      type: object
-      properties:
-        d:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                $ref: '#/components/schemas/KeyFigure'
-    BwDimensionCollection:
-      type: object
-      properties:
-        d:
-          type: object
-          properties:
-            results:
-              type: array
-              items:
-                $ref: '#/components/schemas/BwDimension'
     InfoProvider:
       type: object
       properties:
@@ -216,6 +156,66 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/InfoProvider'
+    BwDimension:
+      type: object
+      properties:
+        DimensionName:
+          type: string
+          description: Technical name of the dimension
+        DimensionDescription:
+          type: string
+          description: Description of the dimension
+        DimensionType:
+          type: string
+          description: Dimension type
+        InfoObjectName:
+          type: string
+          description: Associated InfoObject technical name
+    KeyFigure:
+      type: object
+      properties:
+        KeyFigureName:
+          type: string
+          description: Technical name of the key figure
+        KeyFigureDescription:
+          type: string
+          description: Description of the key figure
+        AggregationType:
+          type: string
+          enum:
+          - SUM
+          - MIN
+          - MAX
+          - AVG
+          - COUNT
+          - NOP
+          description: Aggregation behavior
+        DataType:
+          type: string
+          description: Data type of the key figure
+        UnitOfMeasure:
+          type: string
+          description: Unit of measure or currency
+    BwDimensionCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/BwDimension'
+    KeyFigureCollection:
+      type: object
+      properties:
+        d:
+          type: object
+          properties:
+            results:
+              type: array
+              items:
+                $ref: '#/components/schemas/KeyFigure'
   parameters:
     topParam:
       name: $top
@@ -225,6 +225,12 @@ components:
         type: integer
         default: 100
         minimum: 1
+    selectParam:
+      name: $select
+      in: query
+      description: Comma-separated list of properties to return
+      schema:
+        type: string
     skipParam:
       name: $skip
       in: query
@@ -249,12 +255,6 @@ components:
         - json
         - xml
         default: json
-    selectParam:
-      name: $select
-      in: query
-      description: Comma-separated list of properties to return
-      schema:
-        type: string
     infoProviderName:
       name: infoProviderName
       in: path

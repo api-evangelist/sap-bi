@@ -83,22 +83,48 @@ paths:
         '404':
           description: View not found
 components:
-  parameters:
-    viewId:
-      name: viewId
-      in: path
-      required: true
-      description: View unique identifier
-      schema:
-        type: string
-    spaceId:
-      name: spaceId
-      in: path
-      required: true
-      description: Space unique identifier
-      schema:
-        type: string
   schemas:
+    View:
+      type: object
+      properties:
+        id:
+          type: string
+          description: View unique identifier
+        name:
+          type: string
+          description: View name
+        description:
+          type: string
+          description: View description
+        type:
+          type: string
+          enum:
+          - Analytical
+          - Relational
+          description: View semantic type
+        deploymentStatus:
+          type: string
+          enum:
+          - Deployed
+          - NotDeployed
+          - Modified
+          description: Current deployment status
+        columns:
+          type: array
+          items:
+            $ref: '#/components/schemas/ViewColumn'
+          description: View columns
+        createdBy:
+          type: string
+          description: User who created the view
+        createdTime:
+          type: string
+          format: date-time
+          description: When the view was created
+        modifiedTime:
+          type: string
+          format: date-time
+          description: When the view was last modified
     TaskRun:
       type: object
       properties:
@@ -141,47 +167,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/View'
-    View:
-      type: object
-      properties:
-        id:
-          type: string
-          description: View unique identifier
-        name:
-          type: string
-          description: View name
-        description:
-          type: string
-          description: View description
-        type:
-          type: string
-          enum:
-          - Analytical
-          - Relational
-          description: View semantic type
-        deploymentStatus:
-          type: string
-          enum:
-          - Deployed
-          - NotDeployed
-          - Modified
-          description: Current deployment status
-        columns:
-          type: array
-          items:
-            $ref: '#/components/schemas/ViewColumn'
-          description: View columns
-        createdBy:
-          type: string
-          description: User who created the view
-        createdTime:
-          type: string
-          format: date-time
-          description: When the view was created
-        modifiedTime:
-          type: string
-          format: date-time
-          description: When the view was last modified
     ViewColumn:
       type: object
       properties:
@@ -201,6 +186,21 @@ components:
           - Measure
           - Attribute
           description: Semantic role of the column
+  parameters:
+    viewId:
+      name: viewId
+      in: path
+      required: true
+      description: View unique identifier
+      schema:
+        type: string
+    spaceId:
+      name: spaceId
+      in: path
+      required: true
+      description: Space unique identifier
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

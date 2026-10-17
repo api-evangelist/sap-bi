@@ -153,68 +153,16 @@ paths:
           description: Story not found
 components:
   schemas:
-    Widget:
+    StoryCollection:
       type: object
       properties:
-        id:
-          type: string
-          description: Widget unique identifier
-        type:
-          type: string
-          enum:
-          - Chart
-          - Table
-          - Filter
-          - Text
-          - Image
-          - Shape
-          description: Type of widget
-        name:
-          type: string
-          description: Widget display name
-        modelId:
-          type: string
-          description: Associated model ID
-    Story:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the story
-        name:
-          type: string
-          description: Name of the story
-        description:
-          type: string
-          description: Description of the story
-        createdBy:
-          type: string
-          description: User who created the story
-        createdTime:
-          type: string
-          format: date-time
-          description: When the story was created
-        modifiedBy:
-          type: string
-          description: User who last modified the story
-        modifiedTime:
-          type: string
-          format: date-time
-          description: When the story was last modified
-        status:
-          type: string
-          enum:
-          - Draft
-          - Published
-          description: Current publication status
-        folderId:
-          type: string
-          description: ID of the folder containing the story
-        pages:
+        items:
           type: array
           items:
-            $ref: '#/components/schemas/Page'
-          description: Pages within the story
+            $ref: '#/components/schemas/Story'
+        totalCount:
+          type: integer
+          description: Total number of stories available
     CreateStoryRequest:
       type: object
       required:
@@ -255,25 +203,69 @@ components:
         folderId:
           type: string
           description: Updated folder ID
-    StoryCollection:
+    Story:
       type: object
       properties:
-        items:
+        id:
+          type: string
+          description: Unique identifier for the story
+        name:
+          type: string
+          description: Name of the story
+        description:
+          type: string
+          description: Description of the story
+        createdBy:
+          type: string
+          description: User who created the story
+        createdTime:
+          type: string
+          format: date-time
+          description: When the story was created
+        modifiedBy:
+          type: string
+          description: User who last modified the story
+        modifiedTime:
+          type: string
+          format: date-time
+          description: When the story was last modified
+        status:
+          type: string
+          enum:
+          - Draft
+          - Published
+          description: Current publication status
+        folderId:
+          type: string
+          description: ID of the folder containing the story
+        pages:
           type: array
           items:
-            $ref: '#/components/schemas/Story'
-        totalCount:
-          type: integer
-          description: Total number of stories available
+            $ref: '#/components/schemas/Page'
+          description: Pages within the story
+    Widget:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Widget unique identifier
+        type:
+          type: string
+          enum:
+          - Chart
+          - Table
+          - Filter
+          - Text
+          - Image
+          - Shape
+          description: Type of widget
+        name:
+          type: string
+          description: Widget display name
+        modelId:
+          type: string
+          description: Associated model ID
   parameters:
-    offsetParam:
-      name: offset
-      in: query
-      description: Number of results to skip for pagination
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
     limitParam:
       name: limit
       in: query
@@ -290,6 +282,14 @@ components:
       description: Story unique identifier
       schema:
         type: string
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of results to skip for pagination
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   securitySchemes:
     oauth2:
       type: oauth2

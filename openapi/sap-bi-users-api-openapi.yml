@@ -124,6 +124,16 @@ components:
         totalCount:
           type: integer
           description: Total number of users
+    UserCollection_2:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/BOBJUser'
+        totalCount:
+          type: integer
+          description: Total number of users
     BOBJUser:
       type: object
       properties:
@@ -146,17 +156,16 @@ components:
         SI_NAMEDUSER:
           type: boolean
           description: Whether the user is a named user
-    UserCollection_2:
-      type: object
-      properties:
-        entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/BOBJUser'
-        totalCount:
-          type: integer
-          description: Total number of users
   parameters:
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of results to return
+      schema:
+        type: integer
+        default: 50
+        minimum: 1
+        maximum: 1000
     offsetParam:
       name: offset
       in: query
@@ -172,15 +181,6 @@ components:
       description: User unique identifier
       schema:
         type: string
-    limitParam:
-      name: limit
-      in: query
-      description: Maximum number of results to return
-      schema:
-        type: integer
-        default: 50
-        minimum: 1
-        maximum: 1000
   securitySchemes:
     oauth2:
       type: oauth2
